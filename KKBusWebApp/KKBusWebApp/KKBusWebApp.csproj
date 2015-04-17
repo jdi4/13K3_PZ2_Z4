@@ -40,9 +40,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -165,7 +168,70 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CZAS_PRACY.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBaseModel1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBaseModel1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBaseModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBaseModel1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBaseModel1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DOSTEPNE_NAGRODY.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\KIEROWCY.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KLIENCI.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KURSY.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NAGRODY_KLIENCI.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OSOBY.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POJAZDY.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRACOWNICY.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRZEJAZDY.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRZYSTANKI.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REZERWACJE.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RODZAJE_BILETOW.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TANKOWANIA.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRASA.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ULGI_REZERWACJA.cs">
+      <DependentUpon>DataBaseModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -178,6 +244,23 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\DataBaseModel1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataBaseModel1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DataBaseModel1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataBaseModel1.edmx</DependentUpon>
+      <LastGenOutput>DataBaseModel1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DataBaseModel1.edmx.diagram">
+      <DependentUpon>DataBaseModel1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DataBaseModel1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataBaseModel1.edmx</DependentUpon>
+      <LastGenOutput>DataBaseModel1.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -227,6 +310,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
