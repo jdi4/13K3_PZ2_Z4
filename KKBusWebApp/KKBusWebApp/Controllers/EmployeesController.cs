@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+// wbrew nazwie to jest tylko testowy kontroler - niekoniecznie coś dalej z niego będzie
+
 namespace KKBusWebApp.Controllers
 {
     public class EmployeesController : Controller

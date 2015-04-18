@@ -1,0 +1,80 @@
+﻿@model KKBusWebApp.Models.POJAZDY
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>POJAZDY</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_MARKA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_MARKA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_SILNIK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_SILNIK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_DATA_PRODUKCJI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_DATA_PRODUKCJI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_UBEZPIECZONY_DO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_UBEZPIECZONY_DO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_SPRAWNY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_SPRAWNY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_ADNOTACJE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_ADNOTACJE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_MIEJSCA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_MIEJSCA)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

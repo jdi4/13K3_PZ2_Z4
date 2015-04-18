@@ -1,0 +1,74 @@
+﻿@model KKBusWebApp.Models.POJAZDY
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>POJAZDY</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_MARKA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_MARKA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_SILNIK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_SILNIK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_DATA_PRODUKCJI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_DATA_PRODUKCJI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_UBEZPIECZONY_DO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_UBEZPIECZONY_DO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_SPRAWNY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_SPRAWNY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_ADNOTACJE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_ADNOTACJE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_MIEJSCA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_MIEJSCA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.POJ_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
