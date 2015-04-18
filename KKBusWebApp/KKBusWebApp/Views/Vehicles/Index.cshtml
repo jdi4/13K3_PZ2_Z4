@@ -1,0 +1,69 @@
+﻿@model IEnumerable<KKBusWebApp.Models.POJAZDY>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.POJ_MARKA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POJ_SILNIK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POJ_DATA_PRODUKCJI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POJ_UBEZPIECZONY_DO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POJ_SPRAWNY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POJ_ADNOTACJE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POJ_MIEJSCA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.POJ_MARKA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POJ_SILNIK)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POJ_DATA_PRODUKCJI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POJ_UBEZPIECZONY_DO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POJ_SPRAWNY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POJ_ADNOTACJE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POJ_MIEJSCA)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.POJ_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.POJ_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.POJ_ID })
+        </td>
+    </tr>
+}
+
+</table>
