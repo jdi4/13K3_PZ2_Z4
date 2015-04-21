@@ -17,6 +17,7 @@ input,
 select,
 textarea {
     max-width: 280px;
+    #background-color: black;
 }
 /* styles for validation helpers */
 .field-validation-error {

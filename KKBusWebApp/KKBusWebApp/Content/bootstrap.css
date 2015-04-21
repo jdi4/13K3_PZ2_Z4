@@ -97,7 +97,7 @@ hr {
 }
 
 mark {
-  color: #000;
+  color: red;
   background: #ff0;
 }
 
@@ -167,16 +167,19 @@ textarea {
   margin: 0;
   font-family: inherit;
   font-size: 100%;
+  #background-color:red;
 }
 
 button,
 input {
   line-height: normal;
+  #background-color:red;
 }
 
 button,
 select {
   text-transform: none;
+  #background-color:red;
 }
 
 button,
@@ -185,6 +188,7 @@ input[type="reset"],
 input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
+  #background-color:red;
 }
 
 button[disabled],
