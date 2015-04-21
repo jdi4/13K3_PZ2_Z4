@@ -415,11 +415,13 @@ p {
   font-size: 16.099999999999998px;
   font-weight: 200;
   line-height: 1.4;
+  background-color:black;
 }
 
 @media (min-width: 768px) {
   .lead {
     font-size: 21px;
+    background-color:black;
   }
 }
 
@@ -2027,12 +2029,14 @@ textarea.input-lg {
   outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
+  #color:green;
 }
 
 .btn:hover,
 .btn:focus {
   color: #333333;
   text-decoration: none;
+  #color:green;
 }
 
 .btn:active,
@@ -2068,6 +2072,7 @@ fieldset[disabled] .btn {
   color: #333333;
   background-color: #ebebeb;
   border-color: #adadad;
+  color:green;
 }
 
 .btn-default:active,
@@ -4940,7 +4945,7 @@ a.list-group-item.active > .badge,
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: black;
 }
 
 .jumbotron h1 {
