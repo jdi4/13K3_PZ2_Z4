@@ -23,8 +23,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Komunikaty", "Index", "Home")</li>
                     <li>@Html.ActionLink("O Firmie", "About", "Home")</li>
-                    <li>@Html.ActionLink("Rozkład Jazdy", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Strefa Klienta", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Rozkład Jazdy", "Rozklad", "Home")</li>
+                    <li>@Html.ActionLink("Strefa Klienta", "StrefaKlienta", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Lista pojazdów", "Index", "Vehicles")</li>
                 </ul>
@@ -34,7 +34,7 @@
     </div>
     <div class="container body-content">
         <div class="jumbotron">
-            <img src="prijevoz.jpg" style="width:1000px;height:228px">
+            <img src="prijevoz.jpg" style="width:1000px;height:228px" class="bordered">
         </div>
         @RenderBody()
         <hr />

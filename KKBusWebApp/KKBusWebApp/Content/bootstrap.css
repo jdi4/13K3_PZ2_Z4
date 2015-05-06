@@ -36,6 +36,12 @@ summary {
   display: block;
 }
 
+img.bordered
+{
+  border:10px solid #FF9900;
+  border-color:yellow;
+}
+
 audio,
 canvas,
 video {

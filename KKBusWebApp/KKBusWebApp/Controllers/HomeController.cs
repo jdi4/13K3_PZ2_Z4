@@ -26,5 +26,19 @@ namespace KKBusWebApp.Controllers
 
             return View();
         }
+
+        public ActionResult Rozklad()
+        {
+            ViewBag.Message = "Strona z rozkladem jazdy";
+
+            return View();
+        }
+
+        public ActionResult StrefaKlienta()
+        {
+            ViewBag.Message = "Strona z informacjami dotyczącymi naszych usług";
+
+            return View();
+        }
     }
 }
