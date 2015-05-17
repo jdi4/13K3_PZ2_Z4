@@ -169,7 +169,7 @@ namespace KKBusWebApp.Models
                 (usr, kli) => kli.KLI_ID)
                 != null)
             {
-                return Task.FromResult<IList<string>>(new List<string> { "client" });
+                return Task.FromResult<IList<string>>(new List<string> { "CLIENT" });
             }
             else
             {
