@@ -74,6 +74,11 @@ namespace KKBusWebApp.Models
 
         public Task CreateAsync(OSOBY user)
         {
+            user.OSO_DATA_URODZENIA = DateTime.Now;
+            user.OSO_IMIE = "grzegorz";
+            user.OSO_NAZWISKO = "brzeeeeeczyczyczy";
+            user.OSO_PESEL = "87965198";
+            user.OSO_TELEFON = "34534534";
             this.db.OSOBY.Add(user);
             return this.db.SaveChangesAsync();
         }
@@ -86,13 +91,13 @@ namespace KKBusWebApp.Models
 
         public Task<OSOBY> FindByIdAsync(int userId)
         {
-            return this.db.OSOBY.FirstOrDefaultAsync(u => u.Id.Equals(userId));
+            return this.db.OSOBY.FirstOrDefaultAsync(u => u.OSO_ID.Equals(userId));
         }
 
         public Task<OSOBY> FindByNameAsync(string userName)
         {
             return this.db.OSOBY
-                .FirstOrDefaultAsync(u => u.UserName == userName);
+                .FirstOrDefaultAsync(u => u.OSO_LOGIN == userName);
         }
 
         public Task UpdateAsync(OSOBY user)
@@ -152,7 +157,13 @@ namespace KKBusWebApp.Models
 
         public Task<IList<string>> GetRolesAsync(OSOBY user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            //return Task.FromResult<IList<string>>(user.Roles.Join(this.db.UserRoles, ur => ur.Id, r => r.Id, (ur, r) => r.Name).ToList());
+            return Task.FromResult<IList<string>>(new List<string>());
         }
 
         public Task<bool> IsInRoleAsync(OSOBY user, string roleName)
