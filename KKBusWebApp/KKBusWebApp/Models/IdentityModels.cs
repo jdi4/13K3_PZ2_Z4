@@ -162,8 +162,28 @@ namespace KKBusWebApp.Models
                 throw new ArgumentNullException("user");
             }
 
+            if (user.KLIENCI.Join(
+                this.db.KLIENCI,
+                kli => kli.KLI_ID,
+                usr => usr.OSO_ID,
+                (usr, kli) => kli.KLI_ID)
+                != null)
+            {
+                return Task.FromResult<IList<string>>(new List<string> { "client" });
+            }
+            else
+            {
+                return Task.FromResult<IList<string>>(user.PRACOWNICY.Join(
+                    this.db.PRACOWNICY,
+                    pra => pra.PRA_ID,
+                    usr => usr.OSO_ID,
+                    (usr, pra) => pra.PRA_UPRAWNIENIA
+                    ).ToList()
+                    );
+            }
+
             //return Task.FromResult<IList<string>>(user.Roles.Join(this.db.UserRoles, ur => ur.Id, r => r.Id, (ur, r) => r.Name).ToList());
-            return Task.FromResult<IList<string>>(new List<string>());
+            //return Task.FromResult<IList<string>>(new List<string>());
         }
 
         public Task<bool> IsInRoleAsync(OSOBY user, string roleName)
