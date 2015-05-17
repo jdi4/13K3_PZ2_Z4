@@ -49,7 +49,7 @@ namespace KKBusWebApp.Models
     }
 
     public partial class UserStore : 
-        IQueryableUserStore<OSOBY, int>, IUserPasswordStore<OSOBY, int>,
+        IQueryableUserStore<OSOBY, int>, IUserPasswordStore<OSOBY, int>, IUserLoginStore<OSOBY, int>,
         IUserRoleStore<OSOBY, int>,
         IUserEmailStore<OSOBY, int>, IUserPhoneNumberStore<OSOBY, int>
 
@@ -221,6 +221,26 @@ namespace KKBusWebApp.Models
         }
 
         public Task SetPhoneNumberConfirmedAsync(OSOBY user, bool confirmed)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddLoginAsync(OSOBY user, UserLoginInfo login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<OSOBY> FindAsync(UserLoginInfo login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<UserLoginInfo>> GetLoginsAsync(OSOBY user)
+        {
+            return Task.FromResult<IList<UserLoginInfo>>(new List<UserLoginInfo> { new UserLoginInfo("local", user.OSO_LOGIN) });
+        }
+
+        public Task RemoveLoginAsync(OSOBY user, UserLoginInfo login)
         {
             throw new NotImplementedException();
         }
