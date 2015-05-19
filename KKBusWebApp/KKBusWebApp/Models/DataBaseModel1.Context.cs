@@ -13,10 +13,10 @@ namespace KKBusWebApp.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class sql372873Entities : DbContext
+    public partial class kkbusDBEntities : DbContext
     {
-        public sql372873Entities()
-            : base("name=sql372873Entities")
+        public kkbusDBEntities()
+            : base("name=kkbusDBEntities")
         {
         }
     

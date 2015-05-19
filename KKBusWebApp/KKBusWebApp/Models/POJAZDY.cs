@@ -24,7 +24,7 @@ namespace KKBusWebApp.Models
         public string POJ_SILNIK { get; set; }
         public System.DateTime POJ_DATA_PRODUKCJI { get; set; }
         public Nullable<System.DateTime> POJ_UBEZPIECZONY_DO { get; set; }
-        public bool POJ_SPRAWNY { get; set; }
+        public byte[] POJ_SPRAWNY { get; set; }
         public string POJ_ADNOTACJE { get; set; }
         public int POJ_MIEJSCA { get; set; }
     

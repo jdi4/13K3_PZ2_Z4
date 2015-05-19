@@ -23,7 +23,7 @@ namespace KKBusWebApp.Models
         public string PRZY_NAZWA { get; set; }
         public double PRZY_GPS_LONGITUDE { get; set; }
         public double PRZY_GPS_LATITUDE { get; set; }
-        public bool PRZY_ZADANIE { get; set; }
+        public byte[] PRZY_ZADANIE { get; set; }
     
         public virtual ICollection<TRASA> TRASA { get; set; }
     }

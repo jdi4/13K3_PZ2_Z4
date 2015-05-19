@@ -4,25 +4,25 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="sql372873Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="kkbusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CZAS_PRACY">
           <Key>
             <PropertyRef Name="CZA_ID" />
           </Key>
           <Property Name="CZA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PRA_ID" Type="int" Nullable="false" />
-          <Property Name="CZA_OD" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="CZA_DO" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CZA_OD" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="CZA_DO" Type="datetime2" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="DOSTEPNE_NAGRODY">
           <Key>
             <PropertyRef Name="NAG_ID" />
           </Key>
           <Property Name="NAG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NAG_NAZWA" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="NAG_AKTYWNA" Type="bit" Nullable="false" />
+          <Property Name="NAG_NAZWA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NAG_AKTYWNA" Type="binary" MaxLength="1" Nullable="false" />
           <Property Name="NAG_PUNKTY" Type="int" Nullable="false" />
-          <Property Name="NAG_SCIEZKA_OBRAZKA" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="NAG_SCIEZKA_OBRAZKA" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="KIEROWCY">
           <Key>
@@ -37,17 +37,17 @@
           </Key>
           <Property Name="KLI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OSO_ID" Type="int" Nullable="false" />
-          <Property Name="KLI_EMAIL" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="KLI_EMAIL" Type="nvarchar" MaxLength="45" Nullable="false" />
           <Property Name="KLI_PUNKTY" Type="int" Nullable="false" />
-          <Property Name="KLI_ZABLOKOWANY" Type="bit" Nullable="false" />
+          <Property Name="KLI_ZABLOKOWANY" Type="binary" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="KURSY">
           <Key>
             <PropertyRef Name="KUR_ID" />
           </Key>
           <Property Name="KUR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="KUR_RELACJA" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="KUR_NAZWA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="KUR_RELACJA" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="KUR_NAZWA" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="NAGRODY_KLIENCI">
           <Key>
@@ -56,7 +56,7 @@
           <Property Name="NAK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="KLI_ID" Type="int" Nullable="false" />
           <Property Name="NAG_ID" Type="int" Nullable="false" />
-          <Property Name="NAK_ADRES_WYSYLKI" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="NAK_ADRES_WYSYLKI" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="OSOBY">
           <Key>
@@ -69,19 +69,19 @@
           <Property Name="OSO_TELEFON" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="OSO_DATA_URODZENIA" Type="date" Nullable="false" />
           <Property Name="OSO_LOGIN" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="OSO_HASLO" Type="text" Nullable="false" />
+          <Property Name="OSO_HASLO" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="POJAZDY">
           <Key>
             <PropertyRef Name="POJ_ID" />
           </Key>
           <Property Name="POJ_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="POJ_MARKA" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="POJ_SILNIK" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="POJ_MARKA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="POJ_SILNIK" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="POJ_DATA_PRODUKCJI" Type="date" Nullable="false" />
           <Property Name="POJ_UBEZPIECZONY_DO" Type="date" />
-          <Property Name="POJ_SPRAWNY" Type="bit" Nullable="false" />
-          <Property Name="POJ_ADNOTACJE" Type="longtext" />
+          <Property Name="POJ_SPRAWNY" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="POJ_ADNOTACJE" Type="nvarchar(max)" />
           <Property Name="POJ_MIEJSCA" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PRACOWNICY">
@@ -90,7 +90,7 @@
           </Key>
           <Property Name="PRA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OSO_ID" Type="int" Nullable="false" />
-          <Property Name="PRA_UPRAWNIENIA" Type="enum" Nullable="false" />
+          <Property Name="PRA_UPRAWNIENIA" Type="varchar" MaxLength="13" Nullable="false" />
         </EntityType>
         <EntityType Name="PRZEJAZDY">
           <Key>
@@ -100,18 +100,18 @@
           <Property Name="KUR_ID" Type="int" Nullable="false" />
           <Property Name="PRA_ID" Type="int" Nullable="false" />
           <Property Name="KIE_ID" Type="int" Nullable="false" />
-          <Property Name="PRZ_AKTYWNY" Type="bit" Nullable="false" />
-          <Property Name="PRZ_ODJAZD" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="PRZ_AKTYWNY" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="PRZ_ODJAZD" Type="datetime2" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PRZYSTANKI">
           <Key>
             <PropertyRef Name="PRZY_ID" />
           </Key>
           <Property Name="PRZY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PRZY_NAZWA" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PRZY_GPS_LONGITUDE" Type="double" Nullable="false" />
-          <Property Name="PRZY_GPS_LATITUDE" Type="double" Nullable="false" />
-          <Property Name="PRZY_ZADANIE" Type="bit" Nullable="false" />
+          <Property Name="PRZY_NAZWA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PRZY_GPS_LONGITUDE" Type="float" Nullable="false" />
+          <Property Name="PRZY_GPS_LATITUDE" Type="float" Nullable="false" />
+          <Property Name="PRZY_ZADANIE" Type="binary" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="REZERWACJE">
           <Key>
@@ -120,8 +120,8 @@
           <Property Name="REZ_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="KLI_ID" Type="int" Nullable="false" />
           <Property Name="PRZ_ID" Type="int" Nullable="false" />
-          <Property Name="REZ_CENA" Type="double" Nullable="false" />
-          <Property Name="REZ_WYKORZYSTANA" Type="bit" Nullable="false" />
+          <Property Name="REZ_CENA" Type="float" Nullable="false" />
+          <Property Name="REZ_WYKORZYSTANA" Type="binary" MaxLength="1" Nullable="false" />
           <Property Name="REZ_DOKUMENT" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RODZAJE_BILETOW">
@@ -129,7 +129,7 @@
             <PropertyRef Name="ROD_ID" />
           </Key>
           <Property Name="ROD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ROD_NAZWA" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ROD_NAZWA" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="ROD_WIEK" Type="int" Nullable="false" />
           <Property Name="ROD_ZNIZKA" Type="int" Nullable="false" />
         </EntityType>
@@ -140,9 +140,9 @@
           <Property Name="TAN_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="KIE_ID" Type="int" Nullable="false" />
           <Property Name="POJ_ID" Type="int" Nullable="false" />
-          <Property Name="TAN_ILOSC" Type="double" Nullable="false" />
-          <Property Name="TAN_KWOTA" Type="double" Nullable="false" />
-          <Property Name="TAN_NASTEPNE" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="TAN_ILOSC" Type="float" Nullable="false" />
+          <Property Name="TAN_KWOTA" Type="float" Nullable="false" />
+          <Property Name="TAN_NASTEPNE" Type="datetime2" Precision="0" Nullable="false" />
           <Property Name="TAN_PRZEJECHANO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TRASA">
@@ -154,7 +154,7 @@
           <Property Name="PRZY_ID" Type="int" Nullable="false" />
           <Property Name="TRA_KOLEJNOSC" Type="int" Nullable="false" />
           <Property Name="TRA_CZAS_PRZEJAZDU" Type="int" Nullable="false" />
-          <Property Name="TRA_CENA" Type="double" Nullable="false" />
+          <Property Name="TRA_CENA" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="ULGI_REZERWACJA">
           <Key>
@@ -165,7 +165,7 @@
           <Property Name="ROD_ID" Type="int" Nullable="false" />
           <Property Name="ULR_ILOSC" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="CZAS_PRACY_ibfk_1">
+        <Association Name="CZAS_PRACY$CZAS_PRACY_ibfk_1">
           <End Role="PRACOWNICY" Type="Self.PRACOWNICY" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -179,7 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="KIEROWCY_ibfk_1">
+        <Association Name="KIEROWCY$KIEROWCY_ibfk_1">
           <End Role="OSOBY" Type="Self.OSOBY" Multiplicity="1" />
           <End Role="KIEROWCY" Type="Self.KIEROWCY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -191,7 +191,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="KLIENCI_ibfk_1">
+        <Association Name="KLIENCI$KLIENCI_ibfk_1">
           <End Role="OSOBY" Type="Self.OSOBY" Multiplicity="1" />
           <End Role="KLIENCI" Type="Self.KLIENCI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -203,7 +203,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="NAGRODY_KLIENCI_ibfk_1">
+        <Association Name="NAGRODY_KLIENCI$NAGRODY_KLIENCI_ibfk_1">
           <End Role="KLIENCI" Type="Self.KLIENCI" Multiplicity="1" />
           <End Role="NAGRODY_KLIENCI" Type="Self.NAGRODY_KLIENCI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -215,7 +215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="NAGRODY_KLIENCI_ibfk_2">
+        <Association Name="NAGRODY_KLIENCI$NAGRODY_KLIENCI_ibfk_2">
           <End Role="DOSTEPNE_NAGRODY" Type="Self.DOSTEPNE_NAGRODY" Multiplicity="1" />
           <End Role="NAGRODY_KLIENCI" Type="Self.NAGRODY_KLIENCI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -227,7 +227,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRACOWNICY_ibfk_1">
+        <Association Name="PRACOWNICY$PRACOWNICY_ibfk_1">
           <End Role="OSOBY" Type="Self.OSOBY" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -241,7 +241,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRZEJAZDY_ibfk_4">
+        <Association Name="PRZEJAZDY$PRZEJAZDY_ibfk_4">
           <End Role="KURSY" Type="Self.KURSY" Multiplicity="1" />
           <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -253,7 +253,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRZEJAZDY_ibfk_5">
+        <Association Name="PRZEJAZDY$PRZEJAZDY_ibfk_5">
           <End Role="PRACOWNICY" Type="Self.PRACOWNICY" Multiplicity="1" />
           <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -265,7 +265,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRZEJAZDY_ibfk_6">
+        <Association Name="PRZEJAZDY$PRZEJAZDY_ibfk_6">
           <End Role="KIEROWCY" Type="Self.KIEROWCY" Multiplicity="1" />
           <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -277,7 +277,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="REZERWACJE_ibfk_1">
+        <Association Name="REZERWACJE$REZERWACJE_ibfk_1">
           <End Role="KLIENCI" Type="Self.KLIENCI" Multiplicity="1" />
           <End Role="REZERWACJE" Type="Self.REZERWACJE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -289,7 +289,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="REZERWACJE_ibfk_2">
+        <Association Name="REZERWACJE$REZERWACJE_ibfk_2">
           <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="1" />
           <End Role="REZERWACJE" Type="Self.REZERWACJE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -301,7 +301,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TANKOWANIA_ibfk_1">
+        <Association Name="TANKOWANIA$TANKOWANIA_ibfk_1">
           <End Role="KIEROWCY" Type="Self.KIEROWCY" Multiplicity="1" />
           <End Role="TANKOWANIA" Type="Self.TANKOWANIA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -313,7 +313,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TANKOWANIA_ibfk_2">
+        <Association Name="TANKOWANIA$TANKOWANIA_ibfk_2">
           <End Role="POJAZDY" Type="Self.POJAZDY" Multiplicity="1" />
           <End Role="TANKOWANIA" Type="Self.TANKOWANIA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -325,7 +325,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TRASA_ibfk_3">
+        <Association Name="TRASA$TRASA_ibfk_3">
           <End Role="KURSY" Type="Self.KURSY" Multiplicity="1" />
           <End Role="TRASA" Type="Self.TRASA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -337,7 +337,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TRASA_ibfk_4">
+        <Association Name="TRASA$TRASA_ibfk_4">
           <End Role="PRZYSTANKI" Type="Self.PRZYSTANKI" Multiplicity="1" />
           <End Role="TRASA" Type="Self.TRASA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -349,7 +349,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ULGI_REZERWACJA_ibfk_1">
+        <Association Name="ULGI_REZERWACJA$ULGI_REZERWACJA_ibfk_1">
           <End Role="REZERWACJE" Type="Self.REZERWACJE" Multiplicity="1" />
           <End Role="ULGI_REZERWACJA" Type="Self.ULGI_REZERWACJA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -361,7 +361,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ULGI_REZERWACJA_ibfk_2">
+        <Association Name="ULGI_REZERWACJA$ULGI_REZERWACJA_ibfk_2">
           <End Role="RODZAJE_BILETOW" Type="Self.RODZAJE_BILETOW" Multiplicity="1" />
           <End Role="ULGI_REZERWACJA" Type="Self.ULGI_REZERWACJA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -373,88 +373,97 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="sql372873ModelStoreContainer">
-          <EntitySet Name="CZAS_PRACY" EntityType="Self.CZAS_PRACY" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="DOSTEPNE_NAGRODY" EntityType="Self.DOSTEPNE_NAGRODY" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="KIEROWCY" EntityType="Self.KIEROWCY" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="KLIENCI" EntityType="Self.KLIENCI" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="KURSY" EntityType="Self.KURSY" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="NAGRODY_KLIENCI" EntityType="Self.NAGRODY_KLIENCI" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="OSOBY" EntityType="Self.OSOBY" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="POJAZDY" EntityType="Self.POJAZDY" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="PRACOWNICY" EntityType="Self.PRACOWNICY" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="PRZEJAZDY" EntityType="Self.PRZEJAZDY" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="PRZYSTANKI" EntityType="Self.PRZYSTANKI" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="REZERWACJE" EntityType="Self.REZERWACJE" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="RODZAJE_BILETOW" EntityType="Self.RODZAJE_BILETOW" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="TANKOWANIA" EntityType="Self.TANKOWANIA" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="TRASA" EntityType="Self.TRASA" Schema="sql372873" store:Type="Tables" />
-          <EntitySet Name="ULGI_REZERWACJA" EntityType="Self.ULGI_REZERWACJA" Schema="sql372873" store:Type="Tables" />
-          <AssociationSet Name="CZAS_PRACY_ibfk_1" Association="Self.CZAS_PRACY_ibfk_1">
+        <Function Name="enum2str_PRACOWNICY_PRA_UPRAWNIENIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="enum2str$PRACOWNICY$PRA_UPRAWNIENIA" ReturnType="nvarchar(max)">
+          <Parameter Name="setval" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="norm_enum_PRACOWNICY_PRA_UPRAWNIENIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="norm_enum$PRACOWNICY$PRA_UPRAWNIENIA" ReturnType="nvarchar(max)">
+          <Parameter Name="setval" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="str2enum_PRACOWNICY_PRA_UPRAWNIENIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="str2enum$PRACOWNICY$PRA_UPRAWNIENIA" ReturnType="tinyint">
+          <Parameter Name="setval" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="kkbusDBModelStoreContainer">
+          <EntitySet Name="CZAS_PRACY" EntityType="Self.CZAS_PRACY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOSTEPNE_NAGRODY" EntityType="Self.DOSTEPNE_NAGRODY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KIEROWCY" EntityType="Self.KIEROWCY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KLIENCI" EntityType="Self.KLIENCI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KURSY" EntityType="Self.KURSY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NAGRODY_KLIENCI" EntityType="Self.NAGRODY_KLIENCI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OSOBY" EntityType="Self.OSOBY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POJAZDY" EntityType="Self.POJAZDY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRACOWNICY" EntityType="Self.PRACOWNICY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRZEJAZDY" EntityType="Self.PRZEJAZDY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRZYSTANKI" EntityType="Self.PRZYSTANKI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REZERWACJE" EntityType="Self.REZERWACJE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RODZAJE_BILETOW" EntityType="Self.RODZAJE_BILETOW" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TANKOWANIA" EntityType="Self.TANKOWANIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRASA" EntityType="Self.TRASA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ULGI_REZERWACJA" EntityType="Self.ULGI_REZERWACJA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="CZAS_PRACY$CZAS_PRACY_ibfk_1" Association="Self.CZAS_PRACY$CZAS_PRACY_ibfk_1">
             <End Role="PRACOWNICY" EntitySet="PRACOWNICY" />
             <End Role="CZAS_PRACY" EntitySet="CZAS_PRACY" />
           </AssociationSet>
-          <AssociationSet Name="KIEROWCY_ibfk_1" Association="Self.KIEROWCY_ibfk_1">
+          <AssociationSet Name="KIEROWCY$KIEROWCY_ibfk_1" Association="Self.KIEROWCY$KIEROWCY_ibfk_1">
             <End Role="OSOBY" EntitySet="OSOBY" />
             <End Role="KIEROWCY" EntitySet="KIEROWCY" />
           </AssociationSet>
-          <AssociationSet Name="KLIENCI_ibfk_1" Association="Self.KLIENCI_ibfk_1">
+          <AssociationSet Name="KLIENCI$KLIENCI_ibfk_1" Association="Self.KLIENCI$KLIENCI_ibfk_1">
             <End Role="OSOBY" EntitySet="OSOBY" />
             <End Role="KLIENCI" EntitySet="KLIENCI" />
           </AssociationSet>
-          <AssociationSet Name="NAGRODY_KLIENCI_ibfk_1" Association="Self.NAGRODY_KLIENCI_ibfk_1">
+          <AssociationSet Name="NAGRODY_KLIENCI$NAGRODY_KLIENCI_ibfk_1" Association="Self.NAGRODY_KLIENCI$NAGRODY_KLIENCI_ibfk_1">
             <End Role="KLIENCI" EntitySet="KLIENCI" />
             <End Role="NAGRODY_KLIENCI" EntitySet="NAGRODY_KLIENCI" />
           </AssociationSet>
-          <AssociationSet Name="NAGRODY_KLIENCI_ibfk_2" Association="Self.NAGRODY_KLIENCI_ibfk_2">
+          <AssociationSet Name="NAGRODY_KLIENCI$NAGRODY_KLIENCI_ibfk_2" Association="Self.NAGRODY_KLIENCI$NAGRODY_KLIENCI_ibfk_2">
             <End Role="DOSTEPNE_NAGRODY" EntitySet="DOSTEPNE_NAGRODY" />
             <End Role="NAGRODY_KLIENCI" EntitySet="NAGRODY_KLIENCI" />
           </AssociationSet>
-          <AssociationSet Name="PRACOWNICY_ibfk_1" Association="Self.PRACOWNICY_ibfk_1">
+          <AssociationSet Name="PRACOWNICY$PRACOWNICY_ibfk_1" Association="Self.PRACOWNICY$PRACOWNICY_ibfk_1">
             <End Role="OSOBY" EntitySet="OSOBY" />
             <End Role="PRACOWNICY" EntitySet="PRACOWNICY" />
           </AssociationSet>
-          <AssociationSet Name="PRZEJAZDY_ibfk_4" Association="Self.PRZEJAZDY_ibfk_4">
+          <AssociationSet Name="PRZEJAZDY$PRZEJAZDY_ibfk_4" Association="Self.PRZEJAZDY$PRZEJAZDY_ibfk_4">
             <End Role="KURSY" EntitySet="KURSY" />
             <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
           </AssociationSet>
-          <AssociationSet Name="PRZEJAZDY_ibfk_5" Association="Self.PRZEJAZDY_ibfk_5">
+          <AssociationSet Name="PRZEJAZDY$PRZEJAZDY_ibfk_5" Association="Self.PRZEJAZDY$PRZEJAZDY_ibfk_5">
             <End Role="PRACOWNICY" EntitySet="PRACOWNICY" />
             <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
           </AssociationSet>
-          <AssociationSet Name="PRZEJAZDY_ibfk_6" Association="Self.PRZEJAZDY_ibfk_6">
+          <AssociationSet Name="PRZEJAZDY$PRZEJAZDY_ibfk_6" Association="Self.PRZEJAZDY$PRZEJAZDY_ibfk_6">
             <End Role="KIEROWCY" EntitySet="KIEROWCY" />
             <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
           </AssociationSet>
-          <AssociationSet Name="REZERWACJE_ibfk_1" Association="Self.REZERWACJE_ibfk_1">
+          <AssociationSet Name="REZERWACJE$REZERWACJE_ibfk_1" Association="Self.REZERWACJE$REZERWACJE_ibfk_1">
             <End Role="KLIENCI" EntitySet="KLIENCI" />
             <End Role="REZERWACJE" EntitySet="REZERWACJE" />
           </AssociationSet>
-          <AssociationSet Name="REZERWACJE_ibfk_2" Association="Self.REZERWACJE_ibfk_2">
+          <AssociationSet Name="REZERWACJE$REZERWACJE_ibfk_2" Association="Self.REZERWACJE$REZERWACJE_ibfk_2">
             <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
             <End Role="REZERWACJE" EntitySet="REZERWACJE" />
           </AssociationSet>
-          <AssociationSet Name="TANKOWANIA_ibfk_1" Association="Self.TANKOWANIA_ibfk_1">
+          <AssociationSet Name="TANKOWANIA$TANKOWANIA_ibfk_1" Association="Self.TANKOWANIA$TANKOWANIA_ibfk_1">
             <End Role="KIEROWCY" EntitySet="KIEROWCY" />
             <End Role="TANKOWANIA" EntitySet="TANKOWANIA" />
           </AssociationSet>
-          <AssociationSet Name="TANKOWANIA_ibfk_2" Association="Self.TANKOWANIA_ibfk_2">
+          <AssociationSet Name="TANKOWANIA$TANKOWANIA_ibfk_2" Association="Self.TANKOWANIA$TANKOWANIA_ibfk_2">
             <End Role="POJAZDY" EntitySet="POJAZDY" />
             <End Role="TANKOWANIA" EntitySet="TANKOWANIA" />
           </AssociationSet>
-          <AssociationSet Name="TRASA_ibfk_3" Association="Self.TRASA_ibfk_3">
+          <AssociationSet Name="TRASA$TRASA_ibfk_3" Association="Self.TRASA$TRASA_ibfk_3">
             <End Role="KURSY" EntitySet="KURSY" />
             <End Role="TRASA" EntitySet="TRASA" />
           </AssociationSet>
-          <AssociationSet Name="TRASA_ibfk_4" Association="Self.TRASA_ibfk_4">
+          <AssociationSet Name="TRASA$TRASA_ibfk_4" Association="Self.TRASA$TRASA_ibfk_4">
             <End Role="PRZYSTANKI" EntitySet="PRZYSTANKI" />
             <End Role="TRASA" EntitySet="TRASA" />
           </AssociationSet>
-          <AssociationSet Name="ULGI_REZERWACJA_ibfk_1" Association="Self.ULGI_REZERWACJA_ibfk_1">
+          <AssociationSet Name="ULGI_REZERWACJA$ULGI_REZERWACJA_ibfk_1" Association="Self.ULGI_REZERWACJA$ULGI_REZERWACJA_ibfk_1">
             <End Role="REZERWACJE" EntitySet="REZERWACJE" />
             <End Role="ULGI_REZERWACJA" EntitySet="ULGI_REZERWACJA" />
           </AssociationSet>
-          <AssociationSet Name="ULGI_REZERWACJA_ibfk_2" Association="Self.ULGI_REZERWACJA_ibfk_2">
+          <AssociationSet Name="ULGI_REZERWACJA$ULGI_REZERWACJA_ibfk_2" Association="Self.ULGI_REZERWACJA$ULGI_REZERWACJA_ibfk_2">
             <End Role="RODZAJE_BILETOW" EntitySet="RODZAJE_BILETOW" />
             <End Role="ULGI_REZERWACJA" EntitySet="ULGI_REZERWACJA" />
           </AssociationSet>
@@ -463,27 +472,27 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="sql372873Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="kkbusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="CZAS_PRACY">
           <Key>
             <PropertyRef Name="CZA_ID" />
           </Key>
           <Property Name="CZA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PRA_ID" Type="Int32" Nullable="false" />
-          <Property Name="CZA_OD" Type="DateTime" Nullable="false" />
-          <Property Name="CZA_DO" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="PRACOWNICY" Relationship="Self.CZAS_PRACY_ibfk_1" FromRole="CZAS_PRACY" ToRole="PRACOWNICY" />
+          <Property Name="CZA_OD" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CZA_DO" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="PRACOWNICY" Relationship="Self.CZAS_PRACY_CZAS_PRACY_ibfk_1" FromRole="CZAS_PRACY" ToRole="PRACOWNICY" />
         </EntityType>
         <EntityType Name="DOSTEPNE_NAGRODY">
           <Key>
             <PropertyRef Name="NAG_ID" />
           </Key>
           <Property Name="NAG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAG_NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NAG_AKTYWNA" Type="Boolean" Nullable="false" />
+          <Property Name="NAG_NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NAG_AKTYWNA" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
           <Property Name="NAG_PUNKTY" Type="Int32" Nullable="false" />
-          <Property Name="NAG_SCIEZKA_OBRAZKA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="NAGRODY_KLIENCI" Relationship="Self.NAGRODY_KLIENCI_ibfk_2" FromRole="DOSTEPNE_NAGRODY" ToRole="NAGRODY_KLIENCI" />
+          <Property Name="NAG_SCIEZKA_OBRAZKA" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="NAGRODY_KLIENCI" Relationship="Self.NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_2" FromRole="DOSTEPNE_NAGRODY" ToRole="NAGRODY_KLIENCI" />
         </EntityType>
         <EntityType Name="KIEROWCY">
           <Key>
@@ -491,9 +500,9 @@
           </Key>
           <Property Name="KIE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OSO_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OSOBY" Relationship="Self.KIEROWCY_ibfk_1" FromRole="KIEROWCY" ToRole="OSOBY" />
-          <NavigationProperty Name="PRZEJAZDY" Relationship="Self.PRZEJAZDY_ibfk_6" FromRole="KIEROWCY" ToRole="PRZEJAZDY" />
-          <NavigationProperty Name="TANKOWANIA" Relationship="Self.TANKOWANIA_ibfk_1" FromRole="KIEROWCY" ToRole="TANKOWANIA" />
+          <NavigationProperty Name="OSOBY" Relationship="Self.KIEROWCY_KIEROWCY_ibfk_1" FromRole="KIEROWCY" ToRole="OSOBY" />
+          <NavigationProperty Name="PRZEJAZDY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_6" FromRole="KIEROWCY" ToRole="PRZEJAZDY" />
+          <NavigationProperty Name="TANKOWANIA" Relationship="Self.TANKOWANIA_TANKOWANIA_ibfk_1" FromRole="KIEROWCY" ToRole="TANKOWANIA" />
         </EntityType>
         <EntityType Name="KLIENCI">
           <Key>
@@ -501,22 +510,22 @@
           </Key>
           <Property Name="KLI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OSO_ID" Type="Int32" Nullable="false" />
-          <Property Name="KLI_EMAIL" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KLI_EMAIL" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="KLI_PUNKTY" Type="Int32" Nullable="false" />
-          <Property Name="KLI_ZABLOKOWANY" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="OSOBY" Relationship="Self.KLIENCI_ibfk_1" FromRole="KLIENCI" ToRole="OSOBY" />
-          <NavigationProperty Name="NAGRODY_KLIENCI" Relationship="Self.NAGRODY_KLIENCI_ibfk_1" FromRole="KLIENCI" ToRole="NAGRODY_KLIENCI" />
-          <NavigationProperty Name="REZERWACJE" Relationship="Self.REZERWACJE_ibfk_1" FromRole="KLIENCI" ToRole="REZERWACJE" />
+          <Property Name="KLI_ZABLOKOWANY" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <NavigationProperty Name="OSOBY" Relationship="Self.KLIENCI_KLIENCI_ibfk_1" FromRole="KLIENCI" ToRole="OSOBY" />
+          <NavigationProperty Name="NAGRODY_KLIENCI" Relationship="Self.NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_1" FromRole="KLIENCI" ToRole="NAGRODY_KLIENCI" />
+          <NavigationProperty Name="REZERWACJE" Relationship="Self.REZERWACJE_REZERWACJE_ibfk_1" FromRole="KLIENCI" ToRole="REZERWACJE" />
         </EntityType>
         <EntityType Name="KURSY">
           <Key>
             <PropertyRef Name="KUR_ID" />
           </Key>
           <Property Name="KUR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KUR_RELACJA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="KUR_NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="PRZEJAZDY" Relationship="Self.PRZEJAZDY_ibfk_4" FromRole="KURSY" ToRole="PRZEJAZDY" />
-          <NavigationProperty Name="TRASA" Relationship="Self.TRASA_ibfk_3" FromRole="KURSY" ToRole="TRASA" />
+          <Property Name="KUR_RELACJA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KUR_NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PRZEJAZDY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_4" FromRole="KURSY" ToRole="PRZEJAZDY" />
+          <NavigationProperty Name="TRASA" Relationship="Self.TRASA_TRASA_ibfk_3" FromRole="KURSY" ToRole="TRASA" />
         </EntityType>
         <EntityType Name="NAGRODY_KLIENCI">
           <Key>
@@ -525,9 +534,9 @@
           <Property Name="NAK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="KLI_ID" Type="Int32" Nullable="false" />
           <Property Name="NAG_ID" Type="Int32" Nullable="false" />
-          <Property Name="NAK_ADRES_WYSYLKI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="DOSTEPNE_NAGRODY" Relationship="Self.NAGRODY_KLIENCI_ibfk_2" FromRole="NAGRODY_KLIENCI" ToRole="DOSTEPNE_NAGRODY" />
-          <NavigationProperty Name="KLIENCI" Relationship="Self.NAGRODY_KLIENCI_ibfk_1" FromRole="NAGRODY_KLIENCI" ToRole="KLIENCI" />
+          <Property Name="NAK_ADRES_WYSYLKI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DOSTEPNE_NAGRODY" Relationship="Self.NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_2" FromRole="NAGRODY_KLIENCI" ToRole="DOSTEPNE_NAGRODY" />
+          <NavigationProperty Name="KLIENCI" Relationship="Self.NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_1" FromRole="NAGRODY_KLIENCI" ToRole="KLIENCI" />
         </EntityType>
         <EntityType Name="OSOBY">
           <Key>
@@ -538,26 +547,26 @@
           <Property Name="OSO_NAZWISKO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="OSO_PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="OSO_TELEFON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="OSO_DATA_URODZENIA" Type="DateTime" Nullable="false" />
+          <Property Name="OSO_DATA_URODZENIA" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="OSO_LOGIN" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="OSO_HASLO" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="KIEROWCY" Relationship="Self.KIEROWCY_ibfk_1" FromRole="OSOBY" ToRole="KIEROWCY" />
-          <NavigationProperty Name="KLIENCI" Relationship="Self.KLIENCI_ibfk_1" FromRole="OSOBY" ToRole="KLIENCI" />
-          <NavigationProperty Name="PRACOWNICY" Relationship="Self.PRACOWNICY_ibfk_1" FromRole="OSOBY" ToRole="PRACOWNICY" />
+          <Property Name="OSO_HASLO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="KIEROWCY" Relationship="Self.KIEROWCY_KIEROWCY_ibfk_1" FromRole="OSOBY" ToRole="KIEROWCY" />
+          <NavigationProperty Name="KLIENCI" Relationship="Self.KLIENCI_KLIENCI_ibfk_1" FromRole="OSOBY" ToRole="KLIENCI" />
+          <NavigationProperty Name="PRACOWNICY" Relationship="Self.PRACOWNICY_PRACOWNICY_ibfk_1" FromRole="OSOBY" ToRole="PRACOWNICY" />
         </EntityType>
         <EntityType Name="POJAZDY">
           <Key>
             <PropertyRef Name="POJ_ID" />
           </Key>
           <Property Name="POJ_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="POJ_MARKA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="POJ_SILNIK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="POJ_DATA_PRODUKCJI" Type="DateTime" Nullable="false" />
-          <Property Name="POJ_UBEZPIECZONY_DO" Type="DateTime" />
-          <Property Name="POJ_SPRAWNY" Type="Boolean" Nullable="false" />
-          <Property Name="POJ_ADNOTACJE" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="POJ_MARKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POJ_SILNIK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POJ_DATA_PRODUKCJI" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="POJ_UBEZPIECZONY_DO" Type="DateTime" Precision="0" />
+          <Property Name="POJ_SPRAWNY" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="POJ_ADNOTACJE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="POJ_MIEJSCA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TANKOWANIA" Relationship="Self.TANKOWANIA_ibfk_2" FromRole="POJAZDY" ToRole="TANKOWANIA" />
+          <NavigationProperty Name="TANKOWANIA" Relationship="Self.TANKOWANIA_TANKOWANIA_ibfk_2" FromRole="POJAZDY" ToRole="TANKOWANIA" />
         </EntityType>
         <EntityType Name="PRACOWNICY">
           <Key>
@@ -565,10 +574,10 @@
           </Key>
           <Property Name="PRA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OSO_ID" Type="Int32" Nullable="false" />
-          <Property Name="PRA_UPRAWNIENIA" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="CZAS_PRACY" Relationship="Self.CZAS_PRACY_ibfk_1" FromRole="PRACOWNICY" ToRole="CZAS_PRACY" />
-          <NavigationProperty Name="OSOBY" Relationship="Self.PRACOWNICY_ibfk_1" FromRole="PRACOWNICY" ToRole="OSOBY" />
-          <NavigationProperty Name="PRZEJAZDY" Relationship="Self.PRZEJAZDY_ibfk_5" FromRole="PRACOWNICY" ToRole="PRZEJAZDY" />
+          <Property Name="PRA_UPRAWNIENIA" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CZAS_PRACY" Relationship="Self.CZAS_PRACY_CZAS_PRACY_ibfk_1" FromRole="PRACOWNICY" ToRole="CZAS_PRACY" />
+          <NavigationProperty Name="OSOBY" Relationship="Self.PRACOWNICY_PRACOWNICY_ibfk_1" FromRole="PRACOWNICY" ToRole="OSOBY" />
+          <NavigationProperty Name="PRZEJAZDY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_5" FromRole="PRACOWNICY" ToRole="PRZEJAZDY" />
         </EntityType>
         <EntityType Name="PRZEJAZDY">
           <Key>
@@ -578,23 +587,23 @@
           <Property Name="KUR_ID" Type="Int32" Nullable="false" />
           <Property Name="PRA_ID" Type="Int32" Nullable="false" />
           <Property Name="KIE_ID" Type="Int32" Nullable="false" />
-          <Property Name="PRZ_AKTYWNY" Type="Boolean" Nullable="false" />
-          <Property Name="PRZ_ODJAZD" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="KIEROWCY" Relationship="Self.PRZEJAZDY_ibfk_6" FromRole="PRZEJAZDY" ToRole="KIEROWCY" />
-          <NavigationProperty Name="KURSY" Relationship="Self.PRZEJAZDY_ibfk_4" FromRole="PRZEJAZDY" ToRole="KURSY" />
-          <NavigationProperty Name="PRACOWNICY" Relationship="Self.PRZEJAZDY_ibfk_5" FromRole="PRZEJAZDY" ToRole="PRACOWNICY" />
-          <NavigationProperty Name="REZERWACJE" Relationship="Self.REZERWACJE_ibfk_2" FromRole="PRZEJAZDY" ToRole="REZERWACJE" />
+          <Property Name="PRZ_AKTYWNY" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="PRZ_ODJAZD" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="KIEROWCY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_6" FromRole="PRZEJAZDY" ToRole="KIEROWCY" />
+          <NavigationProperty Name="KURSY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_4" FromRole="PRZEJAZDY" ToRole="KURSY" />
+          <NavigationProperty Name="PRACOWNICY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_5" FromRole="PRZEJAZDY" ToRole="PRACOWNICY" />
+          <NavigationProperty Name="REZERWACJE" Relationship="Self.REZERWACJE_REZERWACJE_ibfk_2" FromRole="PRZEJAZDY" ToRole="REZERWACJE" />
         </EntityType>
         <EntityType Name="PRZYSTANKI">
           <Key>
             <PropertyRef Name="PRZY_ID" />
           </Key>
           <Property Name="PRZY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PRZY_NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRZY_NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PRZY_GPS_LONGITUDE" Type="Double" Nullable="false" />
           <Property Name="PRZY_GPS_LATITUDE" Type="Double" Nullable="false" />
-          <Property Name="PRZY_ZADANIE" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TRASA" Relationship="Self.TRASA_ibfk_4" FromRole="PRZYSTANKI" ToRole="TRASA" />
+          <Property Name="PRZY_ZADANIE" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <NavigationProperty Name="TRASA" Relationship="Self.TRASA_TRASA_ibfk_4" FromRole="PRZYSTANKI" ToRole="TRASA" />
         </EntityType>
         <EntityType Name="REZERWACJE">
           <Key>
@@ -604,21 +613,21 @@
           <Property Name="KLI_ID" Type="Int32" Nullable="false" />
           <Property Name="PRZ_ID" Type="Int32" Nullable="false" />
           <Property Name="REZ_CENA" Type="Double" Nullable="false" />
-          <Property Name="REZ_WYKORZYSTANA" Type="Boolean" Nullable="false" />
+          <Property Name="REZ_WYKORZYSTANA" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
           <Property Name="REZ_DOKUMENT" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="KLIENCI" Relationship="Self.REZERWACJE_ibfk_1" FromRole="REZERWACJE" ToRole="KLIENCI" />
-          <NavigationProperty Name="PRZEJAZDY" Relationship="Self.REZERWACJE_ibfk_2" FromRole="REZERWACJE" ToRole="PRZEJAZDY" />
-          <NavigationProperty Name="ULGI_REZERWACJA" Relationship="Self.ULGI_REZERWACJA_ibfk_1" FromRole="REZERWACJE" ToRole="ULGI_REZERWACJA" />
+          <NavigationProperty Name="KLIENCI" Relationship="Self.REZERWACJE_REZERWACJE_ibfk_1" FromRole="REZERWACJE" ToRole="KLIENCI" />
+          <NavigationProperty Name="PRZEJAZDY" Relationship="Self.REZERWACJE_REZERWACJE_ibfk_2" FromRole="REZERWACJE" ToRole="PRZEJAZDY" />
+          <NavigationProperty Name="ULGI_REZERWACJA" Relationship="Self.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_1" FromRole="REZERWACJE" ToRole="ULGI_REZERWACJA" />
         </EntityType>
         <EntityType Name="RODZAJE_BILETOW">
           <Key>
             <PropertyRef Name="ROD_ID" />
           </Key>
           <Property Name="ROD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ROD_NAZWA" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROD_NAZWA" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ROD_WIEK" Type="Int32" Nullable="false" />
           <Property Name="ROD_ZNIZKA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ULGI_REZERWACJA" Relationship="Self.ULGI_REZERWACJA_ibfk_2" FromRole="RODZAJE_BILETOW" ToRole="ULGI_REZERWACJA" />
+          <NavigationProperty Name="ULGI_REZERWACJA" Relationship="Self.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_2" FromRole="RODZAJE_BILETOW" ToRole="ULGI_REZERWACJA" />
         </EntityType>
         <EntityType Name="TANKOWANIA">
           <Key>
@@ -629,10 +638,10 @@
           <Property Name="POJ_ID" Type="Int32" Nullable="false" />
           <Property Name="TAN_ILOSC" Type="Double" Nullable="false" />
           <Property Name="TAN_KWOTA" Type="Double" Nullable="false" />
-          <Property Name="TAN_NASTEPNE" Type="DateTime" Nullable="false" />
+          <Property Name="TAN_NASTEPNE" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TAN_PRZEJECHANO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="KIEROWCY" Relationship="Self.TANKOWANIA_ibfk_1" FromRole="TANKOWANIA" ToRole="KIEROWCY" />
-          <NavigationProperty Name="POJAZDY" Relationship="Self.TANKOWANIA_ibfk_2" FromRole="TANKOWANIA" ToRole="POJAZDY" />
+          <NavigationProperty Name="KIEROWCY" Relationship="Self.TANKOWANIA_TANKOWANIA_ibfk_1" FromRole="TANKOWANIA" ToRole="KIEROWCY" />
+          <NavigationProperty Name="POJAZDY" Relationship="Self.TANKOWANIA_TANKOWANIA_ibfk_2" FromRole="TANKOWANIA" ToRole="POJAZDY" />
         </EntityType>
         <EntityType Name="TRASA">
           <Key>
@@ -644,8 +653,8 @@
           <Property Name="TRA_KOLEJNOSC" Type="Int32" Nullable="false" />
           <Property Name="TRA_CZAS_PRZEJAZDU" Type="Int32" Nullable="false" />
           <Property Name="TRA_CENA" Type="Double" Nullable="false" />
-          <NavigationProperty Name="KURSY" Relationship="Self.TRASA_ibfk_3" FromRole="TRASA" ToRole="KURSY" />
-          <NavigationProperty Name="PRZYSTANKI" Relationship="Self.TRASA_ibfk_4" FromRole="TRASA" ToRole="PRZYSTANKI" />
+          <NavigationProperty Name="KURSY" Relationship="Self.TRASA_TRASA_ibfk_3" FromRole="TRASA" ToRole="KURSY" />
+          <NavigationProperty Name="PRZYSTANKI" Relationship="Self.TRASA_TRASA_ibfk_4" FromRole="TRASA" ToRole="PRZYSTANKI" />
         </EntityType>
         <EntityType Name="ULGI_REZERWACJA">
           <Key>
@@ -655,10 +664,10 @@
           <Property Name="REZ_ID" Type="Int32" Nullable="false" />
           <Property Name="ROD_ID" Type="Int32" Nullable="false" />
           <Property Name="ULR_ILOSC" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="REZERWACJE" Relationship="Self.ULGI_REZERWACJA_ibfk_1" FromRole="ULGI_REZERWACJA" ToRole="REZERWACJE" />
-          <NavigationProperty Name="RODZAJE_BILETOW" Relationship="Self.ULGI_REZERWACJA_ibfk_2" FromRole="ULGI_REZERWACJA" ToRole="RODZAJE_BILETOW" />
+          <NavigationProperty Name="REZERWACJE" Relationship="Self.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_1" FromRole="ULGI_REZERWACJA" ToRole="REZERWACJE" />
+          <NavigationProperty Name="RODZAJE_BILETOW" Relationship="Self.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_2" FromRole="ULGI_REZERWACJA" ToRole="RODZAJE_BILETOW" />
         </EntityType>
-        <Association Name="CZAS_PRACY_ibfk_1">
+        <Association Name="CZAS_PRACY_CZAS_PRACY_ibfk_1">
           <End Role="PRACOWNICY" Type="Self.PRACOWNICY" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -672,7 +681,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="NAGRODY_KLIENCI_ibfk_2">
+        <Association Name="NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_2">
           <End Role="DOSTEPNE_NAGRODY" Type="Self.DOSTEPNE_NAGRODY" Multiplicity="1" />
           <End Role="NAGRODY_KLIENCI" Type="Self.NAGRODY_KLIENCI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -684,7 +693,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="KIEROWCY_ibfk_1">
+        <Association Name="KIEROWCY_KIEROWCY_ibfk_1">
           <End Role="OSOBY" Type="Self.OSOBY" Multiplicity="1" />
           <End Role="KIEROWCY" Type="Self.KIEROWCY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -696,7 +705,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRZEJAZDY_ibfk_6">
+        <Association Name="PRZEJAZDY_PRZEJAZDY_ibfk_6">
           <End Role="KIEROWCY" Type="Self.KIEROWCY" Multiplicity="1" />
           <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -708,7 +717,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TANKOWANIA_ibfk_1">
+        <Association Name="TANKOWANIA_TANKOWANIA_ibfk_1">
           <End Role="KIEROWCY" Type="Self.KIEROWCY" Multiplicity="1" />
           <End Role="TANKOWANIA" Type="Self.TANKOWANIA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -720,7 +729,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="KLIENCI_ibfk_1">
+        <Association Name="KLIENCI_KLIENCI_ibfk_1">
           <End Role="OSOBY" Type="Self.OSOBY" Multiplicity="1" />
           <End Role="KLIENCI" Type="Self.KLIENCI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -732,7 +741,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="NAGRODY_KLIENCI_ibfk_1">
+        <Association Name="NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_1">
           <End Role="KLIENCI" Type="Self.KLIENCI" Multiplicity="1" />
           <End Role="NAGRODY_KLIENCI" Type="Self.NAGRODY_KLIENCI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -744,7 +753,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="REZERWACJE_ibfk_1">
+        <Association Name="REZERWACJE_REZERWACJE_ibfk_1">
           <End Role="KLIENCI" Type="Self.KLIENCI" Multiplicity="1" />
           <End Role="REZERWACJE" Type="Self.REZERWACJE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -756,7 +765,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRZEJAZDY_ibfk_4">
+        <Association Name="PRZEJAZDY_PRZEJAZDY_ibfk_4">
           <End Role="KURSY" Type="Self.KURSY" Multiplicity="1" />
           <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -768,7 +777,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TRASA_ibfk_3">
+        <Association Name="TRASA_TRASA_ibfk_3">
           <End Role="KURSY" Type="Self.KURSY" Multiplicity="1" />
           <End Role="TRASA" Type="Self.TRASA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -780,7 +789,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRACOWNICY_ibfk_1">
+        <Association Name="PRACOWNICY_PRACOWNICY_ibfk_1">
           <End Role="OSOBY" Type="Self.OSOBY" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -794,7 +803,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TANKOWANIA_ibfk_2">
+        <Association Name="TANKOWANIA_TANKOWANIA_ibfk_2">
           <End Role="POJAZDY" Type="Self.POJAZDY" Multiplicity="1" />
           <End Role="TANKOWANIA" Type="Self.TANKOWANIA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -806,7 +815,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRZEJAZDY_ibfk_5">
+        <Association Name="PRZEJAZDY_PRZEJAZDY_ibfk_5">
           <End Role="PRACOWNICY" Type="Self.PRACOWNICY" Multiplicity="1" />
           <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -818,7 +827,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="REZERWACJE_ibfk_2">
+        <Association Name="REZERWACJE_REZERWACJE_ibfk_2">
           <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="1" />
           <End Role="REZERWACJE" Type="Self.REZERWACJE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -830,7 +839,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TRASA_ibfk_4">
+        <Association Name="TRASA_TRASA_ibfk_4">
           <End Role="PRZYSTANKI" Type="Self.PRZYSTANKI" Multiplicity="1" />
           <End Role="TRASA" Type="Self.TRASA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -842,7 +851,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ULGI_REZERWACJA_ibfk_1">
+        <Association Name="ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_1">
           <End Role="REZERWACJE" Type="Self.REZERWACJE" Multiplicity="1" />
           <End Role="ULGI_REZERWACJA" Type="Self.ULGI_REZERWACJA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -854,7 +863,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ULGI_REZERWACJA_ibfk_2">
+        <Association Name="ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_2">
           <End Role="RODZAJE_BILETOW" Type="Self.RODZAJE_BILETOW" Multiplicity="1" />
           <End Role="ULGI_REZERWACJA" Type="Self.ULGI_REZERWACJA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -866,7 +875,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="sql372873Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="kkbusDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CZAS_PRACY" EntityType="Self.CZAS_PRACY" />
           <EntitySet Name="DOSTEPNE_NAGRODY" EntityType="Self.DOSTEPNE_NAGRODY" />
           <EntitySet Name="KIEROWCY" EntityType="Self.KIEROWCY" />
@@ -883,71 +892,71 @@
           <EntitySet Name="TANKOWANIA" EntityType="Self.TANKOWANIA" />
           <EntitySet Name="TRASA" EntityType="Self.TRASA" />
           <EntitySet Name="ULGI_REZERWACJA" EntityType="Self.ULGI_REZERWACJA" />
-          <AssociationSet Name="CZAS_PRACY_ibfk_1" Association="Self.CZAS_PRACY_ibfk_1">
+          <AssociationSet Name="CZAS_PRACY_CZAS_PRACY_ibfk_1" Association="Self.CZAS_PRACY_CZAS_PRACY_ibfk_1">
             <End Role="PRACOWNICY" EntitySet="PRACOWNICY" />
             <End Role="CZAS_PRACY" EntitySet="CZAS_PRACY" />
           </AssociationSet>
-          <AssociationSet Name="NAGRODY_KLIENCI_ibfk_2" Association="Self.NAGRODY_KLIENCI_ibfk_2">
+          <AssociationSet Name="NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_2" Association="Self.NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_2">
             <End Role="DOSTEPNE_NAGRODY" EntitySet="DOSTEPNE_NAGRODY" />
             <End Role="NAGRODY_KLIENCI" EntitySet="NAGRODY_KLIENCI" />
           </AssociationSet>
-          <AssociationSet Name="KIEROWCY_ibfk_1" Association="Self.KIEROWCY_ibfk_1">
+          <AssociationSet Name="KIEROWCY_KIEROWCY_ibfk_1" Association="Self.KIEROWCY_KIEROWCY_ibfk_1">
             <End Role="OSOBY" EntitySet="OSOBY" />
             <End Role="KIEROWCY" EntitySet="KIEROWCY" />
           </AssociationSet>
-          <AssociationSet Name="PRZEJAZDY_ibfk_6" Association="Self.PRZEJAZDY_ibfk_6">
+          <AssociationSet Name="PRZEJAZDY_PRZEJAZDY_ibfk_6" Association="Self.PRZEJAZDY_PRZEJAZDY_ibfk_6">
             <End Role="KIEROWCY" EntitySet="KIEROWCY" />
             <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
           </AssociationSet>
-          <AssociationSet Name="TANKOWANIA_ibfk_1" Association="Self.TANKOWANIA_ibfk_1">
+          <AssociationSet Name="TANKOWANIA_TANKOWANIA_ibfk_1" Association="Self.TANKOWANIA_TANKOWANIA_ibfk_1">
             <End Role="KIEROWCY" EntitySet="KIEROWCY" />
             <End Role="TANKOWANIA" EntitySet="TANKOWANIA" />
           </AssociationSet>
-          <AssociationSet Name="KLIENCI_ibfk_1" Association="Self.KLIENCI_ibfk_1">
+          <AssociationSet Name="KLIENCI_KLIENCI_ibfk_1" Association="Self.KLIENCI_KLIENCI_ibfk_1">
             <End Role="OSOBY" EntitySet="OSOBY" />
             <End Role="KLIENCI" EntitySet="KLIENCI" />
           </AssociationSet>
-          <AssociationSet Name="NAGRODY_KLIENCI_ibfk_1" Association="Self.NAGRODY_KLIENCI_ibfk_1">
+          <AssociationSet Name="NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_1" Association="Self.NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_1">
             <End Role="KLIENCI" EntitySet="KLIENCI" />
             <End Role="NAGRODY_KLIENCI" EntitySet="NAGRODY_KLIENCI" />
           </AssociationSet>
-          <AssociationSet Name="REZERWACJE_ibfk_1" Association="Self.REZERWACJE_ibfk_1">
+          <AssociationSet Name="REZERWACJE_REZERWACJE_ibfk_1" Association="Self.REZERWACJE_REZERWACJE_ibfk_1">
             <End Role="KLIENCI" EntitySet="KLIENCI" />
             <End Role="REZERWACJE" EntitySet="REZERWACJE" />
           </AssociationSet>
-          <AssociationSet Name="PRZEJAZDY_ibfk_4" Association="Self.PRZEJAZDY_ibfk_4">
+          <AssociationSet Name="PRZEJAZDY_PRZEJAZDY_ibfk_4" Association="Self.PRZEJAZDY_PRZEJAZDY_ibfk_4">
             <End Role="KURSY" EntitySet="KURSY" />
             <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
           </AssociationSet>
-          <AssociationSet Name="TRASA_ibfk_3" Association="Self.TRASA_ibfk_3">
+          <AssociationSet Name="TRASA_TRASA_ibfk_3" Association="Self.TRASA_TRASA_ibfk_3">
             <End Role="KURSY" EntitySet="KURSY" />
             <End Role="TRASA" EntitySet="TRASA" />
           </AssociationSet>
-          <AssociationSet Name="PRACOWNICY_ibfk_1" Association="Self.PRACOWNICY_ibfk_1">
+          <AssociationSet Name="PRACOWNICY_PRACOWNICY_ibfk_1" Association="Self.PRACOWNICY_PRACOWNICY_ibfk_1">
             <End Role="OSOBY" EntitySet="OSOBY" />
             <End Role="PRACOWNICY" EntitySet="PRACOWNICY" />
           </AssociationSet>
-          <AssociationSet Name="TANKOWANIA_ibfk_2" Association="Self.TANKOWANIA_ibfk_2">
+          <AssociationSet Name="TANKOWANIA_TANKOWANIA_ibfk_2" Association="Self.TANKOWANIA_TANKOWANIA_ibfk_2">
             <End Role="POJAZDY" EntitySet="POJAZDY" />
             <End Role="TANKOWANIA" EntitySet="TANKOWANIA" />
           </AssociationSet>
-          <AssociationSet Name="PRZEJAZDY_ibfk_5" Association="Self.PRZEJAZDY_ibfk_5">
+          <AssociationSet Name="PRZEJAZDY_PRZEJAZDY_ibfk_5" Association="Self.PRZEJAZDY_PRZEJAZDY_ibfk_5">
             <End Role="PRACOWNICY" EntitySet="PRACOWNICY" />
             <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
           </AssociationSet>
-          <AssociationSet Name="REZERWACJE_ibfk_2" Association="Self.REZERWACJE_ibfk_2">
+          <AssociationSet Name="REZERWACJE_REZERWACJE_ibfk_2" Association="Self.REZERWACJE_REZERWACJE_ibfk_2">
             <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
             <End Role="REZERWACJE" EntitySet="REZERWACJE" />
           </AssociationSet>
-          <AssociationSet Name="TRASA_ibfk_4" Association="Self.TRASA_ibfk_4">
+          <AssociationSet Name="TRASA_TRASA_ibfk_4" Association="Self.TRASA_TRASA_ibfk_4">
             <End Role="PRZYSTANKI" EntitySet="PRZYSTANKI" />
             <End Role="TRASA" EntitySet="TRASA" />
           </AssociationSet>
-          <AssociationSet Name="ULGI_REZERWACJA_ibfk_1" Association="Self.ULGI_REZERWACJA_ibfk_1">
+          <AssociationSet Name="ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_1" Association="Self.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_1">
             <End Role="REZERWACJE" EntitySet="REZERWACJE" />
             <End Role="ULGI_REZERWACJA" EntitySet="ULGI_REZERWACJA" />
           </AssociationSet>
-          <AssociationSet Name="ULGI_REZERWACJA_ibfk_2" Association="Self.ULGI_REZERWACJA_ibfk_2">
+          <AssociationSet Name="ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_2" Association="Self.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_2">
             <End Role="RODZAJE_BILETOW" EntitySet="RODZAJE_BILETOW" />
             <End Role="ULGI_REZERWACJA" EntitySet="ULGI_REZERWACJA" />
           </AssociationSet>
@@ -957,9 +966,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="sql372873ModelStoreContainer" CdmEntityContainer="sql372873Entities">
+        <EntityContainerMapping StorageEntityContainer="kkbusDBModelStoreContainer" CdmEntityContainer="kkbusDBEntities">
           <EntitySetMapping Name="CZAS_PRACY">
-            <EntityTypeMapping TypeName="sql372873Model.CZAS_PRACY">
+            <EntityTypeMapping TypeName="kkbusDBModel.CZAS_PRACY">
               <MappingFragment StoreEntitySet="CZAS_PRACY">
                 <ScalarProperty Name="CZA_ID" ColumnName="CZA_ID" />
                 <ScalarProperty Name="PRA_ID" ColumnName="PRA_ID" />
@@ -969,7 +978,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DOSTEPNE_NAGRODY">
-            <EntityTypeMapping TypeName="sql372873Model.DOSTEPNE_NAGRODY">
+            <EntityTypeMapping TypeName="kkbusDBModel.DOSTEPNE_NAGRODY">
               <MappingFragment StoreEntitySet="DOSTEPNE_NAGRODY">
                 <ScalarProperty Name="NAG_ID" ColumnName="NAG_ID" />
                 <ScalarProperty Name="NAG_NAZWA" ColumnName="NAG_NAZWA" />
@@ -980,7 +989,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="KIEROWCY">
-            <EntityTypeMapping TypeName="sql372873Model.KIEROWCY">
+            <EntityTypeMapping TypeName="kkbusDBModel.KIEROWCY">
               <MappingFragment StoreEntitySet="KIEROWCY">
                 <ScalarProperty Name="KIE_ID" ColumnName="KIE_ID" />
                 <ScalarProperty Name="OSO_ID" ColumnName="OSO_ID" />
@@ -988,7 +997,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="KLIENCI">
-            <EntityTypeMapping TypeName="sql372873Model.KLIENCI">
+            <EntityTypeMapping TypeName="kkbusDBModel.KLIENCI">
               <MappingFragment StoreEntitySet="KLIENCI">
                 <ScalarProperty Name="KLI_ID" ColumnName="KLI_ID" />
                 <ScalarProperty Name="OSO_ID" ColumnName="OSO_ID" />
@@ -999,7 +1008,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="KURSY">
-            <EntityTypeMapping TypeName="sql372873Model.KURSY">
+            <EntityTypeMapping TypeName="kkbusDBModel.KURSY">
               <MappingFragment StoreEntitySet="KURSY">
                 <ScalarProperty Name="KUR_ID" ColumnName="KUR_ID" />
                 <ScalarProperty Name="KUR_RELACJA" ColumnName="KUR_RELACJA" />
@@ -1008,7 +1017,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NAGRODY_KLIENCI">
-            <EntityTypeMapping TypeName="sql372873Model.NAGRODY_KLIENCI">
+            <EntityTypeMapping TypeName="kkbusDBModel.NAGRODY_KLIENCI">
               <MappingFragment StoreEntitySet="NAGRODY_KLIENCI">
                 <ScalarProperty Name="NAK_ID" ColumnName="NAK_ID" />
                 <ScalarProperty Name="KLI_ID" ColumnName="KLI_ID" />
@@ -1018,7 +1027,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OSOBY">
-            <EntityTypeMapping TypeName="sql372873Model.OSOBY">
+            <EntityTypeMapping TypeName="kkbusDBModel.OSOBY">
               <MappingFragment StoreEntitySet="OSOBY">
                 <ScalarProperty Name="OSO_ID" ColumnName="OSO_ID" />
                 <ScalarProperty Name="OSO_IMIE" ColumnName="OSO_IMIE" />
@@ -1032,7 +1041,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="POJAZDY">
-            <EntityTypeMapping TypeName="sql372873Model.POJAZDY">
+            <EntityTypeMapping TypeName="kkbusDBModel.POJAZDY">
               <MappingFragment StoreEntitySet="POJAZDY">
                 <ScalarProperty Name="POJ_ID" ColumnName="POJ_ID" />
                 <ScalarProperty Name="POJ_MARKA" ColumnName="POJ_MARKA" />
@@ -1046,7 +1055,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRACOWNICY">
-            <EntityTypeMapping TypeName="sql372873Model.PRACOWNICY">
+            <EntityTypeMapping TypeName="kkbusDBModel.PRACOWNICY">
               <MappingFragment StoreEntitySet="PRACOWNICY">
                 <ScalarProperty Name="PRA_ID" ColumnName="PRA_ID" />
                 <ScalarProperty Name="OSO_ID" ColumnName="OSO_ID" />
@@ -1055,7 +1064,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRZEJAZDY">
-            <EntityTypeMapping TypeName="sql372873Model.PRZEJAZDY">
+            <EntityTypeMapping TypeName="kkbusDBModel.PRZEJAZDY">
               <MappingFragment StoreEntitySet="PRZEJAZDY">
                 <ScalarProperty Name="PRZ_ID" ColumnName="PRZ_ID" />
                 <ScalarProperty Name="KUR_ID" ColumnName="KUR_ID" />
@@ -1067,7 +1076,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRZYSTANKI">
-            <EntityTypeMapping TypeName="sql372873Model.PRZYSTANKI">
+            <EntityTypeMapping TypeName="kkbusDBModel.PRZYSTANKI">
               <MappingFragment StoreEntitySet="PRZYSTANKI">
                 <ScalarProperty Name="PRZY_ID" ColumnName="PRZY_ID" />
                 <ScalarProperty Name="PRZY_NAZWA" ColumnName="PRZY_NAZWA" />
@@ -1078,7 +1087,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="REZERWACJE">
-            <EntityTypeMapping TypeName="sql372873Model.REZERWACJE">
+            <EntityTypeMapping TypeName="kkbusDBModel.REZERWACJE">
               <MappingFragment StoreEntitySet="REZERWACJE">
                 <ScalarProperty Name="REZ_ID" ColumnName="REZ_ID" />
                 <ScalarProperty Name="KLI_ID" ColumnName="KLI_ID" />
@@ -1090,7 +1099,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RODZAJE_BILETOW">
-            <EntityTypeMapping TypeName="sql372873Model.RODZAJE_BILETOW">
+            <EntityTypeMapping TypeName="kkbusDBModel.RODZAJE_BILETOW">
               <MappingFragment StoreEntitySet="RODZAJE_BILETOW">
                 <ScalarProperty Name="ROD_ID" ColumnName="ROD_ID" />
                 <ScalarProperty Name="ROD_NAZWA" ColumnName="ROD_NAZWA" />
@@ -1100,7 +1109,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TANKOWANIA">
-            <EntityTypeMapping TypeName="sql372873Model.TANKOWANIA">
+            <EntityTypeMapping TypeName="kkbusDBModel.TANKOWANIA">
               <MappingFragment StoreEntitySet="TANKOWANIA">
                 <ScalarProperty Name="TAN_ID" ColumnName="TAN_ID" />
                 <ScalarProperty Name="KIE_ID" ColumnName="KIE_ID" />
@@ -1113,7 +1122,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TRASA">
-            <EntityTypeMapping TypeName="sql372873Model.TRASA">
+            <EntityTypeMapping TypeName="kkbusDBModel.TRASA">
               <MappingFragment StoreEntitySet="TRASA">
                 <ScalarProperty Name="TRA_ID" ColumnName="TRA_ID" />
                 <ScalarProperty Name="KUR_ID" ColumnName="KUR_ID" />
@@ -1125,7 +1134,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ULGI_REZERWACJA">
-            <EntityTypeMapping TypeName="sql372873Model.ULGI_REZERWACJA">
+            <EntityTypeMapping TypeName="kkbusDBModel.ULGI_REZERWACJA">
               <MappingFragment StoreEntitySet="ULGI_REZERWACJA">
                 <ScalarProperty Name="ULR_ID" ColumnName="ULR_ID" />
                 <ScalarProperty Name="REZ_ID" ColumnName="REZ_ID" />

@@ -23,7 +23,7 @@ namespace KKBusWebApp.Models
         public int KUR_ID { get; set; }
         public int PRA_ID { get; set; }
         public int KIE_ID { get; set; }
-        public bool PRZ_AKTYWNY { get; set; }
+        public byte[] PRZ_AKTYWNY { get; set; }
         public System.DateTime PRZ_ODJAZD { get; set; }
     
         public virtual KIEROWCY KIEROWCY { get; set; }

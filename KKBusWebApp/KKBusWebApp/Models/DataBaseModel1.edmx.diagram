@@ -4,40 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="249f2d099d47433781521cbf26ecc25b" Name="Diagram1">
-        <EntityTypeShape EntityType="sql372873Model.CZAS_PRACY" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.DOSTEPNE_NAGRODY" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.KIEROWCY" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.KLIENCI" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.KURSY" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.NAGRODY_KLIENCI" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.OSOBY" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.POJAZDY" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.PRACOWNICY" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.PRZEJAZDY" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.PRZYSTANKI" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.REZERWACJE" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.RODZAJE_BILETOW" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.TANKOWANIA" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.TRASA" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="sql372873Model.ULGI_REZERWACJA" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
-        <AssociationConnector Association="sql372873Model.CZAS_PRACY_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.NAGRODY_KLIENCI_ibfk_2" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.KIEROWCY_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.PRZEJAZDY_ibfk_6" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.TANKOWANIA_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.KLIENCI_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.NAGRODY_KLIENCI_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.REZERWACJE_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.PRZEJAZDY_ibfk_4" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.TRASA_ibfk_3" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.PRACOWNICY_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.TANKOWANIA_ibfk_2" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.PRZEJAZDY_ibfk_5" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.REZERWACJE_ibfk_2" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.TRASA_ibfk_4" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.ULGI_REZERWACJA_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="sql372873Model.ULGI_REZERWACJA_ibfk_2" ManuallyRouted="false" />
+      <Diagram DiagramId="efd4c35813174a4b91e18a149d05628b" Name="Diagram1">
+        <EntityTypeShape EntityType="kkbusDBModel.CZAS_PRACY" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.DOSTEPNE_NAGRODY" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.KIEROWCY" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.KLIENCI" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.KURSY" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.NAGRODY_KLIENCI" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.OSOBY" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.POJAZDY" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.PRACOWNICY" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.PRZEJAZDY" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.PRZYSTANKI" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.REZERWACJE" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.RODZAJE_BILETOW" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.TANKOWANIA" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.TRASA" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="kkbusDBModel.ULGI_REZERWACJA" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="kkbusDBModel.CZAS_PRACY_CZAS_PRACY_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.KIEROWCY_KIEROWCY_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.PRZEJAZDY_PRZEJAZDY_ibfk_6" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.TANKOWANIA_TANKOWANIA_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.KLIENCI_KLIENCI_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.NAGRODY_KLIENCI_NAGRODY_KLIENCI_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.REZERWACJE_REZERWACJE_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.PRZEJAZDY_PRZEJAZDY_ibfk_4" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.TRASA_TRASA_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.PRACOWNICY_PRACOWNICY_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.TANKOWANIA_TANKOWANIA_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.PRZEJAZDY_PRZEJAZDY_ibfk_5" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.REZERWACJE_REZERWACJE_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.TRASA_TRASA_ibfk_4" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
