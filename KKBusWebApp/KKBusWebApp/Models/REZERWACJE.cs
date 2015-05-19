@@ -23,7 +23,7 @@ namespace KKBusWebApp.Models
         public int KLI_ID { get; set; }
         public int PRZ_ID { get; set; }
         public double REZ_CENA { get; set; }
-        public bool REZ_WYKORZYSTANA { get; set; }
+        public byte[] REZ_WYKORZYSTANA { get; set; }
         public int REZ_DOKUMENT { get; set; }
     
         public virtual KLIENCI KLIENCI { get; set; }

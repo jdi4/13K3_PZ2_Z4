@@ -21,7 +21,7 @@ namespace KKBusWebApp.Models
     
         public int NAG_ID { get; set; }
         public string NAG_NAZWA { get; set; }
-        public bool NAG_AKTYWNA { get; set; }
+        public byte[] NAG_AKTYWNA { get; set; }
         public int NAG_PUNKTY { get; set; }
         public string NAG_SCIEZKA_OBRAZKA { get; set; }
     

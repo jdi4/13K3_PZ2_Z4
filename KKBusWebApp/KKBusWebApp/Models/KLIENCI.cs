@@ -24,7 +24,7 @@ namespace KKBusWebApp.Models
         public int OSO_ID { get; set; }
         public string KLI_EMAIL { get; set; }
         public int KLI_PUNKTY { get; set; }
-        public bool KLI_ZABLOKOWANY { get; set; }
+        public byte[] KLI_ZABLOKOWANY { get; set; }
     
         public virtual OSOBY OSOBY { get; set; }
         public virtual ICollection<NAGRODY_KLIENCI> NAGRODY_KLIENCI { get; set; }
