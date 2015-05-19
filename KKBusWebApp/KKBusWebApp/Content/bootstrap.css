@@ -28,6 +28,16 @@ section,
 summary {
   display: block;
 }
+<<<<<<< HEAD
+=======
+
+img.bordered
+{
+  border:10px solid #FF9900;
+  border-color:yellow;
+}
+
+>>>>>>> bcfa328c19d7c88e2c690eb6faba4f0b24534a31
 audio,
 canvas,
 progress,

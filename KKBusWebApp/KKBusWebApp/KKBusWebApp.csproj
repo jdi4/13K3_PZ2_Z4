@@ -341,11 +341,16 @@
     <Content Include="Views\Vehicles\Details.cshtml" />
     <Content Include="Views\Vehicles\Edit.cshtml" />
     <Content Include="Views\Vehicles\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Drivers\Create.cshtml" />
     <Content Include="Views\Drivers\Delete.cshtml" />
     <Content Include="Views\Drivers\Details.cshtml" />
     <Content Include="Views\Drivers\Edit.cshtml" />
     <Content Include="Views\Drivers\Index.cshtml" />
+=======
+    <Content Include="Views\Home\Rozklad.cshtml" />
+    <Content Include="Views\Home\StrefaKlienta.cshtml" />
+>>>>>>> bcfa328c19d7c88e2c690eb6faba4f0b24534a31
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
