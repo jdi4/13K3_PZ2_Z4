@@ -191,6 +191,7 @@
     <Compile Include="Controllers\FormularzKierowcyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\VehiclesController.cs" />
+    <Compile Include="Controllers\RaportsController.cs" />
     <Compile Include="Controllers\TrasyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -391,6 +392,11 @@
     <Content Include="Areas\Admin\Views\Drivers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Drivers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Drivers\Index.cshtml" />
+    <Content Include="Views\Raports\Create.cshtml" />
+    <Content Include="Views\Raports\Delete.cshtml" />
+    <Content Include="Views\Raports\Details.cshtml" />
+    <Content Include="Views\Raports\Edit.cshtml" />
+    <Content Include="Views\Raports\Index.cshtml" />
     <Content Include="Views\Trasy\Create.cshtml" />
     <Content Include="Views\Trasy\Delete.cshtml" />
     <Content Include="Views\Trasy\Details.cshtml" />

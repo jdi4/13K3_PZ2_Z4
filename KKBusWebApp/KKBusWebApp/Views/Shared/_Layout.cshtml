@@ -29,6 +29,7 @@
                     <li>@Html.ActionLink("Strefa Klienta", "Contact", "Home")</li>
                         @if (User.IsInRole("OWNER"))
                         {
+                            <li>@Html.ActionLink("Raporty", "Index", "Raports")</li>
                             //powinno być też dostępne dla kierowcy
                             <li>@Html.ActionLink("Formularz", "Index", "FormularzKierowcy")</li>
                             <li>@Html.ActionLink("Admin panel", "Index", "AdminPanel", new { Area = "Admin" }, null)</li> 
