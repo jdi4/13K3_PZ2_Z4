@@ -193,6 +193,7 @@
     <Compile Include="Areas\Admin\Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\RaportsController.cs" />
     <Compile Include="Controllers\TrasyController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -407,6 +408,13 @@
     <Content Include="Views\FormularzKierowcy\Details.cshtml" />
     <Content Include="Views\FormularzKierowcy\Edit.cshtml" />
     <Content Include="Views\FormularzKierowcy\Index.cshtml" />
+    <Content Include="Views\Reservation\Create.cshtml" />
+    <Content Include="Views\Reservation\Delete.cshtml" />
+    <Content Include="Views\Reservation\Details.cshtml" />
+    <Content Include="Views\Reservation\Edit.cshtml" />
+    <Content Include="Views\Reservation\AvaiableReservations.cshtml" />
+    <Content Include="Views\Reservation\Index.cshtml" />
+    <Content Include="Views\Reservation\Reserve.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
