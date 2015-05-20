@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="kkbusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="kkbusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CZAS_PRACY">
           <Key>
             <PropertyRef Name="CZA_ID" />
@@ -100,7 +100,7 @@
           <Property Name="KUR_ID" Type="int" Nullable="false" />
           <Property Name="PRA_ID" Type="int" Nullable="false" />
           <Property Name="KIE_ID" Type="int" Nullable="false" />
-          <Property Name="PRZ_AKTYWNY" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="PRZ_AKTYWNY" Type="bit" Nullable="false" />
           <Property Name="PRZ_ODJAZD" Type="datetime2" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PRZYSTANKI">
@@ -468,8 +468,7 @@
             <End Role="ULGI_REZERWACJA" EntitySet="ULGI_REZERWACJA" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="kkbusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -587,7 +586,7 @@
           <Property Name="KUR_ID" Type="Int32" Nullable="false" />
           <Property Name="PRA_ID" Type="Int32" Nullable="false" />
           <Property Name="KIE_ID" Type="Int32" Nullable="false" />
-          <Property Name="PRZ_AKTYWNY" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="PRZ_AKTYWNY" Type="Boolean" Nullable="false" />
           <Property Name="PRZ_ODJAZD" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="KIEROWCY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_6" FromRole="PRZEJAZDY" ToRole="KIEROWCY" />
           <NavigationProperty Name="KURSY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_4" FromRole="PRZEJAZDY" ToRole="KURSY" />
