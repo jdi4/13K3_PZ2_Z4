@@ -1,0 +1,84 @@
+﻿@model KKBusWebApp.Models.OSOBY
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>OSOBY</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OSO_IMIE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OSO_IMIE)
+                @Html.ValidationMessageFor(model => model.OSO_IMIE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OSO_NAZWISKO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OSO_NAZWISKO)
+                @Html.ValidationMessageFor(model => model.OSO_NAZWISKO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OSO_PESEL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OSO_PESEL)
+                @Html.ValidationMessageFor(model => model.OSO_PESEL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OSO_TELEFON, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OSO_TELEFON)
+                @Html.ValidationMessageFor(model => model.OSO_TELEFON)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OSO_DATA_URODZENIA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OSO_DATA_URODZENIA)
+                @Html.ValidationMessageFor(model => model.OSO_DATA_URODZENIA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OSO_LOGIN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OSO_LOGIN)
+                @Html.ValidationMessageFor(model => model.OSO_LOGIN)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OSO_HASLO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OSO_HASLO)
+                @Html.ValidationMessageFor(model => model.OSO_HASLO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

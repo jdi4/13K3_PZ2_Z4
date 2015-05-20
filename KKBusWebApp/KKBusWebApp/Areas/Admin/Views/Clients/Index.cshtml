@@ -1,0 +1,51 @@
+﻿@model IEnumerable<KKBusWebApp.Models.KLIENCI>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KLI_EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KLI_PUNKTY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KLI_ZABLOKOWANY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OSOBY.OSO_IMIE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.KLI_EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KLI_PUNKTY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KLI_ZABLOKOWANY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OSOBY.OSO_IMIE)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.KLI_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.KLI_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.KLI_ID })
+        </td>
+    </tr>
+}
+
+</table>

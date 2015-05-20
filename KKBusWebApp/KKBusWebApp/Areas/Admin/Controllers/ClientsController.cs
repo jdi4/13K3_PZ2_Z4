@@ -8,114 +8,115 @@ using System.Web;
 using System.Web.Mvc;
 using KKBusWebApp.Models;
 
-namespace KKBusWebApp.Controllers
+namespace KKBusWebApp.Areas.Admin.Controllers
 {
-    public class DriversController : Controller
+    [Authorize(Roles = "OWNER")]
+    public class ClientsController : Controller
     {
         private kkbusDBEntities db = new kkbusDBEntities();
 
-        // GET: /Drivers/
+        // GET: /Admin/Clients/
         public ActionResult Index()
         {
-            var kierowcy = db.KIEROWCY.Include(k => k.OSOBY);
-            return View(kierowcy.ToList());
+            var klienci = db.KLIENCI.Include(k => k.OSOBY);
+            return View(klienci.ToList());
         }
 
-        // GET: /Drivers/Details/5
+        // GET: /Admin/Clients/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KIEROWCY kierowcy = db.KIEROWCY.Find(id);
-            if (kierowcy == null)
+            KLIENCI klienci = db.KLIENCI.Find(id);
+            if (klienci == null)
             {
                 return HttpNotFound();
             }
-            return View(kierowcy);
+            return View(klienci);
         }
 
-        // GET: /Drivers/Create
+        // GET: /Admin/Clients/Create
         public ActionResult Create()
         {
             ViewBag.OSO_ID = new SelectList(db.OSOBY, "OSO_ID", "OSO_IMIE");
             return View();
         }
 
-        // POST: /Drivers/Create
+        // POST: /Admin/Clients/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="KIE_ID,OSO_ID")] KIEROWCY kierowcy)
+        public ActionResult Create([Bind(Include="KLI_ID,OSO_ID,KLI_EMAIL,KLI_PUNKTY,KLI_ZABLOKOWANY")] KLIENCI klienci)
         {
             if (ModelState.IsValid)
             {
-                db.KIEROWCY.Add(kierowcy);
+                db.KLIENCI.Add(klienci);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.OSO_ID = new SelectList(db.OSOBY, "OSO_ID", "OSO_IMIE", kierowcy.OSO_ID);
-            return View(kierowcy);
+            ViewBag.OSO_ID = new SelectList(db.OSOBY, "OSO_ID", "OSO_IMIE", klienci.OSO_ID);
+            return View(klienci);
         }
 
-        // GET: /Drivers/Edit/5
+        // GET: /Admin/Clients/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KIEROWCY kierowcy = db.KIEROWCY.Find(id);
-            if (kierowcy == null)
+            KLIENCI klienci = db.KLIENCI.Find(id);
+            if (klienci == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.OSO_ID = new SelectList(db.OSOBY, "OSO_ID", "OSO_IMIE", kierowcy.OSO_ID);
-            return View(kierowcy);
+            ViewBag.OSO_ID = new SelectList(db.OSOBY, "OSO_ID", "OSO_IMIE", klienci.OSO_ID);
+            return View(klienci);
         }
 
-        // POST: /Drivers/Edit/5
+        // POST: /Admin/Clients/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="KIE_ID,OSO_ID")] KIEROWCY kierowcy)
+        public ActionResult Edit([Bind(Include="KLI_ID,OSO_ID,KLI_EMAIL,KLI_PUNKTY,KLI_ZABLOKOWANY")] KLIENCI klienci)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(kierowcy).State = EntityState.Modified;
+                db.Entry(klienci).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.OSO_ID = new SelectList(db.OSOBY, "OSO_ID", "OSO_IMIE", kierowcy.OSO_ID);
-            return View(kierowcy);
+            ViewBag.OSO_ID = new SelectList(db.OSOBY, "OSO_ID", "OSO_IMIE", klienci.OSO_ID);
+            return View(klienci);
         }
 
-        // GET: /Drivers/Delete/5
+        // GET: /Admin/Clients/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KIEROWCY kierowcy = db.KIEROWCY.Find(id);
-            if (kierowcy == null)
+            KLIENCI klienci = db.KLIENCI.Find(id);
+            if (klienci == null)
             {
                 return HttpNotFound();
             }
-            return View(kierowcy);
+            return View(klienci);
         }
 
-        // POST: /Drivers/Delete/5
+        // POST: /Admin/Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            KIEROWCY kierowcy = db.KIEROWCY.Find(id);
-            db.KIEROWCY.Remove(kierowcy);
+            KLIENCI klienci = db.KLIENCI.Find(id);
+            db.KLIENCI.Remove(klienci);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

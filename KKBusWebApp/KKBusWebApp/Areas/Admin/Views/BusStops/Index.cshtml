@@ -1,0 +1,51 @@
+﻿@model IEnumerable<KKBusWebApp.Models.PRZYSTANKI>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PRZY_NAZWA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRZY_GPS_LONGITUDE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRZY_GPS_LATITUDE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRZY_ZADANIE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZY_NAZWA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZY_GPS_LONGITUDE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZY_GPS_LATITUDE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZY_ZADANIE)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PRZY_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PRZY_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PRZY_ID })
+        </td>
+    </tr>
+}
+
+</table>

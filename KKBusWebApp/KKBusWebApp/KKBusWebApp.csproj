@@ -176,12 +176,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminPanelController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BusStopsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PersonalDataController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoutesController.cs" />
     <Compile Include="Authentication\MySQLDatabaseMembershipProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DriversController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DriversController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\VehiclesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VehiclesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,6 +295,35 @@
       <DependentUpon>DataBaseModel1.edmx</DependentUpon>
       <LastGenOutput>DataBaseModel1.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPanel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Clients\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Clients\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Clients\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Clients\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Clients\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalData\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalData\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalData\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalData\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PersonalData\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Routes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Routes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Routes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Routes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Routes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BusStops\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BusStops\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\BusStops\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BusStops\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BusStops\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -336,19 +372,20 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\Welcome.cshtml" />
-    <Content Include="Views\Vehicles\Create.cshtml" />
-    <Content Include="Views\Vehicles\Delete.cshtml" />
-    <Content Include="Views\Vehicles\Details.cshtml" />
-    <Content Include="Views\Vehicles\Edit.cshtml" />
-    <Content Include="Views\Vehicles\Index.cshtml" />
-    <Content Include="Views\Drivers\Create.cshtml" />
-    <Content Include="Views\Drivers\Delete.cshtml" />
-    <Content Include="Views\Drivers\Details.cshtml" />
-    <Content Include="Views\Drivers\Edit.cshtml" />
-    <Content Include="Views\Drivers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Vehicles\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Vehicles\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Vehicles\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Vehicles\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Vehicles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Drivers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Drivers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Drivers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Drivers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Drivers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

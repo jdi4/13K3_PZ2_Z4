@@ -1,0 +1,69 @@
+﻿@model IEnumerable<KKBusWebApp.Models.OSOBY>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OSO_IMIE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OSO_NAZWISKO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OSO_PESEL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OSO_TELEFON)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OSO_DATA_URODZENIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OSO_LOGIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OSO_HASLO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OSO_IMIE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OSO_NAZWISKO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OSO_PESEL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OSO_TELEFON)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OSO_DATA_URODZENIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OSO_LOGIN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OSO_HASLO)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OSO_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OSO_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OSO_ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,74 @@
+﻿@model KKBusWebApp.Models.OSOBY
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OSOBY</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OSO_IMIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSO_IMIE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OSO_NAZWISKO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSO_NAZWISKO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OSO_PESEL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSO_PESEL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OSO_TELEFON)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSO_TELEFON)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OSO_DATA_URODZENIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSO_DATA_URODZENIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OSO_LOGIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSO_LOGIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OSO_HASLO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSO_HASLO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OSO_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
