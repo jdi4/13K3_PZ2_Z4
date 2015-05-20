@@ -1,0 +1,66 @@
+﻿@model IEnumerable<KKBusWebApp.Models.TRASA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (User.IsInRole("OWNER"))
+{
+    <p>
+    @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TRA_KOLEJNOSC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRA_CZAS_PRZEJAZDU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRA_CENA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KURSY.KUR_RELACJA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRZYSTANKI.PRZY_NAZWA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRA_KOLEJNOSC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRA_CZAS_PRZEJAZDU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRA_CENA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KURSY.KUR_RELACJA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZYSTANKI.PRZY_NAZWA)
+        </td>
+        @if (User.IsInRole("OWNER"))
+        {
+            <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TRA_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TRA_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TRA_ID })
+            </td>
+        }
+        
+        
+    </tr>
+}
+
+</table>
