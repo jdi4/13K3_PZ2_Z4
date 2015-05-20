@@ -1,0 +1,91 @@
+﻿@model KKBusWebApp.Models.TANKOWANIA
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>TANKOWANIA</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KIE_ID, "KIE_ID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("KIE_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.KIE_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.POJ_ID, "POJ_ID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("POJ_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.POJ_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TAN_ILOSC, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TAN_ILOSC)
+                @Html.ValidationMessageFor(model => model.TAN_ILOSC)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TAN_KWOTA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TAN_KWOTA)
+                @Html.ValidationMessageFor(model => model.TAN_KWOTA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TAN_NASTEPNE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TAN_NASTEPNE)
+                @Html.ValidationMessageFor(model => model.TAN_NASTEPNE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TAN_PRZEJECHANO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TAN_PRZEJECHANO)
+                @Html.ValidationMessageFor(model => model.TAN_PRZEJECHANO)
+            </div>
+        </div>
+        <!--
+        <div class="form-group">
+            Html.LabelFor("ILOSC CLIENTOW", new { class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Html.EditorFor()
+                Html.ValidationMessageFor()
+            </div>
+        </div>
+
+            -->
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
