@@ -1,0 +1,56 @@
+﻿@model KKBusWebApp.Models.KLIENCI
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>KLIENCI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KLI_EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KLI_EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KLI_PUNKTY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KLI_PUNKTY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KLI_ZABLOKOWANY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KLI_ZABLOKOWANY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OSOBY.OSO_IMIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSOBY.OSO_IMIE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

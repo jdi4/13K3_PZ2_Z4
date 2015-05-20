@@ -1,0 +1,68 @@
+﻿@model KKBusWebApp.Models.TRASA
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>TRASA</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KUR_ID, "KUR_ID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("KUR_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.KUR_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PRZY_ID, "PRZY_ID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PRZY_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.PRZY_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TRA_KOLEJNOSC, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TRA_KOLEJNOSC)
+                @Html.ValidationMessageFor(model => model.TRA_KOLEJNOSC)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TRA_CZAS_PRZEJAZDU, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TRA_CZAS_PRZEJAZDU)
+                @Html.ValidationMessageFor(model => model.TRA_CZAS_PRZEJAZDU)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TRA_CENA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TRA_CENA)
+                @Html.ValidationMessageFor(model => model.TRA_CENA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

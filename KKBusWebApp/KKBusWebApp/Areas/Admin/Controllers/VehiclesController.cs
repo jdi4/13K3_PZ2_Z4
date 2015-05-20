@@ -8,8 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using KKBusWebApp.Models;
 
-namespace KKBusWebApp.Controllers
+namespace KKBusWebApp.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "OWNER")]
     public class VehiclesController : Controller
     {
         private kkbusDBEntities db = new kkbusDBEntities();

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Panel administratora";
+}
+
+<h2>Witaj w panelu administracyjnym.</h2>
+
+@{
+
+    if (User.IsInRole("OWNER"))
+    {
+        <ul>
+            <li>@Html.ActionLink("Admin panel", "Index", "AdminPanel")</li>
+            <li>@Html.ActionLink("Użytkownicy/Osoby", "Index", "PersonalData")</li>
+            <li>@Html.ActionLink("Pracownicy", "Index", "Employees")</li>
+            <li>@Html.ActionLink("Kierowcy", "Index", "Drivers")</li>
+            <li>@Html.ActionLink("Klienci", "Index", "Clients")</li>
+            <li>@Html.ActionLink("Nagrody w Programie Lojalnościowym", "Index", "Rewards")</li>
+            <li>@Html.ActionLink("Trasy", "Index", "Routes")</li>
+            <li>@Html.ActionLink("Przystanki", "Index", "BusStops")</li>
+            <li>@Html.ActionLink("Pojazdy", "Index", "Vehicles")</li>
+        </ul>
+    }
+}
+

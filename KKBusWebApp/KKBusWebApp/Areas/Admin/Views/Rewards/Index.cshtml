@@ -1,0 +1,51 @@
+﻿@model IEnumerable<KKBusWebApp.Models.DOSTEPNE_NAGRODY>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NAG_NAZWA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAG_AKTYWNA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAG_PUNKTY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAG_SCIEZKA_OBRAZKA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAG_NAZWA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAG_AKTYWNA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAG_PUNKTY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAG_SCIEZKA_OBRAZKA)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NAG_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NAG_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.NAG_ID })
+        </td>
+    </tr>
+}
+
+</table>

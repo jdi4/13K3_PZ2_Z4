@@ -1,0 +1,50 @@
+﻿@model KKBusWebApp.Models.KLIENCI
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KLIENCI</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KLI_EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KLI_EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KLI_PUNKTY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KLI_PUNKTY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KLI_ZABLOKOWANY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KLI_ZABLOKOWANY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OSOBY.OSO_IMIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OSOBY.OSO_IMIE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KLI_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

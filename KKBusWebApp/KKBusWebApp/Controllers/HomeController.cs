@@ -20,6 +20,7 @@ namespace KKBusWebApp.Controllers
             return View();
         }
 
+        [Authorize(Roles="CLIENT")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -1,0 +1,50 @@
+﻿@model KKBusWebApp.Models.DOSTEPNE_NAGRODY
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DOSTEPNE_NAGRODY</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NAG_NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NAG_NAZWA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NAG_AKTYWNA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NAG_AKTYWNA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NAG_PUNKTY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NAG_PUNKTY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NAG_SCIEZKA_OBRAZKA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NAG_SCIEZKA_OBRAZKA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NAG_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

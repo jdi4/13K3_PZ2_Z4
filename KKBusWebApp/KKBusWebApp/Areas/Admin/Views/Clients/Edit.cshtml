@@ -1,0 +1,61 @@
+﻿@model KKBusWebApp.Models.KLIENCI
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>KLIENCI</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.KLI_ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OSO_ID, "OSO_ID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("OSO_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.OSO_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KLI_EMAIL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KLI_EMAIL)
+                @Html.ValidationMessageFor(model => model.KLI_EMAIL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KLI_PUNKTY, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KLI_PUNKTY)
+                @Html.ValidationMessageFor(model => model.KLI_PUNKTY)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KLI_ZABLOKOWANY, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KLI_ZABLOKOWANY)
+                @Html.ValidationMessageFor(model => model.KLI_ZABLOKOWANY)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
