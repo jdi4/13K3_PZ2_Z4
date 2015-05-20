@@ -1,0 +1,49 @@
+﻿@model IEnumerable<KKBusWebApp.Models.REZERWACJE>
+
+@{
+    ViewBag.Title = "Moje rezerwacje";
+}
+
+<h2>Moje rezerwacje</h2>
+
+<p>
+    @Html.ActionLink("Zarezerwuj przejazd", "AvaiableReservations")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Cena
+        </th>
+        <th>
+            Zrealizowana
+        </th>
+        <th>
+            Relacja
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRZEJAZDY.PRZ_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.REZ_CENA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.REZ_WYKORZYSTANA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZEJAZDY.KURSY.KUR_RELACJA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZEJAZDY.PRZ_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Anuluj", "Cancel", new { id=item.REZ_ID })
+        </td>
+    </tr>
+}
+
+</table>

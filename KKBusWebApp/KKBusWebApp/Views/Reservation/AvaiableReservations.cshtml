@@ -1,0 +1,36 @@
+﻿@model IEnumerable<KKBusWebApp.Models.PRZEJAZDY>
+
+@{
+    ViewBag.Title = "Zarezerwuj przejazd";
+}
+
+<h2>Zarezerwuj przejazd</h2>
+
+@Html.ActionLink("Powrót", "Index", "Reservation")
+
+<table class="table">
+    <tr>
+        <th>
+            Data i godzina odjazdu
+        </th>
+        <th>
+            Kurs
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZ_ODJAZD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KURSY.KUR_RELACJA)
+        </td>
+        <td>
+            @Html.ActionLink("Rezerwuj", "Reserve", new { id=item.PRZ_ID })
+        </td>
+    </tr>
+}
+
+</table>
