@@ -188,6 +188,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\DriversController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\FormularzKierowcyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\TrasyController.cs" />
@@ -395,6 +396,11 @@
     <Content Include="Views\Trasy\Details.cshtml" />
     <Content Include="Views\Trasy\Edit.cshtml" />
     <Content Include="Views\Trasy\Index.cshtml" />
+    <Content Include="Views\FormularzKierowcy\Create.cshtml" />
+    <Content Include="Views\FormularzKierowcy\Delete.cshtml" />
+    <Content Include="Views\FormularzKierowcy\Details.cshtml" />
+    <Content Include="Views\FormularzKierowcy\Edit.cshtml" />
+    <Content Include="Views\FormularzKierowcy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<KKBusWebApp.Models.TANKOWANIA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TAN_ILOSC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TAN_KWOTA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TAN_NASTEPNE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TAN_PRZEJECHANO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KIEROWCY.KIE_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POJAZDY.POJ_MARKA)
+        </th>
+        <th>
+            <!-- Dodać podawanie ilości klientow
+                
+                Html.DisplayNameFor(model => model.ILE_CLIENTOW)
+
+
+                -->
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TAN_ILOSC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TAN_KWOTA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TAN_NASTEPNE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TAN_PRZEJECHANO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KIEROWCY.KIE_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POJAZDY.POJ_MARKA)
+        </td>
+        @if (User.IsInRole("OWNER"))
+        {
+            <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TAN_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TAN_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TAN_ID })
+            </td>
+        }
+        
+    </tr>
+}
+
+</table>
