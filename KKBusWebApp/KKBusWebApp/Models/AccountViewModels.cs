@@ -83,5 +83,10 @@ namespace KKBusWebApp.Models
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Adres email")]
         public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)] // change?
+        [Display(Name = "PESEL")]
+        public int Pesel { get; set; }
     }
 }

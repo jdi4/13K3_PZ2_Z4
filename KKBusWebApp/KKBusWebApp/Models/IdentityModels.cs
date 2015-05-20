@@ -40,6 +40,8 @@ namespace KKBusWebApp.Models
                 this.OSO_HASLO = value;
             }
         }
+
+        public string TempEmail; // possible problem in future -> move to ApplicationUser?
     }
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
@@ -54,9 +56,9 @@ namespace KKBusWebApp.Models
         IUserEmailStore<OSOBY, int>, IUserPhoneNumberStore<OSOBY, int>
 
     {
-        private readonly sql372873Entities db;
+        private readonly kkbusDBEntities db;
 
-        public UserStore(sql372873Entities db)
+        public UserStore(kkbusDBEntities db)
         {
             if (db == null)
             {
@@ -74,11 +76,6 @@ namespace KKBusWebApp.Models
 
         public Task CreateAsync(OSOBY user)
         {
-            user.OSO_DATA_URODZENIA = DateTime.Now;
-            user.OSO_IMIE = "grzegorz";
-            user.OSO_NAZWISKO = "brzeeeeeczyczyczy";
-            user.OSO_PESEL = "87965198";
-            user.OSO_TELEFON = "34534534";
             this.db.OSOBY.Add(user);
             return this.db.SaveChangesAsync();
         }
@@ -129,6 +126,8 @@ namespace KKBusWebApp.Models
                 throw new ArgumentNullException("user");
             }
 
+            //if (user.PasswordHash == "")
+            //    user.PasswordHash = null;
             return Task.FromResult(user.PasswordHash);
         }
 
@@ -150,9 +149,32 @@ namespace KKBusWebApp.Models
 
         // IUserRoleStore<OSOBY, int>
 
-        public Task AddToRoleAsync(OSOBY user, string roleName)
+        public Task AddToRoleAsync(OSOBY user, string roleName) // is it safe?
         {
-            throw new NotImplementedException();
+            if (roleName == "CLIENT")
+            {
+                KLIENCI client = new KLIENCI();
+                client.OSO_ID = user.OSO_ID;
+                client.KLI_PUNKTY = 0;
+                client.KLI_ZABLOKOWANY = new byte[] { 0 };
+                client.KLI_EMAIL = user.TempEmail;
+
+                db.KLIENCI.Add(client);
+                return db.SaveChangesAsync();
+            }
+            else if (roleName == "DRIVER" || roleName == "WORKER" || roleName == "OWNER")
+            {
+                PRACOWNICY emp = new PRACOWNICY();
+                emp.OSO_ID = user.OSO_ID;
+                emp.PRA_UPRAWNIENIA = roleName;
+
+                db.PRACOWNICY.Add(emp);
+                return db.SaveChangesAsync();
+            }
+            else
+            {
+                return Task.FromResult(-1); // ???
+            }
         }
 
         public Task<IList<string>> GetRolesAsync(OSOBY user)
@@ -164,10 +186,10 @@ namespace KKBusWebApp.Models
 
             if (user.KLIENCI.Join(
                 this.db.KLIENCI,
-                kli => kli.KLI_ID,
+                kli => kli.OSO_ID,
                 usr => usr.OSO_ID,
-                (usr, kli) => kli.KLI_ID)
-                != null)
+                (usr, kli) => kli.KLI_ID).Count()
+                != 0)
             {
                 return Task.FromResult<IList<string>>(new List<string> { "CLIENT" });
             }
@@ -175,7 +197,7 @@ namespace KKBusWebApp.Models
             {
                 return Task.FromResult<IList<string>>(user.PRACOWNICY.Join(
                     this.db.PRACOWNICY,
-                    pra => pra.PRA_ID,
+                    pra => pra.OSO_ID,
                     usr => usr.OSO_ID,
                     (usr, pra) => pra.PRA_UPRAWNIENIA
                     ).ToList()

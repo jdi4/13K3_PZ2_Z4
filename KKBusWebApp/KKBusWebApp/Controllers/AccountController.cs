@@ -16,7 +16,7 @@ namespace KKBusWebApp.Controllers
     public class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<OSOBY, int>(new UserStore(new sql372873Entities())))
+            : this(new UserManager<OSOBY, int>(new UserStore(new kkbusDBEntities())))
         {
         }
 
@@ -45,6 +45,21 @@ namespace KKBusWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                // login without password
+                //OSOBY usertest = await UserManager.FindByNameAsync(model.UserName);
+                //if (!await UserManager.HasPasswordAsync(usertest.OSO_ID))
+                //{
+                //    if (usertest != null)
+                //    {
+                //        await SignInAsync(usertest, model.RememberMe);
+                //        return RedirectToLocal(returnUrl);
+                //    }
+                //    else
+                //    {
+                //        ModelState.AddModelError("", "Invalid username or password.");
+                //    }
+                //}
+                // login normal 
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
@@ -79,10 +94,17 @@ namespace KKBusWebApp.Controllers
             if (ModelState.IsValid)
             {
                 //var user = new ApplicationUser() { UserName = model.UserName };
-                var user = new OSOBY() { UserName = model.UserName };
+                var user = new OSOBY() { UserName = model.UserName,
+                                         OSO_IMIE = model.Name,
+                                         OSO_NAZWISKO = model.Surname,
+                                         OSO_TELEFON = model.PhoneNumber.ToString(),
+                                         OSO_DATA_URODZENIA = model.BirthDate,
+                                         OSO_PESEL = model.Pesel.ToString() };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    user.TempEmail = model.Email; // if another object is created in method below it won't work (probably prevented by DBSet
+                    await UserManager.AddToRoleAsync(user.OSO_ID, "CLIENT");
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
