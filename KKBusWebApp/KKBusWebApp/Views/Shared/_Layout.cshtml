@@ -24,19 +24,26 @@
                     <li>@Html.ActionLink("Komunikaty", "Index", "Home")</li>
                     <li>@Html.ActionLink("O Firmie", "About", "Home")</li>
                     <li>@Html.ActionLink("Rozkład Jazdy", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Strefa Klienta", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Lista pojazdów", "Index", "Vehicles")</li>
+                    <li>@Html.ActionLink("Strefa Klienta", "Contact", "Home")</li>
+                        @if (User.IsInRole("OWNER"))
+                        {
+                            <li>@Html.ActionLink("Admin panel", "Index", "AdminPanel", new { Area = "Admin" }, null)</li> 
+                        }                            
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
+        <div class="jumbotron">
+            <img src="~/prijevoz.jpg" style="width:1000px;height:228px">
+        </div>
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - KKBus sp. z o.o.</p>
         </footer>
     </div>
 
