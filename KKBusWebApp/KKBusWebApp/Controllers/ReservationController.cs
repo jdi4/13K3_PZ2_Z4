@@ -34,7 +34,7 @@ namespace KKBusWebApp.Controllers
             return View(przejazdy.ToList());
         }
 
-        public ActionResult Reserve(int? id)
+        public ActionResult MakeReservation(int? id)
         {
             if (id == null)
             {
@@ -47,12 +47,28 @@ namespace KKBusWebApp.Controllers
             }
             REZERWACJE rezerwacja = new REZERWACJE();
             rezerwacja.REZ_CENA = przejazd.KURSY.TRASA.Sum(t => t.TRA_CENA);
-            rezerwacja.KLI_ID = User.Identity.GetUserId<int>();
+            //rezerwacja.KLI_ID = User.Identity.GetUserId<int>(); !! źle
             rezerwacja.PRZ_ID = przejazd.PRZ_ID;
 
-            //db.REZERWACJE
+            int userid = User.Identity.GetUserId<int>();
+            OSOBY osoba = db.OSOBY.Find(userid);
 
-            return View(rezerwacja);
+            SelectList tickettypes = new SelectList(db.RODZAJE_BILETOW, "ROD_ID", "ROD_NAZWA", db.RODZAJE_BILETOW.First().ROD_ID);
+
+            MakeReservationViewModel model = new MakeReservationViewModel() {
+                                                        Reservation = rezerwacja,
+                                                        CourseName = przejazd.KURSY.KUR_RELACJA,
+                                                        TicketsTypesList = tickettypes,
+                                                        TicketsTypes = db.RODZAJE_BILETOW.ToList(),
+                                                        Name = String.Format("{0} {1}", osoba.OSO_IMIE, osoba.OSO_NAZWISKO)
+            };
+
+            return View(model);
+        }
+
+        private ActionResult AddTicketType()
+        {
+            return View();
         }
 
         [HttpPost]

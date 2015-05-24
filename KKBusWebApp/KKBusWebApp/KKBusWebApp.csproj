@@ -229,6 +229,7 @@
     <Compile Include="Models\KURSY.cs">
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MakeReservationViewModel.cs" />
     <Compile Include="Models\NAGRODY_KLIENCI.cs">
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
     </Compile>
@@ -414,7 +415,8 @@
     <Content Include="Views\Reservation\Edit.cshtml" />
     <Content Include="Views\Reservation\AvaiableReservations.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
-    <Content Include="Views\Reservation\Reserve.cshtml" />
+    <Content Include="Views\Reservation\MakeReservation.cshtml" />
+    <Content Include="Views\Reservation\_TicketTypesListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

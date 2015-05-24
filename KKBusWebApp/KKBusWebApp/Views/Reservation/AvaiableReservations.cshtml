@@ -28,7 +28,7 @@
             @Html.DisplayFor(modelItem => item.KURSY.KUR_RELACJA)
         </td>
         <td>
-            @Html.ActionLink("Rezerwuj", "Reserve", new { id=item.PRZ_ID })
+            @Html.ActionLink("Rezerwuj", "MakeReservation", new { id=item.PRZ_ID })
         </td>
     </tr>
 }
