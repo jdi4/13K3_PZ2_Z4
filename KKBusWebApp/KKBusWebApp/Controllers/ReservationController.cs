@@ -59,12 +59,24 @@ namespace KKBusWebApp.Controllers
                                                         Reservation = rezerwacja,
                                                         CourseName = przejazd.KURSY.KUR_RELACJA,
                                                         TicketsTypesList = tickettypes,
-                                                        TicketsTypes = db.RODZAJE_BILETOW.ToList(),
+                                                        TicketsTypes = db.RODZAJE_BILETOW.Where(t => t.ROD_NAZWA == "Normalny").ToList(),
                                                         Name = String.Format("{0} {1}", osoba.OSO_IMIE, osoba.OSO_NAZWISKO)
             };
 
             return View(model);
         }
+
+        public ViewResult AddTicketType(int? ticketId)
+        {
+            RODZAJE_BILETOW ticketType = db.RODZAJE_BILETOW.Find(ticketId);
+            return View("_TicketTypesListPartial", ticketType);
+        }
+
+        //public ActionResult MakeReservation(int? courseId, int? ticketId, string t)
+        //{
+
+        //    return View();
+        //}
 
         private ActionResult AddTicketType()
         {
