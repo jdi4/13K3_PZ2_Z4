@@ -20,7 +20,8 @@ namespace KKBusWebApp.Controllers
         public ActionResult Index()
         {
             int userId = User.Identity.GetUserId<int>();
-            var rezerwacje = db.REZERWACJE.Where(p => p.KLI_ID == userId);
+            int clientId = db.OSOBY.Find(userId).KLIENCI.FirstOrDefault().KLI_ID;
+            var rezerwacje = db.REZERWACJE.Where(p => p.KLI_ID == clientId);
             return View(rezerwacje.ToList());
         }
 
@@ -31,6 +32,9 @@ namespace KKBusWebApp.Controllers
             var przejazdy = db.PRZEJAZDY.Where(p => p.PRZ_ODJAZD > offsetMin && p.PRZ_ODJAZD < offsetMax)
                 .Include(p => p.KURSY)
                 .OrderBy(p => p.PRZ_ODJAZD);
+            //var przejazdy = db.PRZEJAZDY.Where(p => IsCourseReservatonAvaiable(p))
+            //    .Include(p => p.KURSY)
+            //    .OrderBy(p => p.PRZ_ODJAZD);
             return View(przejazdy.ToList());
         }
 
@@ -53,34 +57,105 @@ namespace KKBusWebApp.Controllers
             int userid = User.Identity.GetUserId<int>();
             OSOBY osoba = db.OSOBY.Find(userid);
 
-            SelectList tickettypes = new SelectList(db.RODZAJE_BILETOW, "ROD_ID", "ROD_NAZWA", db.RODZAJE_BILETOW.First().ROD_ID);
+            //SelectList ticketTypesSelectList = new SelectList(db.RODZAJE_BILETOW, "ROD_ID", "ROD_NAZWA", db.RODZAJE_BILETOW.First().ROD_ID);
+
+            RODZAJE_BILETOW rodzaj_biletu = db.RODZAJE_BILETOW.First();
+            TicketType ticket = new TicketType() { TicketID = (int)rodzaj_biletu.ROD_ID, TicketName = rodzaj_biletu.ROD_NAZWA, TicketsNumber = 1 };
+            List<TicketType> ticketList = new List<TicketType>();
+            ticketList.Add(ticket);
+
+            //;
+
+            SelectList ticketTypesSelectList = new SelectList(db.RODZAJE_BILETOW.Where(r => r.ROD_ID != ticket.TicketID), "ROD_ID", "ROD_NAZWA", db.RODZAJE_BILETOW.First(r => r.ROD_ID != ticket.TicketID).ROD_ID);
 
             MakeReservationViewModel model = new MakeReservationViewModel() {
                                                         Reservation = rezerwacja,
+                                                        CourseId = przejazd.PRZ_ID,
                                                         CourseName = przejazd.KURSY.KUR_RELACJA,
-                                                        TicketsTypesList = tickettypes,
-                                                        TicketsTypes = db.RODZAJE_BILETOW.Where(t => t.ROD_NAZWA == "Normalny").ToList(),
+                                                        TicketsTypesDropDownList = ticketTypesSelectList,
+                                                        TicketsTypes = ticketList,
                                                         Name = String.Format("{0} {1}", osoba.OSO_IMIE, osoba.OSO_NAZWISKO)
             };
 
             return View(model);
         }
 
-        public ViewResult AddTicketType(int? ticketId)
+        public PartialViewResult AddTicketType(int? ticketId)
         {
-            RODZAJE_BILETOW ticketType = db.RODZAJE_BILETOW.Find(ticketId);
-            return View("_TicketTypesListPartial", ticketType);
+            if (ticketId == null)
+            {
+                return PartialView("_TicketTypesListPartial", null);  // zmienić?
+            }
+            RODZAJE_BILETOW rodzaj_biletu = db.RODZAJE_BILETOW.Find(ticketId);
+            TicketType ticket = new TicketType() { TicketID = (int)ticketId, TicketName = rodzaj_biletu.ROD_NAZWA, TicketsNumber = 1 };
+            return PartialView("_TicketTypesListPartial", ticket);
         }
 
-        //public ActionResult MakeReservation(int? courseId, int? ticketId, string t)
-        //{
-
-        //    return View();
-        //}
-
-        private ActionResult AddTicketType()
+        [HttpPost]
+        public ActionResult MakeReservation(int courseId, IEnumerable<TicketType> tickets)
         {
-            return View();
+            PRZEJAZDY course = db.PRZEJAZDY.Find(courseId);
+            if (IsCourseReservatonAvaiable(course))
+            {
+                int userId = User.Identity.GetUserId<int>();
+                OSOBY osoba = db.OSOBY.Find(userId);
+                int clientId = osoba.KLIENCI.FirstOrDefault().KLI_ID;
+                REZERWACJE newReservation = new REZERWACJE()
+                {
+                    KLI_ID = clientId,
+                    PRZ_ID = course.PRZ_ID,
+                    REZ_DOKUMENT = 0,
+                    REZ_WYKORZYSTANA = new byte[1] {0},
+                    REZ_CENA = 0
+                };
+
+                db.REZERWACJE.Add(newReservation);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    ViewBag.StatusMessage = "Wystąpił błąd podczas przetwarzania rezerwacji";
+                    return RedirectToAction("AvaiableReservations");
+                }
+
+                double price = 0;
+                foreach (TicketType ticket in tickets)
+                {
+                    ULGI_REZERWACJA reservationTickets = new ULGI_REZERWACJA()
+                    {
+                        REZ_ID = newReservation.REZ_ID,
+                        ROD_ID = ticket.TicketID,
+                        ULR_ILOSC = ticket.TicketsNumber
+                    };
+
+                    price += CalculatePriceWithRelief((double)course.KURSY.TRASA.Sum(t => t.TRA_CENA), db.RODZAJE_BILETOW.Find(ticket.TicketID));
+                    db.ULGI_REZERWACJA.Add(reservationTickets);
+                }
+
+                newReservation.REZ_CENA = price;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    ViewBag.StatusMessage = "Wystąpił błąd podczas przetwarzania rezerwacji";
+                    return RedirectToAction("AvaiableReservations");
+                }
+
+
+            }
+            else
+            {
+                ViewBag.StatusMessage = "Wygasła możliwośc rezerwacji wybranego przejazdu";
+                return RedirectToAction("AvaiableReservations");
+            }
+
+            ViewBag.StatusMessage = "Pomyślnie zarezerwowano przejazd";
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -95,6 +170,19 @@ namespace KKBusWebApp.Controllers
         {
 
             return View();
+        }
+
+        // testuj, testuj
+        private bool IsCourseReservatonAvaiable(PRZEJAZDY course)
+        {
+            DateTime offsetMin = DateTime.Now.AddHours(2);
+            DateTime offsetMax = DateTime.Now.AddDays(7);
+            return course.PRZ_ODJAZD > offsetMin && course.PRZ_ODJAZD < offsetMax;
+        }
+
+        private double CalculatePriceWithRelief(double initialPrice, RODZAJE_BILETOW ticketRelief)
+        {
+            return initialPrice * (100.0 - ticketRelief.ROD_ZNIZKA) / 100.0;
         }
 
         // GET: /Reservation/Details/5
