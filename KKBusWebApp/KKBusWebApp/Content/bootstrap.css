@@ -2966,6 +2966,11 @@ select[multiple].form-group-lg .form-control {
   margin-right: -15px;
   margin-left: -15px;
 }
+
+.form-group input, select {
+  color: black;
+}
+
 @media (min-width: 768px) {
   .form-horizontal .control-label {
     padding-top: 7px;
