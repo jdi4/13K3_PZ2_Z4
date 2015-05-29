@@ -6,6 +6,8 @@
 
 <h2>Moje rezerwacje</h2>
 
+<h3>@ViewBag.Message</h3>
+
 <p>
     @Html.ActionLink("Zarezerwuj przejazd", "AvaiableReservations")
 </p>
@@ -20,9 +22,6 @@
         <th>
             Relacja
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PRZEJAZDY.PRZ_ID)
-        </th>
         <th></th>
     </tr>
 
@@ -36,9 +35,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PRZEJAZDY.KURSY.KUR_RELACJA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRZEJAZDY.PRZ_ID)
         </td>
         <td>
             @Html.ActionLink("Anuluj", "Cancel", new { id=item.REZ_ID })

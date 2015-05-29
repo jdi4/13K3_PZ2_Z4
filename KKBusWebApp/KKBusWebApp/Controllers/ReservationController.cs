@@ -22,6 +22,10 @@ namespace KKBusWebApp.Controllers
             int userId = User.Identity.GetUserId<int>();
             int clientId = db.OSOBY.Find(userId).KLIENCI.FirstOrDefault().KLI_ID;
             var rezerwacje = db.REZERWACJE.Where(p => p.KLI_ID == clientId);
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.Message = TempData["ErrorMessage"].ToString();
+            }
             return View(rezerwacje.ToList());
         }
 
@@ -78,17 +82,6 @@ namespace KKBusWebApp.Controllers
             };
 
             return View(model);
-        }
-
-        public PartialViewResult AddTicketType(int? ticketId)
-        {
-            if (ticketId == null)
-            {
-                return PartialView("_TicketTypesListPartial", null);  // zmienić?
-            }
-            RODZAJE_BILETOW rodzaj_biletu = db.RODZAJE_BILETOW.Find(ticketId);
-            TicketType ticket = new TicketType() { TicketID = (int)ticketId, TicketName = rodzaj_biletu.ROD_NAZWA, TicketsNumber = 1 };
-            return PartialView("_TicketTypesListPartial", ticket);
         }
 
         [HttpPost]
@@ -158,21 +151,47 @@ namespace KKBusWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public ActionResult Reserve(int TicketsNumber)
+        public PartialViewResult AddTicketType(int? ticketId)
         {
-
-            return View();
+            if (ticketId == null)
+            {
+                return PartialView("_TicketTypesListPartial", null);  // zmienić?
+            }
+            RODZAJE_BILETOW rodzaj_biletu = db.RODZAJE_BILETOW.Find(ticketId);
+            TicketType ticket = new TicketType() { TicketID = (int)ticketId, TicketName = rodzaj_biletu.ROD_NAZWA, TicketsNumber = 1 };
+            return PartialView("_TicketTypesListPartial", ticket);
         }
 
-
-        public ActionResult ConfirmReservation()
+        public ActionResult Cancel(int? id)
         {
-
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            REZERWACJE reservation = db.REZERWACJE.Find(id);
+            if (reservation == null)
+            {
+                return HttpNotFound();
+            }
+            if (!IsReservationCancelAvaiable(reservation))
+            {
+                TempData["ErrorMessage"] = "Zbyt poźno, aby odwołać rezerwację (rezerwacje można odwoływać tylko do 24h przed odjazdem).";
+                return RedirectToAction("Index");
+            }
+            return View(reservation);
         }
 
-        // testuj, testuj
+        [HttpPost, ActionName("Cancel")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CancelConfirmed(int id)
+        {
+            REZERWACJE reservation = db.REZERWACJE.Find(id);
+            db.REZERWACJE.Remove(reservation);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // testy? testy??
         private bool IsCourseReservatonAvaiable(PRZEJAZDY course)
         {
             DateTime offsetMin = DateTime.Now.AddHours(2);
@@ -180,116 +199,14 @@ namespace KKBusWebApp.Controllers
             return course.PRZ_ODJAZD > offsetMin && course.PRZ_ODJAZD < offsetMax;
         }
 
+        private bool IsReservationCancelAvaiable(REZERWACJE reservation)
+        {
+            return (reservation.PRZEJAZDY.PRZ_ODJAZD - DateTime.Now).Hours >= 24;
+        }
+
         private double CalculatePriceWithRelief(double initialPrice, RODZAJE_BILETOW ticketRelief)
         {
             return initialPrice * (100.0 - ticketRelief.ROD_ZNIZKA) / 100.0;
-        }
-
-        // GET: /Reservation/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PRZEJAZDY przejazdy = db.PRZEJAZDY.Find(id);
-            if (przejazdy == null)
-            {
-                return HttpNotFound();
-            }
-            return View(przejazdy);
-        }
-
-        // GET: /Reservation/Create
-        public ActionResult Create()
-        {
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID");
-            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA");
-            ViewBag.PRA_ID = new SelectList(db.PRACOWNICY, "PRA_ID", "PRA_UPRAWNIENIA");
-            return View();
-        }
-
-        // POST: /Reservation/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="PRZ_ID,KUR_ID,PRA_ID,KIE_ID,PRZ_AKTYWNY,PRZ_ODJAZD")] PRZEJAZDY przejazdy)
-        {
-            if (ModelState.IsValid)
-            {
-                db.PRZEJAZDY.Add(przejazdy);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", przejazdy.KIE_ID);
-            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA", przejazdy.KUR_ID);
-            ViewBag.PRA_ID = new SelectList(db.PRACOWNICY, "PRA_ID", "PRA_UPRAWNIENIA", przejazdy.PRA_ID);
-            return View(przejazdy);
-        }
-
-        // GET: /Reservation/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PRZEJAZDY przejazdy = db.PRZEJAZDY.Find(id);
-            if (przejazdy == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", przejazdy.KIE_ID);
-            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA", przejazdy.KUR_ID);
-            ViewBag.PRA_ID = new SelectList(db.PRACOWNICY, "PRA_ID", "PRA_UPRAWNIENIA", przejazdy.PRA_ID);
-            return View(przejazdy);
-        }
-
-        // POST: /Reservation/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="PRZ_ID,KUR_ID,PRA_ID,KIE_ID,PRZ_AKTYWNY,PRZ_ODJAZD")] PRZEJAZDY przejazdy)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(przejazdy).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", przejazdy.KIE_ID);
-            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA", przejazdy.KUR_ID);
-            ViewBag.PRA_ID = new SelectList(db.PRACOWNICY, "PRA_ID", "PRA_UPRAWNIENIA", przejazdy.PRA_ID);
-            return View(przejazdy);
-        }
-
-        // GET: /Reservation/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PRZEJAZDY przejazdy = db.PRZEJAZDY.Find(id);
-            if (przejazdy == null)
-            {
-                return HttpNotFound();
-            }
-            return View(przejazdy);
-        }
-
-        // POST: /Reservation/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            PRZEJAZDY przejazdy = db.PRZEJAZDY.Find(id);
-            db.PRZEJAZDY.Remove(przejazdy);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

@@ -413,7 +413,7 @@
     <Content Include="Views\FormularzKierowcy\Edit.cshtml" />
     <Content Include="Views\FormularzKierowcy\Index.cshtml" />
     <Content Include="Views\Reservation\Create.cshtml" />
-    <Content Include="Views\Reservation\Delete.cshtml" />
+    <Content Include="Views\Reservation\Cancel.cshtml" />
     <Content Include="Views\Reservation\Details.cshtml" />
     <Content Include="Views\Reservation\Edit.cshtml" />
     <Content Include="Views\Reservation\AvaiableReservations.cshtml" />

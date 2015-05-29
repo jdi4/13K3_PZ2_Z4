@@ -27,6 +27,11 @@
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Cennik", "Index", "Trasy")</li>
                     <li>@Html.ActionLink("Strefa Klienta", "Contact", "Home")</li>
+                    @if (User.IsInRole("CLIENT"))
+                    {
+                        //powinno być też dostępne dla kierowcy
+                        <li>@Html.ActionLink("Rezerwacje", "Index", "Reservation")</li>
+                    }
                         @if (User.IsInRole("OWNER"))
                         {
                             <li>@Html.ActionLink("Raporty", "Index", "Raports")</li>
