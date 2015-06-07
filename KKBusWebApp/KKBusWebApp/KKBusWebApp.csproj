@@ -232,7 +232,7 @@
     <Compile Include="Models\KURSY.cs">
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MakeReservationViewModel.cs" />
+    <Compile Include="Models\ReservationViewModels.cs" />
     <Compile Include="Models\NAGRODY_KLIENCI.cs">
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
     </Compile>
@@ -412,10 +412,7 @@
     <Content Include="Views\FormularzKierowcy\Details.cshtml" />
     <Content Include="Views\FormularzKierowcy\Edit.cshtml" />
     <Content Include="Views\FormularzKierowcy\Index.cshtml" />
-    <Content Include="Views\Reservation\Create.cshtml" />
     <Content Include="Views\Reservation\Cancel.cshtml" />
-    <Content Include="Views\Reservation\Details.cshtml" />
-    <Content Include="Views\Reservation\Edit.cshtml" />
     <Content Include="Views\Reservation\AvaiableReservations.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Reservation\MakeReservation.cshtml" />

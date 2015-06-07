@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace KKBusWebApp.Controllers
 {
-    //[Authorize(Roles="CLIENT")]
+    [Authorize(Roles="CLIENT")]
     public class ReservationController : Controller
     {
         private kkbusDBEntities db = new kkbusDBEntities();
@@ -20,7 +20,7 @@ namespace KKBusWebApp.Controllers
         public ActionResult Index()
         {
             int userId = User.Identity.GetUserId<int>();
-            int clientId = db.OSOBY.Find(userId).KLIENCI.FirstOrDefault().KLI_ID;
+            int clientId = db.OSOBY.Find(userId).KLIENCI.First().KLI_ID;
             var rezerwacje = db.REZERWACJE.Where(p => p.KLI_ID == clientId);
             if (TempData["ErrorMessage"] != null)
             {
@@ -61,16 +61,16 @@ namespace KKBusWebApp.Controllers
             int userid = User.Identity.GetUserId<int>();
             OSOBY osoba = db.OSOBY.Find(userid);
 
-            //SelectList ticketTypesSelectList = new SelectList(db.RODZAJE_BILETOW, "ROD_ID", "ROD_NAZWA", db.RODZAJE_BILETOW.First().ROD_ID);
+            SelectList ticketTypesSelectList = new SelectList(db.RODZAJE_BILETOW, "ROD_ID", "ROD_NAZWA", db.RODZAJE_BILETOW.First().ROD_ID);
 
             RODZAJE_BILETOW rodzaj_biletu = db.RODZAJE_BILETOW.First();
-            TicketType ticket = new TicketType() { TicketID = (int)rodzaj_biletu.ROD_ID, TicketName = rodzaj_biletu.ROD_NAZWA, TicketsNumber = 1 };
-            List<TicketType> ticketList = new List<TicketType>();
+            TicketTypeViewModel ticket = new TicketTypeViewModel() { TicketID = (int)rodzaj_biletu.ROD_ID, TicketName = rodzaj_biletu.ROD_NAZWA, TicketsNumber = 1 };
+
+            List<TicketTypeViewModel> ticketList = new List<TicketTypeViewModel>();
             ticketList.Add(ticket);
 
-            //;
-
-            SelectList ticketTypesSelectList = new SelectList(db.RODZAJE_BILETOW.Where(r => r.ROD_ID != ticket.TicketID), "ROD_ID", "ROD_NAZWA", db.RODZAJE_BILETOW.First(r => r.ROD_ID != ticket.TicketID).ROD_ID);
+            // TicketsTypes = db.RODZAJE_BILETOW.Cast<TicketTypeViewModel>().ToList()
+            //SelectList ticketTypesSelectList = new SelectList(db.RODZAJE_BILETOW.Where(r => r.ROD_ID != ticket.TicketID), "ROD_ID", "ROD_NAZWA", db.RODZAJE_BILETOW.First(r => r.ROD_ID != ticket.TicketID).ROD_ID);
 
             MakeReservationViewModel model = new MakeReservationViewModel() {
                                                         Reservation = rezerwacja,
@@ -78,14 +78,14 @@ namespace KKBusWebApp.Controllers
                                                         CourseName = przejazd.KURSY.KUR_RELACJA,
                                                         TicketsTypesDropDownList = ticketTypesSelectList,
                                                         TicketsTypes = ticketList,
-                                                        Name = String.Format("{0} {1}", osoba.OSO_IMIE, osoba.OSO_NAZWISKO)
+                                                        PersonName = String.Format("{0} {1}", osoba.OSO_IMIE, osoba.OSO_NAZWISKO)
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult MakeReservation(int courseId, IEnumerable<TicketType> tickets)
+        public ActionResult MakeReservation(int courseId, IEnumerable<TicketTypeViewModel> tickets)
         {
             PRZEJAZDY course = db.PRZEJAZDY.Find(courseId);
             if (IsCourseReservatonAvaiable(course))
@@ -114,7 +114,7 @@ namespace KKBusWebApp.Controllers
                 }
 
                 double price = 0;
-                foreach (TicketType ticket in tickets)
+                foreach (TicketTypeViewModel ticket in tickets)
                 {
                     ULGI_REZERWACJA reservationTickets = new ULGI_REZERWACJA()
                     {
@@ -123,7 +123,7 @@ namespace KKBusWebApp.Controllers
                         ULR_ILOSC = ticket.TicketsNumber
                     };
 
-                    price += CalculatePriceWithRelief((double)course.KURSY.TRASA.Sum(t => t.TRA_CENA), db.RODZAJE_BILETOW.Find(ticket.TicketID));
+                    price += ticket.TicketsNumber * CalculatePriceWithRelief((double)course.KURSY.TRASA.Sum(t => t.TRA_CENA), db.RODZAJE_BILETOW.Find(ticket.TicketID));
                     db.ULGI_REZERWACJA.Add(reservationTickets);
                 }
 
@@ -158,7 +158,7 @@ namespace KKBusWebApp.Controllers
                 return PartialView("_TicketTypesListPartial", null);  // zmienić?
             }
             RODZAJE_BILETOW rodzaj_biletu = db.RODZAJE_BILETOW.Find(ticketId);
-            TicketType ticket = new TicketType() { TicketID = (int)ticketId, TicketName = rodzaj_biletu.ROD_NAZWA, TicketsNumber = 1 };
+            TicketTypeViewModel ticket = new TicketTypeViewModel() { TicketID = (int)ticketId, TicketName = rodzaj_biletu.ROD_NAZWA, TicketsNumber = 1 }; // bez sensu - zmienic na dziedziczenie
             return PartialView("_TicketTypesListPartial", ticket);
         }
 
@@ -201,7 +201,7 @@ namespace KKBusWebApp.Controllers
 
         private bool IsReservationCancelAvaiable(REZERWACJE reservation)
         {
-            return (reservation.PRZEJAZDY.PRZ_ODJAZD - DateTime.Now).Hours >= 24;
+            return (reservation.PRZEJAZDY.PRZ_ODJAZD - DateTime.Now).TotalHours >= 24;
         }
 
         private double CalculatePriceWithRelief(double initialPrice, RODZAJE_BILETOW ticketRelief)

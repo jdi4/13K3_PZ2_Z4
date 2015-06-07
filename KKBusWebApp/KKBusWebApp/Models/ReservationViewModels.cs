@@ -14,16 +14,14 @@ namespace KKBusWebApp.Models
 
         public REZERWACJE Reservation { get; set; }
 
-        //public IEnumerable<RODZAJE_BILETOW> TicketsTypes { get; set; }
-
-        public IEnumerable<TicketType> TicketsTypes { get; set; }
+        public IEnumerable<TicketTypeViewModel> TicketsTypes { get; set; }
 
         public SelectList TicketsTypesDropDownList { get; set; }
 
-        public string Name { get; set; }
+        public string PersonName { get; set; }
     }
 
-    public class TicketType
+    public class TicketTypeViewModel //: RODZAJE_BILETOW
     {
         public int TicketID { get; set; }
 

@@ -22,6 +22,9 @@
         <th>
             Relacja
         </th>
+        <th>
+            Data i godzina odjazdu
+        </th>
         <th></th>
     </tr>
 
@@ -35,6 +38,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PRZEJAZDY.KURSY.KUR_RELACJA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRZEJAZDY.PRZ_ODJAZD)
         </td>
         <td>
             @Html.ActionLink("Anuluj", "Cancel", new { id=item.REZ_ID })

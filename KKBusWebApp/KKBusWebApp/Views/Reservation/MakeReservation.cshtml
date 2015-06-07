@@ -7,18 +7,17 @@
 @section Scripts
 {
     <script type="text/javascript">
-        base_price = parseInt($("#res_price").text(), 10);
+        //base_price = parseInt($("#res_price").text(), 10);
 
-        //$(":input[type='number']").keypress(function (evt) {
-        //    evt.preventDefault();
-        //});
+        // testy
+        $(document).ready(function () {
+            console.log("ready!");
+            //$("#TicketsTypesDropDownList option:first").remove();
+        });
 
-        $("input[type='number']").on('keypress', (function (evt) {
+        // prevent typing form keyboard on ticket number input
+        $("#ticketTypesList").on('keypress', 'input', (function (evt) {
             evt.preventDefault();
-        }));
-
-        $("#ticketsTypesList").on('click', 'input', (function (evt) {
-            alert('jol');
         }));
 
         //$(":input[type=number]").bind('input', function () {
@@ -26,22 +25,47 @@
         //    $("#res_price").text(price);
         //});
                        
-
+        // dodawanie rodzajów biletów
         $('#addTicket').click(function () {
             var typeid = $("#TicketsTypesDropDownList").val();
+            if (typeid == null) return false;
+            //var currentTypes = new Array();
+            var cancontinue = true;
+            $("#ticketTypesList input[id*='TicketID']").each(function () {
+                //alert("Znaleziony" + $(this).val());
+                if (typeid == $(this).val()) {
+                    cancontinue = false;
+                    return false;
+                }
+            });
+
+            if (!cancontinue) {
+                alert("Ten rodzaj biletu został już wybrany");
+                return false;
+            }
+
             $(this).attr('href', '/Reservation/AddTicketType?ticketId=' + typeid);
-            $("#TicketsTypesDropDownList option[value='" + typeid + "']").remove(); // przy dodawaniu - lista rodzajow
+            //$("#TicketsTypesDropDownList option[value='" + typeid + "']").remove(); // przy dodawaniu - usunąc typ z listy rodzajow
 		    $.ajax({
 		        url: this.href,
 		        cache: false,
 		        success: function (html) { $("#ticketTypesList").append(html); }
 		    });
 		    return false;
-		});
+        });
+
+        // usuwanie rodzajów blietów
+        $("#ticketTypesList").on('click', 'a.deleteTicketType', function () {
+            if ($("#ticketTypesList .ticketTypeRow").size() == 1) {
+                alert("Należy wybrać co najmniej 1 rodzaj biletu");
+                return false;
+            }
+            $(this).parents("div.ticketTypeRow:first").remove();
+            return false;
+        });
 
     </script>
 }
-
 
 <h2>Zarezerwuj</h2>
 
@@ -59,7 +83,7 @@
         </dd>
 
         <dt>
-            Cena
+            Cena zwykłego biletu
         </dt>
 
         <dd id="res_price">
@@ -71,7 +95,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.PersonName)
         </dd>
 
     </dl>
@@ -88,31 +112,17 @@
 
             <div id="ticketTypesList">
                 @if(Model.TicketsTypes != null)
-                { 
-                    foreach (var ticketType in Model.TicketsTypes)
-                    {
-                        @Html.Partial("_TicketTypesListPartial", ticketType)
-                    }
+                {  
+                    @Html.Partial("_TicketTypesListPartial", Model.TicketsTypes.First())
                 }
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2" for="TicketsTypes">Rodzaj biletów</label>
+                <label class="control-label col-md-2" for="TicketsTypesDropDownList">Rodzaj biletów</label>
                 <div class="col-md-10">
                     @Html.DropDownList("TicketsTypesDropDownList")
-                    @Html.ValidationMessageFor(model => model.TicketsTypes)
-                    @*<button id="addTicket">Dodaj rodzaj biletu</button>*@
-                    @*<a id='addTicket' href="#">Dodaj rodzaj biletu</a>*@
+                    @*@Html.ValidationMessageFor(model => model.TicketsTypes)*@
                     @Html.ActionLink("Dodaj rodzaj biletu", "AddTicketType", new { ticketId = 0 }, new { id = "addTicket" })                   
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.TicketsTypes, "Rodzaj biletu", new { @class = "control-label col-md-2" })*@
-                @*<label class="control-label col-md-2" for="TicketsTypes">YOLO Ilośc biletów</label>*@
-                <div class="col-md-10">
-                    @*<input class="text-box single-line" data-val="true" data-val-number="" data-val-required="" id="TicketsNumber" name="Ilośc biletów" type="number" value="1" min="1" max="99" step="1" />*@
                 </div>
             </div>
 
@@ -125,6 +135,5 @@
     }
 </div>
 <p>
-    @*@Html.ActionLink("Potwierdź rezerwację", "ConfirmReservation", new { id = Model.REZ_ID }) |*@
     @Html.ActionLink("Powrót do listy", "AvaiableReservations")
 </p>
