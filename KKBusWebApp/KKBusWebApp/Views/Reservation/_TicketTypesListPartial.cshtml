@@ -1,0 +1,18 @@
+﻿@model KKBusWebApp.Models.TicketTypeViewModel
+
+
+<div class="form-group ticketTypeRow">
+    @using(Html.BeginCollectionItem("tickets"))
+    {
+    @*@Html.LabelFor(model => model.TicketsTypes, "Rodzaj biletu", new { @class = "control-label col-md-2" })*@
+        @Html.HiddenFor(model => model.TicketID)
+        @Html.HiddenFor(model => model.TicketName)
+        @Html.DisplayFor(model => model.TicketName)
+        <label class="control-label col-md-2" for="TicketsTypes">Ilośc biletów</label>
+        <div class="col-md-10">
+        @*<input class="text-box single-line" data-val="true" data-val-number="" data-val-required="" id="TicketsNumber" name="Ilośc biletów" type="number" value="1" min="1" max="99" step="1" />*@
+        @Html.TextBoxFor(model => model.TicketsNumber, new { @class = "text-box single-line", @name = "Ilośc biletów", @type = "number", @value = "1", @min = "1", @max = "99", @step = "1" })
+        <a href="#" class="deleteTicketType">Usuń rodzaj biletu</a>
+        </div>
+    }
+</div>

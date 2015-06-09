@@ -1,0 +1,48 @@
+﻿@model KKBusWebApp.Models.REZERWACJE
+
+@{
+    ViewBag.Title = "Anuluj rezerwację";
+}
+
+<h2>Anulowanie rezerwacji</h2>
+
+<h3>Czy na pewno chcesz anulować tę rezerwację?</h3>
+<div>
+    <h4>Informacje o rezerwacji</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Relacja
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZEJAZDY.KURSY.KUR_RELACJA )
+        </dd>
+
+        <dt>
+            Odjazd
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZEJAZDY.PRZ_ODJAZD)
+        </dd>
+
+        <dt>
+            Cena
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REZ_CENA)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Anulowanie" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do listy", "Index")
+        </div>
+    }
+</div>
