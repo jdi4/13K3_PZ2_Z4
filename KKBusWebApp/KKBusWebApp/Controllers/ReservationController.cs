@@ -14,7 +14,18 @@ namespace KKBusWebApp.Controllers
     [Authorize(Roles="CLIENT")]
     public class ReservationController : Controller
     {
-        private kkbusDBEntities db = new kkbusDBEntities();
+        private kkbusDBEntities db;// = new kkbusDBEntities();
+
+        public ReservationController()
+            :this(new kkbusDBEntities())
+        {
+
+        }
+
+        public ReservationController(kkbusDBEntities dbcontext)
+        {
+            this.db = dbcontext;
+        }
 
         // GET: /Reservation/
         public ActionResult Index()

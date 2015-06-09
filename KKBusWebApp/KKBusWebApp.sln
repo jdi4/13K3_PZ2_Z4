@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKBusWebApp", "KKBusWebApp\KKBusWebApp.csproj", "{B8228CBB-1F1D-4E0A-B21F-18BE1549D7EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKBusWebAppTests", "KKBusWebAppTests\KKBusWebAppTests.csproj", "{FD41EDDC-A97B-4570-85AF-390096E7C871}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B8228CBB-1F1D-4E0A-B21F-18BE1549D7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8228CBB-1F1D-4E0A-B21F-18BE1549D7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8228CBB-1F1D-4E0A-B21F-18BE1549D7EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD41EDDC-A97B-4570-85AF-390096E7C871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD41EDDC-A97B-4570-85AF-390096E7C871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD41EDDC-A97B-4570-85AF-390096E7C871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD41EDDC-A97B-4570-85AF-390096E7C871}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
