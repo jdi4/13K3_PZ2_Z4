@@ -14,6 +14,17 @@ namespace KKBusWebApp.Controllers
     {
         private kkbusDBEntities db = new kkbusDBEntities();
 
+        public TrasyController()
+            :this(new kkbusDBEntities())
+        {
+
+        }
+
+        public TrasyController(kkbusDBEntities dbcontext)
+        {
+            this.db = dbcontext;
+        }
+
         // GET: /Trasy/
         public ActionResult Index()
         {
