@@ -109,5 +109,122 @@ namespace KKBusWebAppTests.UnitTests
             Assert.AreEqual("AvaiableReservations", result1.RouteValues["action"]);
             Assert.AreEqual("Index", result2.RouteValues["action"]);
         }
+
+        [TestMethod]
+        public void Return_AvaiableReservationsView()
+        {
+            //Arrange
+            var controller = new ReservationController(dummyDBContext)
+            {
+                ControllerContext = mockControllerContext
+            };
+
+            PRZEJAZDY p = new PRZEJAZDY()
+            {
+                PRZ_ODJAZD = DateTime.Now.AddDays(2),
+                KUR_ID = 1,
+                KIE_ID = 1,
+                PRA_ID = 1
+            };
+
+            dummyDBContext.PRZEJAZDY.Add(p);
+            dummyDBContext.SaveChanges();
+
+            //Act
+            ViewResult result = controller.AvaiableReservations() as ViewResult;
+            List<PRZEJAZDY> resultData = result.ViewData.Model as List<PRZEJAZDY>;
+
+            //Asert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(resultData.Last(), p);
+        }
+
+        [TestMethod]
+        public void Redirect_WhenToLateTo_Cancel()
+        {
+            //Arrange
+            var controller = new ReservationController(dummyDBContext)
+            {
+                ControllerContext = mockControllerContext
+            };
+
+            PRZEJAZDY p = new PRZEJAZDY()
+            {
+                PRZ_ODJAZD = DateTime.Now.AddHours(20),
+                KUR_ID = 1,
+                KIE_ID = 1,
+                PRA_ID = 1
+            };
+
+            dummyDBContext.PRZEJAZDY.Add(p);
+            dummyDBContext.SaveChanges();
+
+            int przId = p.PRZ_ID;
+
+            REZERWACJE r = new REZERWACJE()
+            {
+                REZ_CENA = 10,
+                REZ_DOKUMENT = 0,
+                REZ_WYKORZYSTANA = new byte[1] { 0 },
+                PRZ_ID = przId,
+                KLI_ID = 1
+            };
+
+            dummyDBContext.REZERWACJE.Add(r);
+            dummyDBContext.SaveChanges();
+
+            int rezId = r.REZ_ID;
+
+            //Act
+            var result = controller.Cancel(rezId) as RedirectToRouteResult;
+
+            //Asert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void Return_CancelView()
+        {
+            //Arrange
+            var controller = new ReservationController(dummyDBContext)
+            {
+                ControllerContext = mockControllerContext
+            };
+
+            PRZEJAZDY p = new PRZEJAZDY()
+            {
+                PRZ_ODJAZD = DateTime.Now.AddHours(25),
+                KUR_ID = 1,
+                KIE_ID = 1,
+                PRA_ID = 1
+            };
+
+            dummyDBContext.PRZEJAZDY.Add(p);
+            dummyDBContext.SaveChanges();
+
+            int przId = p.PRZ_ID;
+
+            REZERWACJE r = new REZERWACJE()
+            {
+                REZ_CENA = 10,
+                REZ_DOKUMENT = 0,
+                REZ_WYKORZYSTANA = new byte[1] { 0 },
+                PRZ_ID = przId,
+                KLI_ID = 1
+            };
+
+            dummyDBContext.REZERWACJE.Add(r);
+            dummyDBContext.SaveChanges();
+
+            int rezId = r.REZ_ID;
+
+            //Act
+            var result = controller.Cancel(rezId) as ViewResult;
+            var resultData = result.ViewData.Model as REZERWACJE;
+
+            //Asert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(resultData, r);
+        }
     }
 }
