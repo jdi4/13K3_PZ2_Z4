@@ -24,37 +24,9 @@ namespace KKBusWebAppTests.UnitTests
         [TestInitialize]
         public void Initialize()
         {
-            // Asp.NET Identity Mock
-            
-            //var claim = new Claim("test1", "11");
-            //identity.Claims = new List<Claim>() { claim };
-            //var tempclaim = identity.Claims;
-            //foreach (Claim c in tempclaim)
-            //{
-            //    identity.RemoveClaim(c);
-            //}
-            List<Claim> claims = new List<Claim>{
-                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", "test1"), 
-                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", "11")
-            };
-
-            var identity = new GenericIdentity("");
-            identity.AddClaims(claims);
-            var principal = new GenericPrincipal(identity, new[] { "CLIENT" });
-            this.mockControllerContext = Mock.Of<ControllerContext>(cc => cc.HttpContext.User == principal);
-
-            // Effort database fake
-            //IDataLoader OSOBYloader = new Effort.DataLoaders.CsvDataLoader(@"\DB Test Data\OSOBY.csv");
-            //IDataLoader KLIENCIloader = new Effort.DataLoaders.CsvDataLoader(@"\DB Test Data\KLIENCI.csv");
-            IDataLoader loader = new Effort.DataLoaders.CsvDataLoader(@"D:\SQL Export t");
-
-            //IDataLoader loader = new Effort.DataLoaders.EntityDataLoader("name=kkbusDBEntities");
-
-            EntityConnection connection =
-                Effort.EntityConnectionFactory.CreateTransient("name=kkbusDBEntities", loader);
-            this.dummyDBContext = new kkbusDBEntities(connection);
+            this.mockControllerContext = TestsEnvironment.SetupControllerContextUserIdentity(new[] { "CLIENT" });
+            this.dummyDBContext = TestsEnvironment.SetupDatabase();
         }
-
 
         [TestMethod]
         public void Return_IndexView()
