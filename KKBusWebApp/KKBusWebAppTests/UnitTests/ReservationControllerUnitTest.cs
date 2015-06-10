@@ -11,13 +11,14 @@ using Effort.DataLoaders;
 using System.Data.Common;
 using System.Data.Entity.Core.EntityClient;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KKBusWebAppTests.UnitTests
 {
     [TestClass]
     public class ReservationControllerUnitTests
     {
-        private kkbusDBEntities fakeDBContext;
+        private kkbusDBEntities dummyDBContext;
         private ControllerContext mockControllerContext;
 
         [TestInitialize]
@@ -51,7 +52,7 @@ namespace KKBusWebAppTests.UnitTests
 
             EntityConnection connection =
                 Effort.EntityConnectionFactory.CreateTransient("name=kkbusDBEntities", loader);
-            this.fakeDBContext = new kkbusDBEntities(connection);
+            this.dummyDBContext = new kkbusDBEntities(connection);
         }
 
 
@@ -59,7 +60,7 @@ namespace KKBusWebAppTests.UnitTests
         public void Return_IndexView()
         {
             //Arrange
-            var controller = new ReservationController(fakeDBContext)
+            var controller = new ReservationController(dummyDBContext)
             {
                 ControllerContext = mockControllerContext
             };
@@ -75,7 +76,7 @@ namespace KKBusWebAppTests.UnitTests
         public void PassMessage_InViewBag_Index()
         {
             //Arrange
-            var controller = new ReservationController(fakeDBContext)
+            var controller = new ReservationController(dummyDBContext)
             {
                 ControllerContext = mockControllerContext
             };
@@ -86,6 +87,55 @@ namespace KKBusWebAppTests.UnitTests
 
             //Asert
             Assert.AreEqual("Test Error", result.ViewBag.Message);
+        }
+
+        [TestMethod]
+        public void Redirect_WhenToLateTo_MakeReservation()
+        {
+            //Arrange
+            var controller = new ReservationController(dummyDBContext)
+            {
+                ControllerContext = mockControllerContext
+            };
+
+            PRZEJAZDY p1 = new PRZEJAZDY()
+            {
+                PRZ_ODJAZD = DateTime.Now.AddHours(2), // nie można odwołać
+                KUR_ID = 1,
+                KIE_ID = 1,
+                PRA_ID = 1
+            };
+            PRZEJAZDY p2 = new PRZEJAZDY()
+            {
+                PRZ_ODJAZD = DateTime.Now.AddHours(6), // można odwołac
+                KUR_ID = 1,
+                KIE_ID = 1,
+                PRA_ID = 1
+            };
+            dummyDBContext.PRZEJAZDY.Add(p1);
+            dummyDBContext.PRZEJAZDY.Add(p2);
+            dummyDBContext.SaveChanges();
+
+            List<TicketTypeViewModel> tickets = new List<TicketTypeViewModel>()
+            {
+                new TicketTypeViewModel() 
+                {
+                    TicketID = 1,
+                    TicketName = "TestTicket",
+                    TicketsNumber = 1
+                }
+            };
+
+            dummyDBContext.PRZEJAZDY.Load();
+            dummyDBContext.KURSY.Load();
+
+            //Act
+            var result1 = controller.MakeReservation(p1.PRZ_ID, tickets) as RedirectToRouteResult;
+            var result2 = controller.MakeReservation(p2.PRZ_ID, tickets) as RedirectToRouteResult;
+            
+            //Asert
+            Assert.AreEqual("AvaiableReservations", result1.RouteValues["action"]);
+            Assert.AreEqual("Index", result2.RouteValues["action"]);
         }
     }
 }
