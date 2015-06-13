@@ -3,4 +3,3 @@
 Wymagania:
 
 - Visual Studio 2013
-- MySQL for Visual Studio & MySQL Connector/Net - http://dev.mysql.com/downloads/installer/
