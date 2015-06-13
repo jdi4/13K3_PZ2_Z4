@@ -13,7 +13,18 @@ namespace KKBusWebApp.Areas.Admin.Controllers
     [Authorize(Roles = "OWNER")]
     public class ClientsController : Controller
     {
-        private kkbusDBEntities db = new kkbusDBEntities();
+        private kkbusDBEntities db;
+
+        public ClientsController()
+            :this(new kkbusDBEntities())
+        {
+
+        }
+
+        public ClientsController(kkbusDBEntities dbcontext)
+        {
+            this.db = dbcontext;
+        }
 
         // GET: /Admin/Clients/
         public ActionResult Index()

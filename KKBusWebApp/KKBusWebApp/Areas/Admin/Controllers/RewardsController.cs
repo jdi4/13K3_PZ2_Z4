@@ -12,7 +12,18 @@ namespace KKBusWebApp.Areas.Admin.Controllers
 {
     public class RewardsController : Controller
     {
-        private kkbusDBEntities db = new kkbusDBEntities();
+        private kkbusDBEntities db;
+
+        public RewardsController()
+            :this(new kkbusDBEntities())
+        {
+
+        }
+
+        public RewardsController(kkbusDBEntities dbcontext)
+        {
+            this.db = dbcontext;
+        }
 
         // GET: /Admin/Rewards/
         public ActionResult Index()

@@ -12,7 +12,7 @@ namespace KKBusWebApp.Controllers
 {
     public class TrasyController : Controller
     {
-        private kkbusDBEntities db = new kkbusDBEntities();
+        private kkbusDBEntities db;
 
         public TrasyController()
             :this(new kkbusDBEntities())
