@@ -25,10 +25,12 @@ namespace KKBusWebApp.Models
         public int KIE_ID { get; set; }
         public bool PRZ_AKTYWNY { get; set; }
         public System.DateTime PRZ_ODJAZD { get; set; }
+        public int POJ_ID { get; set; }
     
         public virtual KIEROWCY KIEROWCY { get; set; }
         public virtual KURSY KURSY { get; set; }
         public virtual PRACOWNICY PRACOWNICY { get; set; }
         public virtual ICollection<REZERWACJE> REZERWACJE { get; set; }
+        public virtual POJAZDY POJAZDY { get; set; }
     }
 }

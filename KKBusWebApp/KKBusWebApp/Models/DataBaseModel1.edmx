@@ -102,6 +102,7 @@
           <Property Name="KIE_ID" Type="int" Nullable="false" />
           <Property Name="PRZ_AKTYWNY" Type="bit" Nullable="false" />
           <Property Name="PRZ_ODJAZD" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="POJ_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PRZYSTANKI">
           <Key>
@@ -176,6 +177,18 @@
             </Principal>
             <Dependent Role="CZAS_PRACY">
               <PropertyRef Name="PRA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRZEJAZDY_POJAZDY">
+          <End Role="POJAZDY" Type="Self.POJAZDY" Multiplicity="1" />
+          <End Role="PRZEJAZDY" Type="Self.PRZEJAZDY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POJAZDY">
+              <PropertyRef Name="POJ_ID" />
+            </Principal>
+            <Dependent Role="PRZEJAZDY">
+              <PropertyRef Name="POJ_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -350,7 +363,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ULGI_REZERWACJA$ULGI_REZERWACJA_ibfk_1">
-          <End Role="REZERWACJE" Type="Self.REZERWACJE" Multiplicity="1" />
+          <End Role="REZERWACJE" Type="Self.REZERWACJE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ULGI_REZERWACJA" Type="Self.ULGI_REZERWACJA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="REZERWACJE">
@@ -402,6 +417,10 @@
           <AssociationSet Name="CZAS_PRACY$CZAS_PRACY_ibfk_1" Association="Self.CZAS_PRACY$CZAS_PRACY_ibfk_1">
             <End Role="PRACOWNICY" EntitySet="PRACOWNICY" />
             <End Role="CZAS_PRACY" EntitySet="CZAS_PRACY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRZEJAZDY_POJAZDY" Association="Self.FK_PRZEJAZDY_POJAZDY">
+            <End Role="POJAZDY" EntitySet="POJAZDY" />
+            <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
           </AssociationSet>
           <AssociationSet Name="KIEROWCY$KIEROWCY_ibfk_1" Association="Self.KIEROWCY$KIEROWCY_ibfk_1">
             <End Role="OSOBY" EntitySet="OSOBY" />
@@ -566,6 +585,7 @@
           <Property Name="POJ_ADNOTACJE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="POJ_MIEJSCA" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TANKOWANIA" Relationship="Self.TANKOWANIA_TANKOWANIA_ibfk_2" FromRole="POJAZDY" ToRole="TANKOWANIA" />
+          <NavigationProperty Name="PRZEJAZDY" Relationship="kkbusDBModel.FK_PRZEJAZDY_POJAZDY" FromRole="POJAZDY" ToRole="PRZEJAZDY" />
         </EntityType>
         <EntityType Name="PRACOWNICY">
           <Key>
@@ -592,6 +612,8 @@
           <NavigationProperty Name="KURSY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_4" FromRole="PRZEJAZDY" ToRole="KURSY" />
           <NavigationProperty Name="PRACOWNICY" Relationship="Self.PRZEJAZDY_PRZEJAZDY_ibfk_5" FromRole="PRZEJAZDY" ToRole="PRACOWNICY" />
           <NavigationProperty Name="REZERWACJE" Relationship="Self.REZERWACJE_REZERWACJE_ibfk_2" FromRole="PRZEJAZDY" ToRole="REZERWACJE" />
+          <Property Name="POJ_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="POJAZDY" Relationship="kkbusDBModel.FK_PRZEJAZDY_POJAZDY" FromRole="PRZEJAZDY" ToRole="POJAZDY" />
         </EntityType>
         <EntityType Name="PRZYSTANKI">
           <Key>
@@ -959,7 +981,23 @@
             <End Role="RODZAJE_BILETOW" EntitySet="RODZAJE_BILETOW" />
             <End Role="ULGI_REZERWACJA" EntitySet="ULGI_REZERWACJA" />
           </AssociationSet>
+          <AssociationSet Name="FK_PRZEJAZDY_POJAZDY" Association="kkbusDBModel.FK_PRZEJAZDY_POJAZDY">
+            <End Role="POJAZDY" EntitySet="POJAZDY" />
+            <End Role="PRZEJAZDY" EntitySet="PRZEJAZDY" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_PRZEJAZDY_POJAZDY">
+          <End Type="kkbusDBModel.POJAZDY" Role="POJAZDY" Multiplicity="1" />
+          <End Type="kkbusDBModel.PRZEJAZDY" Role="PRZEJAZDY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POJAZDY">
+              <PropertyRef Name="POJ_ID" />
+            </Principal>
+            <Dependent Role="PRZEJAZDY">
+              <PropertyRef Name="POJ_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1065,6 +1103,7 @@
           <EntitySetMapping Name="PRZEJAZDY">
             <EntityTypeMapping TypeName="kkbusDBModel.PRZEJAZDY">
               <MappingFragment StoreEntitySet="PRZEJAZDY">
+                <ScalarProperty Name="POJ_ID" ColumnName="POJ_ID" />
                 <ScalarProperty Name="PRZ_ID" ColumnName="PRZ_ID" />
                 <ScalarProperty Name="KUR_ID" ColumnName="KUR_ID" />
                 <ScalarProperty Name="PRA_ID" ColumnName="PRA_ID" />
