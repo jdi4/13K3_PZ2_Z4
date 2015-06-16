@@ -198,6 +198,7 @@
     <Compile Include="Controllers\FormularzKierowcyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\VehiclesController.cs" />
+    <Compile Include="Controllers\PrzejazdyController.cs" />
     <Compile Include="Controllers\RaportsController.cs" />
     <Compile Include="Controllers\TrasyController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
@@ -209,6 +210,7 @@
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBase Partials\kkbusDBEntitiesp1.cs" />
+    <Compile Include="Models\DataBase Partials\PRZEJAZDYp1.cs" />
     <Compile Include="Models\DataBaseModel1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -423,6 +425,12 @@
     <Content Include="Views\Reservation\MakeReservation.cshtml" />
     <Content Include="Views\Reservation\_TicketTypesListPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Przejazdy\Create.cshtml" />
+    <Content Include="Views\Przejazdy\Delete.cshtml" />
+    <Content Include="Views\Przejazdy\Details.cshtml" />
+    <Content Include="Views\Przejazdy\Edit.cshtml" />
+    <Content Include="Views\Przejazdy\Index.cshtml" />
+    <Content Include="Views\Przejazdy\Past.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
