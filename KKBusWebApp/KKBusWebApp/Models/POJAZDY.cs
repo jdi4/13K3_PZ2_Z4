@@ -17,6 +17,7 @@ namespace KKBusWebApp.Models
         public POJAZDY()
         {
             this.TANKOWANIA = new HashSet<TANKOWANIA>();
+            this.PRZEJAZDY = new HashSet<PRZEJAZDY>();
         }
     
         public int POJ_ID { get; set; }
@@ -29,5 +30,6 @@ namespace KKBusWebApp.Models
         public int POJ_MIEJSCA { get; set; }
     
         public virtual ICollection<TANKOWANIA> TANKOWANIA { get; set; }
+        public virtual ICollection<PRZEJAZDY> PRZEJAZDY { get; set; }
     }
 }

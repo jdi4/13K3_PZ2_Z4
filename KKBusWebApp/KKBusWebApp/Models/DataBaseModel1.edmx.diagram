@@ -38,6 +38,7 @@
         <AssociationConnector Association="kkbusDBModel.TRASA_TRASA_ibfk_4" ManuallyRouted="false" />
         <AssociationConnector Association="kkbusDBModel.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="kkbusDBModel.ULGI_REZERWACJA_ULGI_REZERWACJA_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="kkbusDBModel.FK_PRZEJAZDY_POJAZDY" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
