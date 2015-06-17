@@ -15,33 +15,23 @@ namespace KKBusWebApp.Controllers
         private kkbusDBEntities db = new kkbusDBEntities();
 
         // GET: /Przejazdy/
-        public ActionResult Index()
+        public ActionResult Index(bool past = false)
         {
-            DateTime offsetMin = DateTime.Now.Date; // sam dzień (bez godzin, żeby wyśietlić wszystkie przejazdy danego dnia)
-
+            DateTime offsetMin = past ? new DateTime() : DateTime.Now.Date; // sam dzień (bez godzin, żeby wyśietlić wszystkie przejazdy danego dnia)
+            DateTime offsetMax = past ? DateTime.Now : DateTime.MaxValue;
+            
             var przejazdy = db.PRZEJAZDY
-                .Where(p => p.PRZ_ODJAZD > offsetMin)
+                .Where(p => p.PRZ_ODJAZD > offsetMin && p.PRZ_ODJAZD < offsetMax)
                 .Include(p => p.KIEROWCY)
                 .Include(p => p.KURSY)
                 .Include(p => p.PRACOWNICY)
                 .Include(p => p.KIEROWCY.OSOBY)
                 .Include(p => p.REZERWACJE)
+                .Include(p => p.POJAZDY)
                 .OrderBy(p => p.PRZ_ODJAZD);
-            return View(przejazdy.ToList());
-        }
-
-        public ActionResult Past()
-        {
-            DateTime offsetMin = DateTime.Now;
-
-            var przejazdy = db.PRZEJAZDY
-                .Where(p => p.PRZ_ODJAZD < offsetMin)
-                .Include(p => p.KIEROWCY)
-                .Include(p => p.KURSY)
-                .Include(p => p.PRACOWNICY)
-                .Include(p => p.KIEROWCY.OSOBY)
-                .Include(p => p.REZERWACJE)
-                .OrderBy(p => p.PRZ_ODJAZD);
+            ViewBag.Title = "Zarządzanie przejazdami";
+            ViewBag.HeaderH2 = past ? "Poprzednie przejazdy" : "Aktualne przejazdy";
+            ViewBag.PastMode = past;
             return View(przejazdy.ToList());
         }
 
@@ -63,9 +53,7 @@ namespace KKBusWebApp.Controllers
         // GET: /Przejazdy/Create
         public ActionResult Create()
         {
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID");
-            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA");
-            ViewBag.PRA_ID = new SelectList(db.PRACOWNICY, "PRA_ID", "PRA_UPRAWNIENIA");
+            SetPRZEJAZDYSelectLists();
             return View();
         }
 
@@ -74,7 +62,7 @@ namespace KKBusWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="PRZ_ID,KUR_ID,PRA_ID,KIE_ID,PRZ_AKTYWNY,PRZ_ODJAZD")] PRZEJAZDY przejazdy)
+        public ActionResult Create([Bind(Include="KUR_ID,PRA_ID,KIE_ID,PRZ_AKTYWNY,PRZ_ODJAZD,POJ_ID")] PRZEJAZDY przejazdy)
         {
             if (ModelState.IsValid)
             {
@@ -83,9 +71,7 @@ namespace KKBusWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", przejazdy.KIE_ID);
-            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA", przejazdy.KUR_ID);
-            ViewBag.PRA_ID = new SelectList(db.PRACOWNICY, "PRA_ID", "PRA_UPRAWNIENIA", przejazdy.PRA_ID);
+            SetPRZEJAZDYSelectLists();
             return View(przejazdy);
         }
 
@@ -101,9 +87,7 @@ namespace KKBusWebApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", przejazdy.KIE_ID);
-            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA", przejazdy.KUR_ID);
-            ViewBag.PRA_ID = new SelectList(db.PRACOWNICY, "PRA_ID", "PRA_UPRAWNIENIA", przejazdy.PRA_ID);
+            SetPRZEJAZDYSelectLists();
             return View(przejazdy);
         }
 
@@ -112,7 +96,7 @@ namespace KKBusWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="PRZ_ID,KUR_ID,PRA_ID,KIE_ID,PRZ_AKTYWNY,PRZ_ODJAZD")] PRZEJAZDY przejazdy)
+        public ActionResult Edit([Bind(Include="KUR_ID,PRA_ID,KIE_ID,PRZ_AKTYWNY,PRZ_ODJAZD")] PRZEJAZDY przejazdy)
         {
             if (ModelState.IsValid)
             {
@@ -120,9 +104,7 @@ namespace KKBusWebApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", przejazdy.KIE_ID);
-            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA", przejazdy.KUR_ID);
-            ViewBag.PRA_ID = new SelectList(db.PRACOWNICY, "PRA_ID", "PRA_UPRAWNIENIA", przejazdy.PRA_ID);
+            SetPRZEJAZDYSelectLists();
             return View(przejazdy);
         }
 
@@ -150,6 +132,41 @@ namespace KKBusWebApp.Controllers
             db.PRZEJAZDY.Remove(przejazdy);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private void SetPRZEJAZDYSelectLists()
+        {
+            var kierowcy = db.KIEROWCY;
+            List<object> kierowcySL = new List<object>();
+            foreach (var k in kierowcy)
+                kierowcySL.Add(new
+                {
+                    Id = k.KIE_ID,
+                    Name = k.OSOBY.OSO_IMIE + " " + k.OSOBY.OSO_NAZWISKO
+                });
+
+            var pracownicy = db.PRACOWNICY;
+            List<object> pracownicySL = new List<object>();
+            foreach (var pr in pracownicy)
+                pracownicySL.Add(new
+                {
+                    Id = pr.PRA_ID,
+                    Name = pr.OSOBY.OSO_IMIE + " " + pr.OSOBY.OSO_NAZWISKO
+                });
+
+            var pojazdy = db.POJAZDY.Where(p => p.POJ_SPRAWNY == new byte[1] { 1 });
+            List<object> pojazdySL = new List<object>();
+            foreach (var p in pojazdy)
+                pojazdySL.Add(new
+                {
+                    Id = p.POJ_ID,
+                    Name = String.Format("{0} {1} [miejsca: {2}]", p.POJ_MARKA, p.POJ_ID, p.POJ_MIEJSCA)
+                });
+
+            ViewBag.KIE_ID = new SelectList(kierowcySL, "Id", "Name");
+            ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA");
+            ViewBag.PRA_ID = new SelectList(pracownicySL, "Id", "Name");
+            ViewBag.POJ_ID = new SelectList(pojazdySL, "Id", "Name");
         }
 
         protected override void Dispose(bool disposing)

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<KKBusWebApp.Models.PRZEJAZDY>
 
 @{
-    ViewBag.Title = "Zarządzanie przejazdami";
+    //ViewBag.Title = "Zarządzanie przejazdami";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.HeaderH2</h2>
 
 <p>
     @Html.ActionLink("Dodaj nowy przejazd", "Create")
@@ -24,7 +24,13 @@
             Relacja
         </th>
         <th>
+            Pojazd
+        </th>
+        <th>
             Ilość rezerwacji
+        </th>
+        <th>
+            Ilość miejsc
         </th>
         <th></th>
     </tr>
@@ -46,14 +52,32 @@
             @Html.DisplayFor(modelItem => item.KURSY.KUR_RELACJA)
         </td>
         <td>
+            @*Action link do pojazdu*@
+            @Html.DisplayFor(modelItem => item.POJAZDY.POJ_MARKA)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.REZERWACJE.Count)
         </td>
         <td>
-            @Html.ActionLink("Edytuj", "Edit", new { id=item.PRZ_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PRZ_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PRZ_ID })
+            @Html.DisplayFor(modelItem => item.POJAZDY.POJ_MIEJSCA)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.PRZ_ID })
+            @if (!ViewBag.PastMode)
+            {
+                <span>|</span> @Html.ActionLink("Edytuj", "Edit", new { id=item.PRZ_ID }) <span>|</span>  
+                @Html.ActionLink("Delete", "Delete", new { id=item.PRZ_ID }) <span>|</span>
+            }
+
         </td>
     </tr>
 }
 
 </table>
+
+<p>
+@{
+    if (ViewBag.PastMode != true) { @Html.ActionLink("Poprzednie przejazdy", "Index", new { past = true }); }
+ else { @Html.ActionLink("Aktualne przejazdy", "Index", new { past = false }); }
+}
+</p>

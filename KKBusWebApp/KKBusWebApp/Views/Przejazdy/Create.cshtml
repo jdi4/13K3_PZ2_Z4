@@ -4,6 +4,30 @@
     ViewBag.Title = "Create";
 }
 
+@section JSPlugins
+{
+    @*<link rel="stylesheet" type="text/css" href="/Content/jquery.datetimepicker.css" />
+    <script src="/Scripts/jquery.datetimepicker.js"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("/Scripts/jquery.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.datetimepicker.js")"></script>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/jquery.datetimepicker.css")" />
+    <script type="text/javascript">
+        $('#datetimepicker').datetimepicker({
+            theme: 'dark',
+            dayOfWeekStart: 1,
+            lang: 'pl',
+            minDate: '0',
+            minTime: '@DateTime.Now.AddHours(1).Hour:@DateTime.Now.AddHours(1).Minute',
+            mask: true,
+            step: 10
+
+            //formatDate: 'd/m/Y',
+            //startDate: '@DateTime.Now.Date.ToString("dd/MM/yyyy")',
+            //formatTime: 'H:i',
+        });
+    </script>
+
+}
 <h2>Create</h2>
 
 @using (Html.BeginForm()) 
@@ -18,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.KUR_ID, "KUR_ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("KUR_ID", String.Empty)
+                @Html.DropDownList("KUR_ID")
                 @Html.ValidationMessageFor(model => model.KUR_ID)
             </div>
         </div>
@@ -26,7 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PRA_ID, "PRA_ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("PRA_ID", String.Empty)
+                @Html.DropDownList("PRA_ID")
                 @Html.ValidationMessageFor(model => model.PRA_ID)
             </div>
         </div>
@@ -34,26 +58,38 @@
         <div class="form-group">
             @Html.LabelFor(model => model.KIE_ID, "KIE_ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("KIE_ID", String.Empty)
+                @Html.DropDownList("KIE_ID")
                 @Html.ValidationMessageFor(model => model.KIE_ID)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PRZ_AKTYWNY, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.KIE_ID, "POJ_ID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("POJ_ID")
+                @Html.ValidationMessageFor(model => model.POJ_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.PRZ_AKTYWNY)
+            @*@Html.LabelFor(model => model.PRZ_AKTYWNY, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PRZ_AKTYWNY)
                 @Html.ValidationMessageFor(model => model.PRZ_AKTYWNY)
-            </div>
+            </div>*@
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PRZ_ODJAZD, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PRZ_ODJAZD)
+                @*@Html.EditorFor(model => model.PRZ_ODJAZD)*@
+                <input id="datetimepicker" type="text" name="PRZ_ODJAZD">
                 @Html.ValidationMessageFor(model => model.PRZ_ODJAZD)
             </div>
         </div>
+
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
