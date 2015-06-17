@@ -54,7 +54,12 @@ namespace KKBusWebApp.Controllers
         public ActionResult Create()
         {
             SetPRZEJAZDYSelectLists();
-            return View();
+            PRZEJAZDY nowyPrzejazd = new PRZEJAZDY()
+            {
+                PRZ_AKTYWNY = false,
+                KIE_ID = db.KIEROWCY.FirstOrDefault().KIE_ID
+            };
+            return View(nowyPrzejazd);
         }
 
         // POST: /Przejazdy/Create
@@ -66,7 +71,18 @@ namespace KKBusWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //przejazdy.KIE_ID = db.KIEROWCY.First(k => k.OSO_ID == db.OSOBY.First(o => o.OSO_ID == przejazdy))
                 db.PRZEJAZDY.Add(przejazdy);
+                db.SaveChanges();
+                db.Entry(przejazdy).Reference("PRACOWNICY").Load();
+                KIEROWCY kie = db.KIEROWCY.First(k => k.OSO_ID == przejazdy.PRACOWNICY.OSO_ID);
+                if (kie == null)
+                {
+                    kie = new KIEROWCY() { OSO_ID = przejazdy.PRACOWNICY.OSO_ID };
+                    db.KIEROWCY.Add(kie);
+                    db.SaveChanges();
+                }
+                przejazdy.KIE_ID = kie.KIE_ID;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -136,16 +152,8 @@ namespace KKBusWebApp.Controllers
 
         private void SetPRZEJAZDYSelectLists()
         {
-            var kierowcy = db.KIEROWCY;
-            List<object> kierowcySL = new List<object>();
-            foreach (var k in kierowcy)
-                kierowcySL.Add(new
-                {
-                    Id = k.KIE_ID,
-                    Name = k.OSOBY.OSO_IMIE + " " + k.OSOBY.OSO_NAZWISKO
-                });
-
-            var pracownicy = db.PRACOWNICY;
+            var pracownicy = db.PRACOWNICY.Where(pra => pra.PRA_UPRAWNIENIA.Contains("DRIVER"));
+            //var pracownicy = db.PRACOWNICY.Where(pra => pra.PRA_UPRAWNIENIA == "DIRVER");
             List<object> pracownicySL = new List<object>();
             foreach (var pr in pracownicy)
                 pracownicySL.Add(new
@@ -163,7 +171,8 @@ namespace KKBusWebApp.Controllers
                     Name = String.Format("{0} {1} [miejsca: {2}]", p.POJ_MARKA, p.POJ_ID, p.POJ_MIEJSCA)
                 });
 
-            ViewBag.KIE_ID = new SelectList(kierowcySL, "Id", "Name");
+            //ViewBag.KIE_ID = new SelectList(kierowcySL, "Id", "Name");
+            //ViewBag.KIE_ID = db.KIEROWCY.FirstOrDefault().KIE_ID;
             ViewBag.KUR_ID = new SelectList(db.KURSY, "KUR_ID", "KUR_RELACJA");
             ViewBag.PRA_ID = new SelectList(pracownicySL, "Id", "Name");
             ViewBag.POJ_ID = new SelectList(pojazdySL, "Id", "Name");

@@ -194,6 +194,7 @@
     <Compile Include="Authentication\MySQLDatabaseMembershipProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\DriversController.cs" />
+    <Compile Include="Controllers\BazaKierowcowController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FormularzKierowcyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -433,6 +434,7 @@
     <Content Include="Views\Przejazdy\Edit.cshtml" />
     <Content Include="Views\Przejazdy\Index.cshtml" />
     <Content Include="Views\Przejazdy\Past.cshtml" />
+    <Content Include="Views\BazaKierowcow\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
