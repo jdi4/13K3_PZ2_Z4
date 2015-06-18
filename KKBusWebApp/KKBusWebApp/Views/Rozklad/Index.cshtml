@@ -1,0 +1,65 @@
+﻿@model IEnumerable<KKBusWebApp.Models.KURSY>
+
+@{
+    ViewBag.Title = "Rozkład jazdy";
+}
+
+<h2>Rozkład jazdy</h2>
+
+@if (User.IsInRole("OWNER"))
+{
+    <p>
+        @Html.ActionLink("Dodaj", "Create")
+    </p>
+}
+
+@foreach (var kurs in Model) { 
+    <dl >
+        <dt>
+            Nazwa kursu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelKurs => kurs.KUR_NAZWA)
+        </dd>
+
+        <dt>
+            Relacja
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelKurs => kurs.KUR_RELACJA)
+        </dd>
+
+    </dl>
+    
+    <table class="table">
+        <tr>
+            <th>
+               Przystanek
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Czas przejazdu
+            </th>
+        </tr>
+
+    @foreach (var item in kurs.TRASA) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRZYSTANKI.PRZY_NAZWA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TRA_CENA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TRA_CZAS_PRZEJAZDU) min.
+            </td>
+        </tr>
+    }
+
+</table>
+    
+}

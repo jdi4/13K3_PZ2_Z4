@@ -24,7 +24,7 @@
             @{
                 String upr = Model.First().PRACOWNICY.PRA_UPRAWNIENIA;
                 upr = upr.Replace("DRIVER", "KIEROWCA")
-                    .Replace("OFFICE WORKER", "PRACOWNIK SEKRETARIATU")
+                    .Replace("WORKER", "PRACOWNIK SEKRETARIATU")
                     .Replace("OWNER", "WŁAŚCICIEL");
             }
             @upr

@@ -10,6 +10,7 @@ using KKBusWebApp.Models;
 
 namespace KKBusWebApp.Controllers
 {
+    [Authorize(Roles = "WORKER, OWNER")]
     public class BazaKierowcowController : Controller
     {
         private kkbusDBEntities db = new kkbusDBEntities();

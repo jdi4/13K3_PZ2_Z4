@@ -10,117 +10,108 @@ using KKBusWebApp.Models;
 
 namespace KKBusWebApp.Controllers
 {
-    [Authorize(Roles = "DRIVER")]
-    public class FormularzKierowcyController : Controller
+    [Authorize(Roles = "OWNER")]
+    public class RozkladController : Controller
     {
         private kkbusDBEntities db = new kkbusDBEntities();
-
-        // GET: /FormularzKierowcy/
+        // GET: /Rozklad/
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            var tankowania = db.TANKOWANIA.Include(t => t.KIEROWCY).Include(t => t.POJAZDY);
-            return View(tankowania.ToList());
+            return View(db.KURSY.ToList());
         }
 
-        // GET: /FormularzKierowcy/Details/5
+        // GET: /Rozklad/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TANKOWANIA tankowania = db.TANKOWANIA.Find(id);
-            if (tankowania == null)
+            KURSY kursy = db.KURSY.Find(id);
+            if (kursy == null)
             {
                 return HttpNotFound();
             }
-            return View(tankowania);
+            return View(kursy);
         }
 
-        // GET: /FormularzKierowcy/Create
+        // GET: /Rozklad/Create
         public ActionResult Create()
         {
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID");
-            ViewBag.POJ_ID = new SelectList(db.POJAZDY, "POJ_ID", "POJ_MARKA");
             return View();
         }
 
-        // POST: /FormularzKierowcy/Create
+        // POST: /Rozklad/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="TAN_ID,KIE_ID,POJ_ID,TAN_ILOSC,TAN_KWOTA,TAN_NASTEPNE,TAN_PRZEJECHANO")] TANKOWANIA tankowania)
+        public ActionResult Create([Bind(Include="KUR_RELACJA,KUR_NAZWA")] KURSY kursy)
         {
             if (ModelState.IsValid)
             {
-                db.TANKOWANIA.Add(tankowania);
+                db.KURSY.Add(kursy);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", tankowania.KIE_ID);
-            ViewBag.POJ_ID = new SelectList(db.POJAZDY, "POJ_ID", "POJ_MARKA", tankowania.POJ_ID);
-            return View(tankowania);
+            return View(kursy);
         }
 
-        // GET: /FormularzKierowcy/Edit/5
+        // GET: /Rozklad/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TANKOWANIA tankowania = db.TANKOWANIA.Find(id);
-            if (tankowania == null)
+            KURSY kursy = db.KURSY.Find(id);
+            if (kursy == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", tankowania.KIE_ID);
-            ViewBag.POJ_ID = new SelectList(db.POJAZDY, "POJ_ID", "POJ_MARKA", tankowania.POJ_ID);
-            return View(tankowania);
+            return View(kursy);
         }
 
-        // POST: /FormularzKierowcy/Edit/5
+        // POST: /Rozklad/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="TAN_ID,KIE_ID,POJ_ID,TAN_ILOSC,TAN_KWOTA,TAN_NASTEPNE,TAN_PRZEJECHANO")] TANKOWANIA tankowania)
+        public ActionResult Edit([Bind(Include="KUR_ID,KUR_RELACJA,KUR_NAZWA")] KURSY kursy)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tankowania).State = EntityState.Modified;
+                db.Entry(kursy).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.KIE_ID = new SelectList(db.KIEROWCY, "KIE_ID", "KIE_ID", tankowania.KIE_ID);
-            ViewBag.POJ_ID = new SelectList(db.POJAZDY, "POJ_ID", "POJ_MARKA", tankowania.POJ_ID);
-            return View(tankowania);
+            return View(kursy);
         }
 
-        // GET: /FormularzKierowcy/Delete/5
+        // GET: /Rozklad/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TANKOWANIA tankowania = db.TANKOWANIA.Find(id);
-            if (tankowania == null)
+            KURSY kursy = db.KURSY.Find(id);
+            if (kursy == null)
             {
                 return HttpNotFound();
             }
-            return View(tankowania);
+            return View(kursy);
         }
 
-        // POST: /FormularzKierowcy/Delete/5
+        // POST: /Rozklad/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TANKOWANIA tankowania = db.TANKOWANIA.Find(id);
-            db.TANKOWANIA.Remove(tankowania);
+            KURSY kursy = db.KURSY.Find(id);
+            db.KURSY.Remove(kursy);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

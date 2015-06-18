@@ -10,6 +10,7 @@ using KKBusWebApp.Models;
 
 namespace KKBusWebApp.Controllers
 {
+    [Authorize(Roles = "WORKER, DRIVER, OWNER")]
     public class GrafikController : Controller
     {
         private kkbusDBEntities db = new kkbusDBEntities();

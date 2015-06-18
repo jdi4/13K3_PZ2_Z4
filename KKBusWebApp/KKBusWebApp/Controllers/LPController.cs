@@ -23,7 +23,7 @@ namespace KKBusWebApp.Controllers
             var client = db.OSOBY.Find(userId).KLIENCI.First();
             //int clientId = client.KLI_ID;
 
-            var nagrody_klienci = db.NAGRODY_KLIENCI
+            var nagrody_klienci = db.NAGRODY_KLIENCI.Where(nk => nk.KLI_ID == client.KLI_ID)
                 .Include(n => n.DOSTEPNE_NAGRODY)
                 .Include(n => n.KLIENCI);
 

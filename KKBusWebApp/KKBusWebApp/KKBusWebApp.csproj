@@ -204,6 +204,7 @@
     <Compile Include="Controllers\PrzejazdyController.cs" />
     <Compile Include="Controllers\PrzystankiController.cs" />
     <Compile Include="Controllers\RaportsController.cs" />
+    <Compile Include="Controllers\RozkladController.cs" />
     <Compile Include="Controllers\TrasyController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\VehicleInspectController.cs" />
@@ -217,7 +218,9 @@
     <Compile Include="Models\DataBase Partials\kkbusDBEntitiesp1.cs" />
     <Compile Include="Models\DataBase Partials\POJAZDYp1.cs" />
     <Compile Include="Models\DataBase Partials\PRZEJAZDYp1.cs" />
+    <Compile Include="Models\DataBase Partials\PRZYSTANKIp1.cs" />
     <Compile Include="Models\DataBase Partials\TANKOWANIAp1.cs" />
+    <Compile Include="Models\DataBase Partials\TRASAp1.cs" />
     <Compile Include="Models\DataBaseModel1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -456,6 +459,11 @@
     <Content Include="Views\Przystanki\Details.cshtml" />
     <Content Include="Views\Przystanki\Edit.cshtml" />
     <Content Include="Views\Przystanki\Index.cshtml" />
+    <Content Include="Views\Rozklad\Create.cshtml" />
+    <Content Include="Views\Rozklad\Delete.cshtml" />
+    <Content Include="Views\Rozklad\Details.cshtml" />
+    <Content Include="Views\Rozklad\Edit.cshtml" />
+    <Content Include="Views\Rozklad\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

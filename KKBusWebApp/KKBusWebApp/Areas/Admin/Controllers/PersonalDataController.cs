@@ -47,10 +47,12 @@ namespace KKBusWebApp.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="OSO_ID,OSO_IMIE,OSO_NAZWISKO,OSO_PESEL,OSO_TELEFON,OSO_DATA_URODZENIA,OSO_LOGIN,OSO_HASLO")] OSOBY osoby)
+        public ActionResult Create([Bind(Include="OSO_IMIE,OSO_NAZWISKO,OSO_PESEL,OSO_TELEFON,OSO_DATA_URODZENIA,OSO_LOGIN,OSO_HASLO")] OSOBY osoby)
         {
             if (ModelState.IsValid)
             {
+                Microsoft.AspNet.Identity.PasswordHasher ph = new Microsoft.AspNet.Identity.PasswordHasher();
+                osoby.OSO_HASLO = ph.HashPassword(osoby.OSO_HASLO);
                 db.OSOBY.Add(osoby);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,6 +85,8 @@ namespace KKBusWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                Microsoft.AspNet.Identity.PasswordHasher ph = new Microsoft.AspNet.Identity.PasswordHasher();
+                osoby.OSO_HASLO = ph.HashPassword(osoby.OSO_HASLO);
                 db.Entry(osoby).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
