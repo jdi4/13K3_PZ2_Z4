@@ -197,6 +197,7 @@
     <Compile Include="Controllers\BazaKierowcowController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FormularzKierowcyController.cs" />
+    <Compile Include="Controllers\GrafikController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\PrzejazdyController.cs" />
@@ -435,6 +436,10 @@
     <Content Include="Views\Przejazdy\Index.cshtml" />
     <Content Include="Views\Przejazdy\Past.cshtml" />
     <Content Include="Views\BazaKierowcow\Index.cshtml" />
+    <Content Include="Views\Grafik\Create.cshtml" />
+    <Content Include="Views\Grafik\Delete.cshtml" />
+    <Content Include="Views\Grafik\Details.cshtml" />
+    <Content Include="Views\Grafik\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
