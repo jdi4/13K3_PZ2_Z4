@@ -1,0 +1,81 @@
+﻿@model KKBusWebApp.Models.LPHomeViewModel
+
+@{
+    ViewBag.Title = "Program lojalnościowy";
+}
+
+<h2>Program lojalnościowy</h2>
+
+<p>
+    @Model.UserName
+    <br />
+    Ilość punktów: @Model.LPPoints
+</p>
+<p>
+    Dostępne nagrody
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Koszt
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var Prize in Model.AvaiablePrizes) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Prize.NAG_NAZWA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Prize.NAG_PUNKTY)
+        </td>
+        <td>
+            @if(Prize.NAG_PUNKTY < Model.LPPoints)
+            {
+                @Html.ActionLink("Wykorzystaj", "Exchange", new { id = Prize.NAG_ID });
+            }
+            else
+            {
+                @:Za mało punktów!
+            }
+            
+        </td>
+    </tr>
+}
+</table>
+
+<p>
+    Poprzednie nagrody
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Koszt
+        </th>
+        <th>
+            Adres wysyłki
+        </th>
+    </tr>
+
+    @foreach (var pastPrize in Model.UserPrizes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => pastPrize.DOSTEPNE_NAGRODY.NAG_NAZWA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => pastPrize.DOSTEPNE_NAGRODY.NAG_PUNKTY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => pastPrize.NAK_ADRES_WYSYLKI)
+            </td>
+        </tr>
+    }
+</table>

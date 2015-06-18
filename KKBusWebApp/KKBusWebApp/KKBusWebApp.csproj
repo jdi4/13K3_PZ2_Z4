@@ -200,6 +200,7 @@
     <Compile Include="Controllers\GrafikController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\VehiclesController.cs" />
+    <Compile Include="Controllers\LPController.cs" />
     <Compile Include="Controllers\PrzejazdyController.cs" />
     <Compile Include="Controllers\RaportsController.cs" />
     <Compile Include="Controllers\TrasyController.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Models\KURSY.cs">
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LPViewModels.cs" />
     <Compile Include="Models\ReservationViewModels.cs" />
     <Compile Include="Models\NAGRODY_KLIENCI.cs">
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
@@ -440,6 +442,11 @@
     <Content Include="Views\Grafik\Delete.cshtml" />
     <Content Include="Views\Grafik\Details.cshtml" />
     <Content Include="Views\Grafik\Index.cshtml" />
+    <Content Include="Views\LP\Exchange.cshtml" />
+    <Content Include="Views\LP\Delete.cshtml" />
+    <Content Include="Views\LP\Details.cshtml" />
+    <Content Include="Views\LP\Edit.cshtml" />
+    <Content Include="Views\LP\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
