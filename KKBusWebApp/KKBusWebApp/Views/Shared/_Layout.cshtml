@@ -21,31 +21,38 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Komunikaty", "Index", "Home")</li>
+                    <li>@*@Html.ActionLink("Komunikaty", "Index", "Home")*@</li>
                     <li>@Html.ActionLink("O Firmie", "About", "Home")</li>
-                    <li>@Html.ActionLink("Rozkład Jazdy", "Index", "Trasy")</li>
+                    <li>@Html.ActionLink("Rozkład Jazdy", "Index", "Rozklad")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Cennik", "Index", "Trasy")</li>
-                    <li>@Html.ActionLink("Strefa Klienta", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Cennik", "Index", "Trasy")</li>
+                    <li>@Html.ActionLink("Strefa Klienta", "Contact", "Home")</li>*@
                     @if (User.IsInRole("CLIENT"))
                     {
-                        //powinno być też dostępne dla kierowcy
                         <li>@Html.ActionLink("Rezerwacje", "Index", "Reservation")</li>
+                        <li>@Html.ActionLink("Program Lojalnościowy", "Index", "LP")</li>
                     }
-                        @if (User.IsInRole("OWNER"))
-                        {
-                            <li>@Html.ActionLink("Raporty", "Index", "Raports")</li>
-                            //powinno być też dostępne dla kierowcy
-                            <li>@Html.ActionLink("Formularz", "Index", "FormularzKierowcy")</li>
-                            <li>@Html.ActionLink("Admin panel", "Index", "AdminPanel", new { Area = "Admin" }, null)</li> 
-                        }     
-                        
-                        @if (User.IsInRole("DRIVER"))
-                        {
-                            //powinno być też dostępne dla kierowcy
-                            <li>@Html.ActionLink("Formularz", "Index", "FormularzKierowcy")</li>
-                        }
-                        
+                    
+                    @if (User.IsInRole("WORKER") || User.IsInRole("OWNER"))
+                    {
+                        <li>@Html.ActionLink("Przejazdy", "Index", "Przejazdy")</li>
+                        <li>@Html.ActionLink("Przystanki", "Index", "Przystanki")</li>
+                        <li>@Html.ActionLink("Trasy", "Index", "Trasy")</li>
+                    }    
+                    
+                    @if (User.IsInRole("OWNER"))
+                    {
+                        <li>@*@Html.ActionLink("Raporty", "Index", "Raports")*@</li>
+                        //powinno być też dostępne dla kierowcy
+                        <li>@*@Html.ActionLink("Formularz", "Index", "FormularzKierowcy")*@</li>
+                        <li>@Html.ActionLink("Admin panel", "Index", "AdminPanel", new { Area = "Admin" }, null)</li> 
+                    }   
+                       
+                    @if (User.IsInRole("DRIVER"))
+                    {
+                        //powinno być też dostępne dla kierowcy
+                        <li>@Html.ActionLink("Formularz", "Index", "FormularzKierowcy")</li>
+                    }
 
                 </ul>
                 @Html.Partial("_LoginPartial")

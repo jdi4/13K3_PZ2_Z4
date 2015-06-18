@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<KKBusWebApp.Models.TRASA>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Trasy";
 }
 
-<h2>Index</h2>
+<h2>Trasy</h2>
 
 @if (User.IsInRole("OWNER"))
 {
     <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj", "Create")
     </p>
 }
 
@@ -53,9 +53,9 @@
         @if (User.IsInRole("OWNER"))
         {
             <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TRA_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TRA_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TRA_ID })
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.TRA_ID }) |
+            @Html.ActionLink("Informacje", "Details", new { id=item.TRA_ID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.TRA_ID })
             </td>
         }
         

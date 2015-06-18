@@ -1,0 +1,110 @@
+﻿@model KKBusWebApp.Models.POJAZDY
+
+@{
+    ViewBag.Title = "Informacje o pojeździe";
+}
+
+<h2>Informacje o pojeździe</h2>
+
+<div>
+    <h4>Szczegóły pojazdu</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_MARKA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_MARKA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_SILNIK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_SILNIK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_DATA_PRODUKCJI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_DATA_PRODUKCJI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_UBEZPIECZONY_DO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_UBEZPIECZONY_DO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_SPRAWNY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_SPRAWNY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_ADNOTACJE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_ADNOTACJE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POJ_MIEJSCA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POJ_MIEJSCA)
+        </dd>
+
+    </dl>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TANKOWANIA.First().TAN_ILOSC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TANKOWANIA.First().TAN_KWOTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TANKOWANIA.First().TAN_PRZEJECHANO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TANKOWANIA.First().TAN_NASTEPNE)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.TANKOWANIA)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TAN_ILOSC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TAN_KWOTA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TAN_PRZEJECHANO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TAN_NASTEPNE)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.POJ_ID }) |*@
+    @Html.ActionLink("Lista pojazdów", "Index")
+</p>

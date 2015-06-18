@@ -1,0 +1,76 @@
+﻿@model IEnumerable<KKBusWebApp.Models.CZAS_PRACY>
+@using System.Globalization
+
+@{
+    ViewBag.Title = "Grafik pracy";
+}
+
+<h2>Grafik pracy</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Imię i nazwisko
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.First().PRACOWNICY.OSOBY.OSO_IMIE)
+            @Html.DisplayFor(model => model.First().PRACOWNICY.OSOBY.OSO_NAZWISKO)
+        </dd>
+        <dt>
+            Stanowisko
+        </dt>
+        <dd>
+            @{
+                String upr = Model.First().PRACOWNICY.PRA_UPRAWNIENIA;
+                upr = upr.Replace("DRIVER", "KIEROWCA")
+                    .Replace("WORKER", "PRACOWNIK SEKRETARIATU")
+                    .Replace("OWNER", "WŁAŚCICIEL");
+            }
+            @upr
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Dodaj zmianę", "Create", new { employeeId = Model.First().PRA_ID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Praca od:
+        </th>
+        <th>
+            Praca do:
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @{ 
+               String czasODd = DateTimeFormatInfo.CurrentInfo.GetDayName(item.CZA_OD.DayOfWeek);
+               String czasODt = item.CZA_OD.ToString("HH:mm");
+               }
+            @czasODd
+            @czasODt
+            @*@Html.DisplayFor(modelItem => Model.CZA_OD.TimeOfDay)*@
+        </td>
+        <td>
+            @{
+               String czasDOd = DateTimeFormatInfo.CurrentInfo.GetDayName(item.CZA_DO.DayOfWeek);
+               String czasDOt = item.CZA_DO.ToString("HH:mm");
+            }
+            @czasDOd
+            @czasDOt
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=Model.CZA_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=Model.CZA_ID }) |*@
+            @Html.ActionLink("Usuń", "Delete", new { id=item.CZA_ID })
+        </td>
+    </tr>
+}
+
+</table>

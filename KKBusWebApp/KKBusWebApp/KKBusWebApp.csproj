@@ -194,14 +194,20 @@
     <Compile Include="Authentication\MySQLDatabaseMembershipProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\DriversController.cs" />
+    <Compile Include="Controllers\BazaKierowcowController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FormularzKierowcyController.cs" />
+    <Compile Include="Controllers\GrafikController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\VehiclesController.cs" />
+    <Compile Include="Controllers\LPController.cs" />
     <Compile Include="Controllers\PrzejazdyController.cs" />
+    <Compile Include="Controllers\PrzystankiController.cs" />
     <Compile Include="Controllers\RaportsController.cs" />
+    <Compile Include="Controllers\RozkladController.cs" />
     <Compile Include="Controllers\TrasyController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\VehicleInspectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,7 +216,11 @@
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBase Partials\kkbusDBEntitiesp1.cs" />
+    <Compile Include="Models\DataBase Partials\POJAZDYp1.cs" />
     <Compile Include="Models\DataBase Partials\PRZEJAZDYp1.cs" />
+    <Compile Include="Models\DataBase Partials\PRZYSTANKIp1.cs" />
+    <Compile Include="Models\DataBase Partials\TANKOWANIAp1.cs" />
+    <Compile Include="Models\DataBase Partials\TRASAp1.cs" />
     <Compile Include="Models\DataBaseModel1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -239,6 +249,7 @@
     <Compile Include="Models\KURSY.cs">
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LPViewModels.cs" />
     <Compile Include="Models\ReservationViewModels.cs" />
     <Compile Include="Models\NAGRODY_KLIENCI.cs">
       <DependentUpon>DataBaseModel1.tt</DependentUpon>
@@ -432,7 +443,27 @@
     <Content Include="Views\Przejazdy\Details.cshtml" />
     <Content Include="Views\Przejazdy\Edit.cshtml" />
     <Content Include="Views\Przejazdy\Index.cshtml" />
-    <Content Include="Views\Przejazdy\Past.cshtml" />
+    <Content Include="Views\BazaKierowcow\Index.cshtml" />
+    <Content Include="Views\Grafik\Create.cshtml" />
+    <Content Include="Views\Grafik\Delete.cshtml" />
+    <Content Include="Views\Grafik\Details.cshtml" />
+    <Content Include="Views\Grafik\Index.cshtml" />
+    <Content Include="Views\LP\Exchange.cshtml" />
+    <Content Include="Views\LP\Details.cshtml" />
+    <Content Include="Views\LP\Index.cshtml" />
+    <Content Include="Views\VehicleInspect\Details.cshtml" />
+    <Content Include="Views\VehicleInspect\Edit.cshtml" />
+    <Content Include="Views\VehicleInspect\Index.cshtml" />
+    <Content Include="Views\Przystanki\Create.cshtml" />
+    <Content Include="Views\Przystanki\Delete.cshtml" />
+    <Content Include="Views\Przystanki\Details.cshtml" />
+    <Content Include="Views\Przystanki\Edit.cshtml" />
+    <Content Include="Views\Przystanki\Index.cshtml" />
+    <Content Include="Views\Rozklad\Create.cshtml" />
+    <Content Include="Views\Rozklad\Delete.cshtml" />
+    <Content Include="Views\Rozklad\Details.cshtml" />
+    <Content Include="Views\Rozklad\Edit.cshtml" />
+    <Content Include="Views\Rozklad\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

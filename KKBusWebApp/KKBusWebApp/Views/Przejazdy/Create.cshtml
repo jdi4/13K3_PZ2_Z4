@@ -17,9 +17,9 @@
             dayOfWeekStart: 1,
             lang: 'pl',
             minDate: '0',
-            minTime: '@DateTime.Now.AddHours(1).Hour:@DateTime.Now.AddHours(1).Minute',
+            //minTime: '@DateTime.Now.AddHours(1).Hour:@DateTime.Now.AddHours(1).Minute',
             mask: true,
-            step: 10
+            step: 5
 
             //formatDate: 'd/m/Y',
             //startDate: '@DateTime.Now.Date.ToString("dd/MM/yyyy")',
@@ -56,15 +56,16 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.KIE_ID, "KIE_ID", new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.KIE_ID)
+            @*@Html.LabelFor(model => model.KIE_ID, "KIE_ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("KIE_ID")
                 @Html.ValidationMessageFor(model => model.KIE_ID)
-            </div>
+            </div>*@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.KIE_ID, "POJ_ID", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.POJ_ID, "POJ_ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("POJ_ID")
                 @Html.ValidationMessageFor(model => model.POJ_ID)

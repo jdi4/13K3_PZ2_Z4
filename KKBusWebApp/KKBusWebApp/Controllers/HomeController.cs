@@ -15,15 +15,14 @@ namespace KKBusWebApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Lorem Ipsum";
 
             return View();
         }
 
-        [Authorize(Roles="CLIENT")]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Kontakt";
 
             return View();
         }

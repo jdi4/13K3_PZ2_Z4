@@ -1,0 +1,71 @@
+﻿@model KKBusWebApp.Models.CZAS_PRACY
+
+@{
+    ViewBag.Title = "Dodaj";
+}
+
+@section JSPlugins
+{
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.datetimepicker.js")"></script>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/jquery.datetimepicker.css")" />
+    <script type="text/javascript">
+        $('.datetimepickerCL').datetimepicker({
+            theme: 'dark',
+            dayOfWeekStart: 1,
+            lang: 'pl',
+            minDate: '0',
+            mask: true,
+            step: 10
+        });
+    </script>
+
+}
+
+<h2>Dodaj</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CZAS_PRACY</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.PRA_ID)
+            @Html.Label(Model.PRACOWNICY.OSOBY.OSO_IMIE + " " + Model.PRACOWNICY.OSOBY.OSO_NAZWISKO, new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.PRA_ID, "PRA_ID", new { @class = "control-label col-md-2" })*@
+            @*<div class="col-md-10">
+                @Html.DropDownList("PRA_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.PRA_ID)
+            </div>*@
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CZA_OD, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="datetimepickerCL" type="text" name="CZA_OD">
+                @Html.ValidationMessageFor(model => model.CZA_OD)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CZA_DO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="datetimepickerCL" type="text" name="CZA_DO">
+                @Html.ValidationMessageFor(model => model.CZA_DO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Powrót do listy", "Index", new { employeeId = Model.PRA_ID })
+</div>

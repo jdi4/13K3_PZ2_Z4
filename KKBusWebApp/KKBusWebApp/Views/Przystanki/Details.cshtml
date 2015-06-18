@@ -1,0 +1,50 @@
+﻿@model KKBusWebApp.Models.PRZYSTANKI
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PRZYSTANKI</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PRZY_NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZY_NAZWA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRZY_GPS_LONGITUDE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZY_GPS_LONGITUDE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRZY_GPS_LATITUDE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZY_GPS_LATITUDE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRZY_ZADANIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZY_ZADANIE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PRZY_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

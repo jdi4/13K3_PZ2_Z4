@@ -44,16 +44,21 @@
             @Html.DisplayFor(modelItem => item.PRZ_ODJAZD)
         </td>
         <td>
-            @*<a href="@Url.Action("Transactions", new { id=item.ID})">@Html.DisplayFor(modelItem => item.Balance)</a>*@
-            @Html.DisplayFor(modelItem => item.KIEROWCY.OSOBY.OSO_IMIE)
-            @Html.DisplayFor(modelItem => item.KIEROWCY.OSOBY.OSO_NAZWISKO)
+            <a href="@Url.Action("Index", "Grafik", new { employeeId = item.PRA_ID })">
+                @Html.DisplayFor(modelItem => item.KIEROWCY.OSOBY.OSO_IMIE) 
+                @Html.DisplayFor(modelItem => item.KIEROWCY.OSOBY.OSO_NAZWISKO)
+            </a>
+            @*@Html.DisplayFor(modelItem => item.KIEROWCY.OSOBY.OSO_IMIE)
+            @Html.DisplayFor(modelItem => item.KIEROWCY.OSOBY.OSO_NAZWISKO)*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.KURSY.KUR_RELACJA)
         </td>
         <td>
+            <a href="@Url.Action("Details", "VehicleInspect", new { id = item.POJ_ID })">
+                @Html.DisplayFor(modelItem => item.POJAZDY.POJ_MARKA)
+            </a>
             @*Action link do pojazdu*@
-            @Html.DisplayFor(modelItem => item.POJAZDY.POJ_MARKA)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.REZERWACJE.Count)
@@ -62,11 +67,11 @@
             @Html.DisplayFor(modelItem => item.POJAZDY.POJ_MIEJSCA)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id = item.PRZ_ID })
-            @if (!ViewBag.PastMode)
+            @*@Html.ActionLink("Details", "Details", new { id = item.PRZ_ID })*@
+            @if (ViewBag.PastMode == false)
             {
-                <span>|</span> @Html.ActionLink("Edytuj", "Edit", new { id=item.PRZ_ID }) <span>|</span>  
-                @Html.ActionLink("Delete", "Delete", new { id=item.PRZ_ID }) <span>|</span>
+                @*<span>|</span> @Html.ActionLink("Edytuj", "Edit", new { id=item.PRZ_ID }) <span>|</span>*@  
+                <span>|</span> @Html.ActionLink("Usuń", "Delete", new { id=item.PRZ_ID }) <span>|</span>
             }
 
         </td>

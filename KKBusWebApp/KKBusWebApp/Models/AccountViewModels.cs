@@ -40,7 +40,7 @@ namespace KKBusWebApp.Models
         [Display(Name = "Hasło")]
         public string Password { get; set; }
 
-        [Display(Name = "Zapamiętaj mnie?")]
+        [Display(Name = "Zapamiętaj mnie")]
         public bool RememberMe { get; set; }
     }
 

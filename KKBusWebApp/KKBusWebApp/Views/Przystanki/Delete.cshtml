@@ -1,0 +1,56 @@
+﻿@model KKBusWebApp.Models.PRZYSTANKI
+
+@{
+    ViewBag.Title = "Usuń przystanek";
+}
+
+<h2>Usuń przystanek</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Przystanek</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PRZY_NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZY_NAZWA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRZY_GPS_LONGITUDE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZY_GPS_LONGITUDE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRZY_GPS_LATITUDE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZY_GPS_LATITUDE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRZY_ZADANIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRZY_ZADANIE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót", "Index")
+        </div>
+    }
+</div>
