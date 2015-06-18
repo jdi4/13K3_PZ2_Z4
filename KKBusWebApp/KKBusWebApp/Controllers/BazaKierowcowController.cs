@@ -17,7 +17,9 @@ namespace KKBusWebApp.Controllers
         // GET: /BazaKierowcow/
         public ActionResult Index()
         {
-            var kierowcy = db.KIEROWCY.Include(k => k.OSOBY);
+            var kierowcy = db.KIEROWCY
+                .Include(k => k.OSOBY)
+                .Include(k => k.PRZEJAZDY);
             return View(kierowcy.ToList());
         }
 

@@ -55,8 +55,10 @@
             @Html.DisplayFor(modelItem => item.KURSY.KUR_RELACJA)
         </td>
         <td>
+            <a href="@Url.Action("Details", "VehicleInspect", new { id = item.POJ_ID })">
+                @Html.DisplayFor(modelItem => item.POJAZDY.POJ_MARKA)
+            </a>
             @*Action link do pojazdu*@
-            @Html.DisplayFor(modelItem => item.POJAZDY.POJ_MARKA)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.REZERWACJE.Count)
